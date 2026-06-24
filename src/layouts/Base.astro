@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'welanutria — Free Health & Fitness Calculators',
+  description = 'Free, fast health and fitness calculators and recipes. TDEE, BMI, ideal weight, protein, water and body fat. No sign-up.',
+  current = '',
+} = Astro.props;
+
+const nav = [
+  { href: '/calculators/', label: 'Calculators', key: 'calculators' },
+  { href: '/recipes/', label: 'Recipes', key: 'recipes' },
+  { href: '/meal-plans/', label: 'Meal Plans', key: 'meal-plans' },
+  { href: '/food-lists/', label: 'Food Lists', key: 'food-lists' },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.pathname} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="/" class="brand">wela<span class="n">nutria</span></a>
+      <nav class="nav" id="nav">
+        {nav.map((item) => (
+          <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="f-col">
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/calculators/tdee/">TDEE & Macros</a></li>
+          <li><a href="/calculators/bmi/">BMI</a></li>
+          <li><a href="/calculators/protein/">Protein</a></li>
+          <li><a href="/calculators/">All calculators</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/recipes/">Recipes</a></li>
+          <li><a href="/meal-plans/">Meal Plans</a></li>
+          <li><a href="/food-lists/">Food Lists</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/methodology/">Methodology</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="/terms/">Terms</a></li>
+        </ul>
+      </div>
+      <div class="f-bottom">
+        welanutria · Estimates for general information only, not medical advice.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const nav = document.getElementById('nav');
+    btn?.addEventListener('click', () => {
+      const open = nav?.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>

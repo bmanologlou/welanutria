@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+
+const calculators = [
+  { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Daily calories and your protein, carb and fat split.' },
+  { href: '/calculators/bmi/', name: 'BMI', desc: 'Body mass index and what the range means.' },
+  { href: '/calculators/ideal-weight/', name: 'Ideal Weight', desc: 'A healthy weight range for your height.' },
+  { href: '/calculators/protein/', name: 'Protein', desc: 'How much protein you need each day.' },
+  { href: '/calculators/water/', name: 'Water Intake', desc: 'Daily water target from your weight and activity.' },
+  { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a tape measure.' },
+];
+---
+<Base
+  title="welanutria — Free Health & Fitness Calculators and Recipes"
+  description="Free, fast health and fitness calculators plus recipes that fit your goals. TDEE, BMI, protein, water and more. No sign-up."
+  current=""
+>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Free · No sign-up</p>
+      <h1>Straight answers for your health numbers.</h1>
+      <p class="lede">Work out your calories, macros, BMI and more in seconds — then find recipes that fit the result. Every tool is backed by a recognised method and clearly explained.</p>
+      <div class="hero-cta">
+        <a href="/calculators/tdee/" class="btn">Calculate my calories</a>
+        <a href="/recipes/" class="btn btn-ghost">Browse recipes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2 class="section-title">Calculators</h2>
+    <div class="grid">
+      {calculators.map((c) => (
+        <a class="tile" href={c.href}>
+          <span class="tile-name">{c.name}</span>
+          <span class="tile-desc">{c.desc}</span>
+        </a>
+      ))}
+    </div>
+    <p class="section-more"><a href="/calculators/">See all calculators →</a></p>
+  </section>
+
+  <section class="wrap section">
+    <div class="split">
+      <a class="feature feature-warm" href="/recipes/">
+        <span class="eyebrow">Recipes</span>
+        <h3>Meals that match your macros</h3>
+        <p>High-protein, low-calorie and balanced recipes with full nutrition, sourced from public-domain data.</p>
+        <span class="feature-link">Browse recipes →</span>
+      </a>
+      <a class="feature feature-warm2" href="/meal-plans/">
+        <span class="eyebrow">Meal Plans</span>
+        <h3>A week of eating, planned</h3>
+        <p>Seven-day plans built around your calorie level, using our recipes for variety.</p>
+        <span class="feature-link">See meal plans →</span>
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .hero{padding:64px 0 40px;background:linear-gradient(180deg,var(--cool) 0%,var(--paper) 100%)}
+    .hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;letter-spacing:-.03em;margin:.2em 0 .3em;max-width:14ch}
+    .lede{font-size:1.15rem;color:#3F4F49;max-width:52ch;margin:0 0 28px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+    .section{padding:44px 0 0}
+    .section-title{font-size:1.5rem;letter-spacing:-.02em;margin:0 0 20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+    .tile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;transition:.15s}
+    .tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .tile-name{font-weight:700;font-size:1.05rem;color:var(--ink)}
+    .tile-desc{font-size:.9rem;color:var(--muted);line-height:1.45}
+    .section-more{margin:18px 0 0}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .feature{display:flex;flex-direction:column;gap:8px;border-radius:var(--radius);padding:28px 24px;transition:.15s;border:1px solid var(--line)}
+    .feature:hover{transform:translateY(-2px);text-decoration:none}
+    .feature h3{margin:.1em 0;font-size:1.3rem;letter-spacing:-.02em;color:var(--ink)}
+    .feature p{margin:0;color:#3F4F49;font-size:.95rem}
+    .feature-link{font-weight:600;color:var(--accent);margin-top:6px}
+    .feature-warm{background:var(--amber-soft);border-color:#F0E3CB}
+    .feature-warm2{background:#FBEEE0;border-color:#F2DcC4}
+    @media(max-width:640px){.split{grid-template-columns:1fr}}
+  </style>
+</Base>
