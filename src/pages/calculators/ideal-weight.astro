@@ -1,0 +1,131 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Ideal Weight Calculator — Healthy Weight Range | welanutria"
+  description="Free ideal weight calculator. Find a healthy weight range for your height, based on the healthy BMI range. A range, not a single number."
+  current="calculators"
+>
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Ideal Weight</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Ideal Weight Calculator</h1>
+      <p class="lede">There's no single "perfect" weight — but there is a healthy range for your height. Here's yours, based on the healthy BMI range.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+        <div class="field"><label id="h-label">Height (cm)</label>
+          <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease height">−</button><input type="number" id="height" value="175"><button type="button" data-step="1" aria-label="Increase height">+</button></div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Healthy weight range</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-range">56.7–76.3</span>
+          <span class="big-lbl" id="r-unit">kg</span>
+        </div>
+        <p class="r-context">A weight in this range puts you in the healthy BMI band (18.5–24.9) for your height.</p>
+        <p class="margin-note">This is a guide based on height alone. Your best weight also depends on muscle, build and overall health.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>Why a range, not a number?</h2>
+      <p>You'll often see calculators promise a single "ideal weight". We don't, because no single number is right for everyone of the same height — build, muscle mass and frame all matter. Showing a <strong>healthy range</strong> is more honest and more useful: anywhere inside it is generally considered a healthy weight for your height.</p>
+
+      <h2>How it's calculated</h2>
+      <p>We take the healthy <strong>BMI range of 18.5 to 24.9</strong> and work backwards for your height to find the weights that fall inside it. That's the range you see above. You can read more on our <a href="/methodology/">methodology page</a>.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/bmi/">BMI calculator</a> — see your current category</li>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — calories to reach or hold a weight</li>
+          <li><a href="/calculators/body-fat/">Body fat</a> — composition, not just weight</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice. Consult a qualified professional about a healthy weight for you.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 14px}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let units='metric';
+      $('seg-units').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        const nu=b.dataset.u; if(nu===units)return;
+        const h=$('height');
+        if(nu==='imperial'){ h.value=Math.round(parseFloat(h.value)/2.54); $('h-label').textContent='Height (in)'; }
+        else { h.value=Math.round(parseFloat(h.value)*2.54); $('h-label').textContent='Height (cm)'; }
+        units=nu;
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step; input.value=v; calc();
+      });
+      $('height').addEventListener('input',calc);
+      function calc(){
+        let h=parseFloat($('height').value)||0;
+        if(units==='imperial'){ h=h*2.54; }
+        const m=h/100;
+        let lo=18.5*m*m, hi=24.9*m*m; // kg
+        let unit='kg';
+        if(units==='imperial'){ lo=lo*2.2046; hi=hi*2.2046; unit='lb'; }
+        $('r-range').textContent = lo.toFixed(1)+'–'+hi.toFixed(1);
+        $('r-unit').textContent = unit;
+      }
+      calc();
+    })();
+  </script>
+</Base>

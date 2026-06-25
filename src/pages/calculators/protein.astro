@@ -1,0 +1,174 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Protein Calculator — Daily Protein Needs | welanutria"
+  description="Free protein calculator. Find how much protein you need each day based on your weight, activity level and goal."
+  current="calculators"
+>
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Protein</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Protein Calculator</h1>
+      <p class="lede">Protein supports muscle, recovery and fullness. Here's a daily target based on your weight, how active you are, and what you're aiming for.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+        <div class="field"><label id="w-label">Weight (kg)</label>
+          <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease weight">−</button><input type="number" id="weight" value="75"><button type="button" data-step="1" aria-label="Increase weight">+</button></div>
+        </div>
+        <div class="field"><label for="activity">Activity level</label>
+          <select id="activity">
+            <option value="sedentary">Sedentary — little exercise</option>
+            <option value="active" selected>Active — regular exercise</option>
+            <option value="athlete">Very active — athlete / heavy training</option>
+          </select>
+        </div>
+        <div class="field"><label>Goal</label>
+          <div class="goals" id="goals">
+            <button type="button" class="goal" data-goal="maintain" aria-pressed="true"><span class="g-name">Maintain</span><span class="g-sub">general health</span></button>
+            <button type="button" class="goal" data-goal="build" aria-pressed="false"><span class="g-name">Build muscle</span><span class="g-sub">higher intake</span></button>
+            <button type="button" class="goal" data-goal="lose" aria-pressed="false"><span class="g-name">Lose fat</span><span class="g-sub">preserve muscle</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Daily protein</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-protein">120</span>
+          <span class="big-lbl" id="r-unit">grams / day</span>
+        </div>
+        <p class="r-context" id="r-context">A solid target for staying active and healthy.</p>
+        <div class="protein-extra">
+          <div class="pe-row"><span>Per meal (4 meals)</span><strong id="r-meal">30 g</strong></div>
+          <div class="pe-row"><span>Range</span><strong id="r-rng">105–135 g</strong></div>
+        </div>
+        <p class="margin-note">A general guideline, not a prescription. Needs vary with age, health and training.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>How much protein do you need?</h2>
+      <p>Protein needs are usually expressed as <strong>grams per kilogram of body weight</strong>. A mostly sedentary person needs less; someone training regularly or trying to build muscle needs more, and a higher intake also helps preserve muscle while losing fat. This calculator adjusts the grams-per-kilo figure for your activity and goal.</p>
+
+      <h2>Why protein matters</h2>
+      <p>Beyond building and repairing muscle, protein is the most filling of the three macronutrients — which is why a higher-protein diet often makes fat loss easier to sustain. Spreading it across the day (rather than one big hit) helps your body use it well.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — fit protein into your full calorie plan</li>
+          <li><a href="/recipes/">High-protein recipes</a> — hit your target with real meals</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical or dietary advice.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    select{width:100%;padding:11px 12px;font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);cursor:pointer}
+    select:focus{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .goals{display:flex;flex-direction:column;gap:8px}
+    .goal{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#F4FAF9;cursor:pointer;transition:.15s;text-align:left}
+    .goal:hover{border-color:var(--accent)}
+    .goal[aria-pressed=true]{border-color:#3E8C9E;background:var(--cool-sel);box-shadow:inset 0 0 0 1px #3E8C9E}
+    .goal .g-name{font-weight:600;font-size:.92rem}.goal .g-sub{font-size:.78rem;color:var(--muted)}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 16px}
+    .protein-extra{border-top:1px solid var(--cool-line);padding-top:12px;margin-bottom:12px}
+    .pe-row{display:flex;justify-content:space-between;font-size:.9rem;padding:5px 0;color:#33433D}
+    .pe-row strong{color:var(--ink)}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let units='metric', goal='maintain';
+      // g/kg base by activity, adjusted by goal
+      const table = {
+        sedentary: {maintain:0.8, build:1.2, lose:1.2},
+        active:    {maintain:1.4, build:1.8, lose:1.6},
+        athlete:   {maintain:1.8, build:2.2, lose:2.0}
+      };
+      $('seg-units').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        const nu=b.dataset.u; if(nu===units)return;
+        const w=$('weight');
+        if(nu==='imperial'){ w.value=Math.round(parseFloat(w.value)*2.2046); $('w-label').textContent='Weight (lb)'; }
+        else { w.value=Math.round(parseFloat(w.value)/2.2046); $('w-label').textContent='Weight (kg)'; }
+        units=nu;
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      $('goals').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        goal=b.dataset.goal;
+        [...$('goals').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step; if(v<0)v=0; input.value=v; calc();
+      });
+      $('weight').addEventListener('input',calc);
+      $('activity').addEventListener('change',calc);
+      function calc(){
+        let w=parseFloat($('weight').value)||0;
+        if(units==='imperial'){ w=w/2.2046; }
+        const act=$('activity').value;
+        const perKg=table[act][goal];
+        const grams=Math.round(w*perKg);
+        const lo=Math.round(grams*0.88), hi=Math.round(grams*1.12);
+        $('r-protein').textContent=grams;
+        $('r-meal').textContent=Math.round(grams/4)+' g';
+        $('r-rng').textContent=lo+'–'+hi+' g';
+        const ctx={maintain:'A solid target for staying active and healthy.',build:'A higher intake to support muscle growth.',lose:'Enough to preserve muscle while losing fat.'};
+        $('r-context').textContent=ctx[goal];
+      }
+      calc();
+    })();
+  </script>
+</Base>

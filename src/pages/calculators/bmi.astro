@@ -1,0 +1,202 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="BMI Calculator — Body Mass Index | welanutria"
+  description="Free BMI calculator. Work out your body mass index from your height and weight, see your category, and understand what it means."
+  current="calculators"
+>
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>BMI</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>BMI Calculator</h1>
+      <p class="lede">Body mass index is a quick screening number based on your height and weight. See where you fall and what the range means — with the context BMI alone leaves out.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field"><label id="h-label">Height (cm)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease height">−</button><input type="number" id="height" value="175"><button type="button" data-step="1" aria-label="Increase height">+</button></div>
+          </div>
+          <div class="field"><label id="w-label">Weight (kg)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease weight">−</button><input type="number" id="weight" value="75"><button type="button" data-step="1" aria-label="Increase weight">+</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Your result</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-bmi">24.5</span>
+          <span class="big-lbl">BMI</span>
+        </div>
+        <p class="r-category" id="r-cat">Normal weight</p>
+
+        <div class="bmi-scale" aria-hidden="true">
+          <div class="bmi-bar">
+            <span class="seg-under"></span><span class="seg-normal"></span><span class="seg-over"></span><span class="seg-obese"></span>
+          </div>
+          <div class="bmi-marker" id="bmi-marker"></div>
+          <div class="bmi-ticks"><span>18.5</span><span>25</span><span>30</span></div>
+        </div>
+
+        <ul class="bmi-legend">
+          <li><span class="dot under"></span>Under 18.5 — underweight</li>
+          <li><span class="dot normal"></span>18.5–24.9 — normal</li>
+          <li><span class="dot over"></span>25–29.9 — overweight</li>
+          <li><span class="dot obese"></span>30+ — obese</li>
+        </ul>
+
+        <p class="margin-note">BMI is a screening tool, not a diagnosis. It doesn't account for muscle, body composition, age or sex.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>What is BMI?</h2>
+      <p><strong>Body mass index (BMI)</strong> is a simple ratio of your weight to your height. It's calculated as weight in kilograms divided by height in metres squared. Because it needs only two easy measurements, it's widely used as a quick population-level screening tool for weight categories.</p>
+
+      <h2>What BMI doesn't tell you</h2>
+      <p>BMI treats all weight the same, so it can't tell muscle from fat. A very muscular person can have a "high" BMI while carrying little fat, and BMI can also miss low muscle mass in older adults. It also doesn't consider where fat is stored, which matters for health. Treat it as one rough signal among several — not the whole picture.</p>
+
+      <h2>Better-together tools</h2>
+      <p>For a fuller view, pair BMI with body composition and energy needs.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/body-fat/">Body fat calculator</a> — a composition estimate BMI can't give</li>
+          <li><a href="/calculators/ideal-weight/">Ideal weight</a> — a healthy range for your height</li>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — your daily calorie needs</li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice. Consult a qualified professional about your weight and health.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}
+    .crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}
+    .field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    @media(max-width:460px){.row{grid-template-columns:1fr}}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}
+    .stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-category{font-weight:700;font-size:1.05rem;margin:0 0 18px;color:var(--ink)}
+
+    .bmi-scale{margin-bottom:16px}
+    .bmi-bar{display:flex;height:10px;border-radius:5px;overflow:hidden}
+    .bmi-bar span{display:block}
+    .seg-under{background:#6DA98C;width:24%}
+    .seg-normal{background:#2E6B57;width:21%}
+    .seg-over{background:#D99A2B;width:20%}
+    .seg-obese{background:#C25A4D;width:35%}
+    .bmi-marker{width:2px;height:16px;background:var(--ink);margin-top:-13px;border-radius:1px;position:relative;transition:.2s}
+    .bmi-ticks{display:flex;justify-content:flex-start;gap:0;font-size:.7rem;color:var(--muted);margin-top:4px;position:relative;height:14px}
+    .bmi-ticks span{position:absolute}
+    .bmi-ticks span:nth-child(1){left:24%}
+    .bmi-ticks span:nth-child(2){left:45%}
+    .bmi-ticks span:nth-child(3){left:65%}
+
+    .bmi-legend{list-style:none;margin:0 0 8px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:.82rem;color:#33433D}
+    .bmi-legend li{display:flex;align-items:center;gap:7px}
+    .dot{width:11px;height:11px;border-radius:3px;flex:none}
+    .dot.under{background:#6DA98C}.dot.normal{background:#2E6B57}.dot.over{background:#D99A2B}.dot.obese{background:#C25A4D}
+
+    .margin-note{font-size:.78rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
+    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}
+    .next-links ul{margin:0;padding-left:1.2em;line-height:1.7}
+    .next-links a{font-weight:500}
+    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+      let units = 'metric';
+
+      $('seg-units').addEventListener('click', (e) => {
+        const b = e.target.closest('button'); if(!b) return;
+        const nu = b.dataset.u; if(nu===units) return;
+        const h=$('height'), w=$('weight');
+        if(nu==='imperial'){ h.value=Math.round(parseFloat(h.value)/2.54); w.value=Math.round(parseFloat(w.value)*2.2046); $('h-label').textContent='Height (in)'; $('w-label').textContent='Weight (lb)'; }
+        else { h.value=Math.round(parseFloat(h.value)*2.54); w.value=Math.round(parseFloat(w.value)/2.2046); $('h-label').textContent='Height (cm)'; $('w-label').textContent='Weight (kg)'; }
+        units=nu;
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed', x===b?'true':'false'));
+        calc();
+      });
+
+      document.addEventListener('click', (e) => {
+        const btn=e.target.closest('.stepper button'); if(!btn) return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step;
+        const min=input.min!==''?parseFloat(input.min):-Infinity;
+        const max=input.max!==''?parseFloat(input.max):Infinity;
+        if(v<min)v=min; if(v>max)v=max; input.value=v; calc();
+      });
+      ['height','weight'].forEach(id=>{ $(id).addEventListener('input',calc); });
+
+      function calc(){
+        let h=parseFloat($('height').value)||0;
+        let w=parseFloat($('weight').value)||0;
+        if(units==='imperial'){ h=h*2.54; w=w/2.2046; }
+        const m=h/100;
+        let bmi = m>0 ? w/(m*m) : 0;
+        bmi = Math.round(bmi*10)/10;
+        $('r-bmi').textContent = bmi.toFixed(1);
+
+        let cat='', col='';
+        if(bmi<18.5){cat='Underweight';col='#6DA98C';}
+        else if(bmi<25){cat='Normal weight';col='#2E6B57';}
+        else if(bmi<30){cat='Overweight';col='#D99A2B';}
+        else {cat='Obese';col='#C25A4D';}
+        const ce=$('r-cat'); ce.textContent=cat; ce.style.color=col;
+
+        // marker position: map BMI 15..40 to 0..100%
+        let pct = (bmi-15)/(40-15)*100;
+        if(pct<0)pct=0; if(pct>100)pct=100;
+        $('bmi-marker').style.marginLeft = 'calc('+pct+'% - 1px)';
+      }
+      calc();
+    })();
+  </script>
+</Base>
