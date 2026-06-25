@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const calculators = [
+  { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Your daily calories and a protein, carb and fat split for your goal.', ready: true },
+  { href: '/calculators/bmi/', name: 'BMI', desc: 'Body mass index and what the range means for you.', ready: false },
+  { href: '/calculators/ideal-weight/', name: 'Ideal Weight', desc: 'A healthy weight range based on your height.', ready: false },
+  { href: '/calculators/protein/', name: 'Protein', desc: 'How much protein you need each day.', ready: false },
+  { href: '/calculators/water/', name: 'Water Intake', desc: 'A daily water target from your weight and activity.', ready: false },
+  { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a few tape measurements.', ready: false },
+];
+---
+<Base
+  title="Free Health & Fitness Calculators | welanutria"
+  description="Free calculators for calories, macros, BMI, ideal weight, protein, water intake and body fat. No sign-up, instant results, each method explained."
+  current="calculators"
+>
+  <div class="wrap idx">
+    <header class="idx-head">
+      <p class="eyebrow">Calculators</p>
+      <h1>Health &amp; fitness calculators</h1>
+      <p class="lede">Fast, free tools for the numbers that matter — calories, macros, weight and more. Each one is backed by a recognised method and explained in plain language.</p>
+    </header>
+
+    <div class="idx-grid">
+      {calculators.map((c) => (
+        c.ready ? (
+          <a class="idx-tile" href={c.href}>
+            <span class="idx-name">{c.name}</span>
+            <span class="idx-desc">{c.desc}</span>
+            <span class="idx-go">Open →</span>
+          </a>
+        ) : (
+          <div class="idx-tile soon">
+            <span class="idx-name">{c.name}</span>
+            <span class="idx-desc">{c.desc}</span>
+            <span class="idx-soon">Coming soon</span>
+          </div>
+        )
+      ))}
+    </div>
+  </div>
+
+  <style>
+    .idx{padding:40px 0 0}
+    .idx-head{margin-bottom:26px}
+    .idx-head h1{font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .idx-head .lede{color:#33433D;max-width:58ch;margin:0;font-size:1.05rem}
+    .idx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+    .idx-tile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:.15s}
+    a.idx-tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .idx-name{font-weight:700;font-size:1.08rem;color:var(--ink)}
+    .idx-desc{font-size:.9rem;color:var(--muted);line-height:1.45;flex:1}
+    .idx-go{font-weight:600;color:var(--accent);font-size:.9rem;margin-top:4px}
+    .idx-tile.soon{opacity:.7}
+    .idx-soon{font-size:.78rem;color:var(--muted);font-weight:600;margin-top:4px}
+  </style>
+</Base>
