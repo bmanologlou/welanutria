@@ -1,0 +1,186 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calorie Deficit Calculator',
+  url: 'https://welanutria.com/calculators/calorie-deficit/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Work out the daily calorie deficit you need to reach a weight-loss goal by a target date.',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Calculators', item: 'https://welanutria.com/calculators/' },
+    { '@type': 'ListItem', position: 2, name: 'Calorie Deficit', item: 'https://welanutria.com/calculators/calorie-deficit/' },
+  ],
+};
+
+const faqs = [
+  { q: 'What is a calorie deficit?', a: 'A calorie deficit means eating fewer calories than your body burns, so it draws on stored energy and you lose weight. Roughly 7,700 calories equals about one kilogram of body fat.' },
+  { q: 'How big should my deficit be?', a: 'A moderate deficit of about 15 to 25 percent below maintenance, or roughly 0.5 to 1 kg per week, is generally sustainable. Very large deficits are hard to maintain and can cost muscle.' },
+  { q: 'Why does my target rate matter?', a: 'Losing weight faster needs a bigger daily deficit. This calculator shows the deficit required for your chosen rate so you can pick something realistic.' },
+  { q: 'Is faster weight loss better?', a: 'Not usually. Slower, steady loss is easier to sustain, better preserves muscle, and is less likely to rebound. welanutria provides estimates only, not medical advice.' },
+];
+---
+<Base
+  title="Calorie Deficit Calculator — Weight Loss Planner | welanutria"
+  description="Free calorie deficit calculator. Find the daily deficit you need to lose weight at your chosen rate, and the calories to eat each day."
+  current="calculators"
+>
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={breadcrumb} />
+
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Calorie Deficit</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Calorie Deficit Calculator</h1>
+      <p class="lede">Pick how fast you want to lose weight, and see the daily calorie deficit — and target intake — to get there. Enter your maintenance calories (your TDEE) to start.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+        <div class="field"><label for="tdee">Maintenance calories (TDEE)</label>
+          <div class="stepper"><button type="button" data-step="-10" aria-label="Decrease">−</button><input type="number" id="tdee" value="2500" min="1000" max="6000"><button type="button" data-step="10" aria-label="Increase">+</button></div>
+          <p class="hint">Not sure? Use the <a href="/calculators/tdee/">TDEE calculator</a> first.</p>
+        </div>
+        <div class="field"><label>Goal rate</label>
+          <div class="goals" id="goals">
+            <button type="button" class="goal" data-rate="0.25" aria-pressed="false"><span class="g-name">Gentle</span><span class="g-sub">~0.25 kg / week</span></button>
+            <button type="button" class="goal" data-rate="0.5" aria-pressed="true"><span class="g-name">Steady</span><span class="g-sub">~0.5 kg / week</span></button>
+            <button type="button" class="goal" data-rate="0.75" aria-pressed="false"><span class="g-name">Faster</span><span class="g-sub">~0.75 kg / week</span></button>
+            <button type="button" class="goal" data-rate="1" aria-pressed="false"><span class="g-name">Aggressive</span><span class="g-sub">~1 kg / week</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Your plan</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-intake">2000</span>
+          <span class="big-lbl">calories / day</span>
+        </div>
+        <p class="r-context">to lose weight at your chosen rate.</p>
+        <div class="plan-extra">
+          <div class="pe-row"><span>Daily deficit</span><strong id="r-deficit">−500 kcal</strong></div>
+          <div class="pe-row"><span>Weekly loss</span><strong id="r-weekly">~0.5 kg</strong></div>
+        </div>
+        <p class="margin-note" id="r-warn">A sustainable, moderate pace.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>How a calorie deficit works</h2>
+      <p>To lose weight you need to take in fewer calories than you burn — a <strong>calorie deficit</strong>. Your body makes up the difference from stored energy, mostly fat. About <strong>7,700 calories</strong> equals roughly one kilogram of body fat, so a 500-calorie daily deficit leads to about half a kilo of loss per week.</p>
+
+      <h2>Choosing a sustainable rate</h2>
+      <p>Bigger deficits lose weight faster but are harder to stick to and can cost muscle. For most people, a moderate deficit that loses around 0.5 to 1 kg per week is the sweet spot — fast enough to see progress, slow enough to sustain. Pair your deficit with enough <a href="/calculators/protein/">protein</a> to protect muscle.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — find your maintenance calories first</li>
+          <li><a href="/calculators/protein/">Protein calculator</a> — preserve muscle in a deficit</li>
+          <li><a href="/recipes/">Low-calorie recipes</a> — eat well within your target</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faq-wrap"><Faq items={faqs} /></div>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical or dietary advice.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr;align-items:start}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .hint{font-size:.8rem;color:var(--muted);margin:7px 0 0}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .goals{display:flex;flex-direction:column;gap:8px}
+    .goal{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#F4FAF9;cursor:pointer;transition:.15s;text-align:left}
+    .goal:hover{border-color:var(--accent)}
+    .goal[aria-pressed=true]{border-color:#3E8C9E;background:var(--cool-sel);box-shadow:inset 0 0 0 1px #3E8C9E}
+    .goal .g-name{font-weight:600;font-size:.92rem}.goal .g-sub{font-size:.78rem;color:var(--muted)}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 16px}
+    .plan-extra{border-top:1px solid var(--cool-line);padding-top:12px;margin-bottom:12px}
+    .pe-row{display:flex;justify-content:space-between;font-size:.9rem;padding:5px 0;color:#33433D}
+    .pe-row strong{color:var(--ink)}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    .faq-wrap{max-width:calc((100% - 16px) / 2)}
+    @media(max-width:780px){.explainer,.page-disclaimer,.faq-wrap{max-width:100%}}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let rate=0.5;
+      $('goals').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        rate=parseFloat(b.dataset.rate);
+        [...$('goals').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step;
+        const min=input.min!==''?parseFloat(input.min):-Infinity;
+        const max=input.max!==''?parseFloat(input.max):Infinity;
+        if(v<min)v=min; if(v>max)v=max; input.value=v; calc();
+      });
+      $('tdee').addEventListener('input',calc);
+      function calc(){
+        const tdee=parseFloat($('tdee').value)||0;
+        // kg/week * 7700 / 7 = daily deficit
+        const dailyDeficit=Math.round(rate*7700/7/10)*10;
+        let intake=tdee-dailyDeficit;
+        intake=Math.round(intake/10)*10;
+        $('r-intake').textContent=intake.toLocaleString();
+        $('r-deficit').textContent='−'+dailyDeficit.toLocaleString()+' kcal';
+        $('r-weekly').textContent='~'+rate+' kg';
+        // warning logic
+        let warn='A sustainable, moderate pace.';
+        if(intake < 1200){ warn='Heads up: this puts intake very low. Very low-calorie diets need professional supervision.'; }
+        else if(rate>=1){ warn='An aggressive pace — harder to sustain and may cost muscle. Keep protein high.'; }
+        else if(rate<=0.25){ warn='A gentle, easy-to-sustain pace.'; }
+        $('r-warn').textContent=warn;
+      }
+      calc();
+    })();
+  </script>
+</Base>

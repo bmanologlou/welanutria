@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calories Burned Calculator',
+  url: 'https://welanutria.com/calculators/calories-burned/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Estimate calories burned during exercise from your weight, the activity and how long you do it, using MET values.',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Calculators', item: 'https://welanutria.com/calculators/' },
+    { '@type': 'ListItem', position: 2, name: 'Calories Burned', item: 'https://welanutria.com/calculators/calories-burned/' },
+  ],
+};
+
+const faqs = [
+  { q: 'How are calories burned calculated?', a: 'This calculator uses MET values (Metabolic Equivalent of Task), a standard measure of an activity\u2019s intensity. Calories burned equals MET times your weight in kilograms times the time in hours.' },
+  { q: 'How accurate is it?', a: 'MET-based estimates are a good general guide but individual burn varies with fitness, intensity, terrain and efficiency. Treat the number as an approximation, not an exact count.' },
+  { q: 'Does this include my resting calories?', a: 'It estimates the calories burned by the activity itself. Your body also burns calories at rest, which your TDEE accounts for separately.' },
+  { q: 'Should I eat back exercise calories?', a: 'Not necessarily all of them, partly because estimates run high. If you are managing weight, use your TDEE as the main guide. welanutria provides estimates only.' },
+];
+---
+<Base
+  title="Calories Burned Calculator — Exercise Calorie Estimator | welanutria"
+  description="Free calories burned calculator. Estimate how many calories you burn during exercise from your weight, the activity and the duration."
+  current="calculators"
+>
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={breadcrumb} />
+
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Calories Burned</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Calories Burned Calculator</h1>
+      <p class="lede">Estimate the calories you burn during exercise — pick an activity, your weight and how long you do it.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your activity</h2>
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+        <div class="field"><label id="w-label">Weight (kg)</label>
+          <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease weight">−</button><input type="number" id="weight" value="75"><button type="button" data-step="1" aria-label="Increase weight">+</button></div>
+        </div>
+        <div class="field"><label for="activity">Activity</label>
+          <select id="activity">
+            <option value="3.5">Walking (moderate, 5 km/h)</option>
+            <option value="7" selected>Jogging (8 km/h)</option>
+            <option value="9.8">Running (10 km/h)</option>
+            <option value="7.5">Cycling (moderate)</option>
+            <option value="8">Swimming (moderate)</option>
+            <option value="6">Weight training (vigorous)</option>
+            <option value="5">Elliptical / cardio machine</option>
+            <option value="7.3">HIIT</option>
+            <option value="3">Yoga</option>
+            <option value="5.5">Hiking</option>
+            <option value="6.5">Dancing</option>
+            <option value="8.5">Jump rope</option>
+          </select>
+        </div>
+        <div class="field"><label>Duration (minutes)</label>
+          <div class="stepper"><button type="button" data-step="-5" aria-label="Decrease duration">−</button><input type="number" id="duration" value="30" min="1" max="600"><button type="button" data-step="5" aria-label="Increase duration">+</button></div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Calories burned</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-cal">276</span>
+          <span class="big-lbl">calories</span>
+        </div>
+        <p class="r-context" id="r-context">from 30 minutes of activity.</p>
+        <div class="plan-extra">
+          <div class="pe-row"><span>Per 10 minutes</span><strong id="r-per10">92 kcal</strong></div>
+          <div class="pe-row"><span>Per hour</span><strong id="r-perhr">551 kcal</strong></div>
+        </div>
+        <p class="margin-note">A MET-based estimate. Real burn varies with intensity, fitness and terrain.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>How calories burned are estimated</h2>
+      <p>This calculator uses <strong>MET values</strong> (Metabolic Equivalent of Task) — a standard way to rate how intense an activity is compared with sitting still. The formula is simple: <strong>calories ≈ MET × weight (kg) × time (hours)</strong>. Heavier people and longer or more intense sessions burn more.</p>
+
+      <h2>A note on accuracy</h2>
+      <p>MET estimates are a solid general guide, but your real burn depends on fitness, effort, terrain and how efficiently you move. Fitness trackers and machines often overestimate, so treat any number as a ballpark. If you're managing weight, lean on your <a href="/calculators/tdee/">TDEE</a> as the main guide rather than eating back every exercise calorie.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — your full daily calorie needs</li>
+          <li><a href="/calculators/calorie-deficit/">Calorie deficit</a> — plan weight loss</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faq-wrap"><Faq items={faqs} /></div>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical or fitness-coaching advice.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr;align-items:start}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    select{width:100%;padding:11px 12px;font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);cursor:pointer}
+    select:focus{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 16px}
+    .plan-extra{border-top:1px solid var(--cool-line);padding-top:12px;margin-bottom:12px}
+    .pe-row{display:flex;justify-content:space-between;font-size:.9rem;padding:5px 0;color:#33433D}
+    .pe-row strong{color:var(--ink)}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    .faq-wrap{max-width:calc((100% - 16px) / 2)}
+    @media(max-width:780px){.explainer,.page-disclaimer,.faq-wrap{max-width:100%}}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let units='metric';
+      $('seg-units').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        const nu=b.dataset.u; if(nu===units)return;
+        const w=$('weight');
+        if(nu==='imperial'){ w.value=Math.round(parseFloat(w.value)*2.2046); $('w-label').textContent='Weight (lb)'; }
+        else { w.value=Math.round(parseFloat(w.value)/2.2046); $('w-label').textContent='Weight (kg)'; }
+        units=nu;
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step;
+        const min=input.min!==''?parseFloat(input.min):-Infinity;
+        const max=input.max!==''?parseFloat(input.max):Infinity;
+        if(v<min)v=min; if(v>max)v=max; input.value=v; calc();
+      });
+      $('weight').addEventListener('input',calc);
+      $('activity').addEventListener('change',calc);
+      $('duration').addEventListener('input',calc);
+      function calc(){
+        let w=parseFloat($('weight').value)||0;
+        if(units==='imperial'){ w=w/2.2046; }
+        const met=parseFloat($('activity').value)||1;
+        const mins=parseFloat($('duration').value)||0;
+        const hours=mins/60;
+        const cals=met*w*hours;
+        $('r-cal').textContent=Math.round(cals).toLocaleString();
+        $('r-context').textContent='from '+mins+' minutes of activity.';
+        $('r-per10').textContent=Math.round(met*w*(10/60))+' kcal';
+        $('r-perhr').textContent=Math.round(met*w)+' kcal';
+      }
+      calc();
+    })();
+  </script>
+</Base>

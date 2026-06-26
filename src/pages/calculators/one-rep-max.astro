@@ -1,0 +1,194 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'One-Rep Max Calculator',
+  url: 'https://welanutria.com/calculators/one-rep-max/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Estimate your one-rep max (1RM) from a weight and reps, with a full percentage training table.',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Calculators', item: 'https://welanutria.com/calculators/' },
+    { '@type': 'ListItem', position: 2, name: 'One-Rep Max', item: 'https://welanutria.com/calculators/one-rep-max/' },
+  ],
+};
+
+const faqs = [
+  { q: 'What is a one-rep max (1RM)?', a: 'Your one-rep max is the most weight you can lift for a single repetition of an exercise. It is a common benchmark for strength and for setting training loads.' },
+  { q: 'How is 1RM estimated?', a: 'This calculator uses the Epley formula, which estimates 1RM from a weight you lifted and the number of reps. It is most accurate for sets of around 10 reps or fewer.' },
+  { q: 'Why use percentages of 1RM?', a: 'Many training programs prescribe loads as a percentage of your 1RM, for example 5 reps at 80 percent. The table here shows the weights for each percentage so you can plan your sets.' },
+  { q: 'Is estimating safer than testing?', a: 'Often, yes. Estimating from a submaximal set avoids the injury risk of a true max attempt. Always warm up and use a spotter for heavy lifts. welanutria provides estimates only.' },
+];
+
+const pcts = [100, 95, 90, 85, 80, 75, 70, 65, 60];
+const repsAt = { 100:1, 95:2, 90:4, 85:6, 80:8, 75:10, 70:12, 65:16, 60:20 };
+---
+<Base
+  title="One-Rep Max Calculator — 1RM & Training Percentages | welanutria"
+  description="Free one-rep max calculator. Estimate your 1RM from weight and reps using the Epley formula, with a full percentage training table."
+  current="calculators"
+>
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={breadcrumb} />
+
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>One-Rep Max</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>One-Rep Max Calculator</h1>
+      <p class="lede">Estimate the most you could lift for a single rep — without a risky max attempt. Enter a weight and how many reps you did, and get a full training-percentage table.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your lift</h2>
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="kg" aria-pressed="true">kg</button>
+            <button type="button" data-u="lb" aria-pressed="false">lb</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label id="wt-label">Weight lifted (kg)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease weight">−</button><input type="number" id="weight" value="100" min="1"><button type="button" data-step="1" aria-label="Increase weight">+</button></div>
+          </div>
+          <div class="field"><label>Reps</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease reps">−</button><input type="number" id="reps" value="5" min="1" max="20"><button type="button" data-step="1" aria-label="Increase reps">+</button></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Estimated 1RM</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-1rm">117</span>
+          <span class="big-lbl" id="r-unit">kg</span>
+        </div>
+        <p class="r-context">The most you could likely lift for a single rep.</p>
+        <p class="margin-note">An estimate (Epley formula), most accurate at 10 reps or fewer. Always warm up and lift safely.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>Training percentage table</h2>
+      <p>Use these loads to plan your sets — most strength programs prescribe weight as a percentage of your 1RM.</p>
+      <table class="pct-table">
+        <thead><tr><th>% of 1RM</th><th>Weight</th><th>Approx reps</th></tr></thead>
+        <tbody id="pct-body">
+          {pcts.map((p) => (
+            <tr><td>{p}%</td><td data-pct={p} class="pct-w">—</td><td>{repsAt[p]}</td></tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2>How it works</h2>
+      <p>This calculator uses the <strong>Epley formula</strong>, which estimates your one-rep max from a weight you lifted for multiple reps. Estimating from a submaximal set is safer than a true max attempt, which carries more injury risk. The estimate is most reliable for sets of around ten reps or fewer.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/protein/">Protein calculator</a> — fuel strength training</li>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — calories to build muscle</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faq-wrap"><Faq items={faqs} /></div>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical or fitness-coaching advice.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr;align-items:start}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    @media(max-width:460px){.row{grid-template-columns:1fr}}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 16px}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    .faq-wrap{max-width:calc((100% - 16px) / 2)}
+    @media(max-width:780px){.explainer,.page-disclaimer,.faq-wrap{max-width:100%}}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .pct-table{width:100%;border-collapse:collapse;margin:0 0 1em;font-size:.92rem}
+    .pct-table th,.pct-table td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+    .pct-table th{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .pct-table td.pct-w{font-weight:700;color:var(--accent)}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let units='kg';
+      $('seg-units').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        const nu=b.dataset.u; if(nu===units)return;
+        const w=$('weight');
+        if(nu==='lb'){ w.value=Math.round(parseFloat(w.value)*2.2046); $('wt-label').textContent='Weight lifted (lb)'; }
+        else { w.value=Math.round(parseFloat(w.value)/2.2046); $('wt-label').textContent='Weight lifted (kg)'; }
+        units=nu;
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step;
+        const min=input.min!==''?parseFloat(input.min):-Infinity;
+        const max=input.max!==''?parseFloat(input.max):Infinity;
+        if(v<min)v=min; if(v>max)v=max; input.value=v; calc();
+      });
+      $('weight').addEventListener('input',calc);
+      $('reps').addEventListener('input',calc);
+      function calc(){
+        const w=parseFloat($('weight').value)||0;
+        const r=parseFloat($('reps').value)||1;
+        // Epley: 1RM = w * (1 + r/30)
+        const orm = w*(1+r/30);
+        $('r-1rm').textContent = Math.round(orm);
+        $('r-unit').textContent = units;
+        document.querySelectorAll('.pct-w').forEach(td=>{
+          const p=parseFloat(td.dataset.pct);
+          td.textContent = Math.round(orm*p/100) + ' ' + units;
+        });
+      }
+      calc();
+    })();
+  </script>
+</Base>
