@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import JsonLd from '../../components/JsonLd.astro';
+import CalcIcon from '../../components/CalcIcon.astro';
 
 const calculators = [
   { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Your daily calories and a protein, carb and fat split for your goal.', ready: true },
@@ -36,19 +37,21 @@ const itemList = {
     <header class="idx-head">
       <p class="eyebrow">Calculators</p>
       <h1>Health &amp; fitness calculators</h1>
-      <p class="lede">Fast, free tools for the numbers that matter — calories, macros, weight and more. Each one is backed by a recognised method and explained in plain language.</p>
+      <p class="lede">Fast, free tools for the numbers that matter, calories, macros, weight and more. Each one is backed by a recognised method and explained in plain language.</p>
     </header>
 
     <div class="idx-grid">
       {calculators.map((c) => (
         c.ready ? (
           <a class="idx-tile" href={c.href}>
+            <span class="idx-icon"><CalcIcon name={c.href.split('/').filter(Boolean).pop()} /></span>
             <span class="idx-name">{c.name}</span>
             <span class="idx-desc">{c.desc}</span>
             <span class="idx-go">Open →</span>
           </a>
         ) : (
           <div class="idx-tile soon">
+            <span class="idx-icon"><CalcIcon name={c.href.split('/').filter(Boolean).pop()} /></span>
             <span class="idx-name">{c.name}</span>
             <span class="idx-desc">{c.desc}</span>
             <span class="idx-soon">Coming soon</span>
@@ -59,8 +62,8 @@ const itemList = {
 
     <section class="idx-intro">
       <h2>Tools you can trust, explained in plain language</h2>
-      <p>Most online calculators hand you a number and leave you guessing. welanutria does the opposite: every tool tells you which method it uses, what the result means, and how confident you can be in it. Our calculators draw on recognised, published formulas — the Mifflin-St Jeor equation for daily calories, the U.S. Navy method for body fat, and standard dietary references for protein and water — so you get answers grounded in real science rather than guesswork.</p>
-      <p>Whether you're working out how many calories you need, checking a healthy weight range, or dialling in your protein, each calculator works instantly in your browser with no sign-up. Pair them together for a fuller picture — start with <a href="/calculators/tdee/">your daily calories</a>, then use the results to plan meals that fit. Remember that every result is an estimate for general guidance, not a medical diagnosis.</p>
+      <p>Most online calculators hand you a number and leave you guessing. welanutria does the opposite: every tool tells you which method it uses, what the result means, and how confident you can be in it. Our calculators draw on recognised, published formulas, the Mifflin-St Jeor equation for daily calories, the U.S. Navy method for body fat, and standard dietary references for protein and water, so you get answers grounded in real science rather than guesswork.</p>
+      <p>Whether you're working out how many calories you need, checking a healthy weight range, or dialling in your protein, each calculator works instantly in your browser with no sign-up. Pair them together for a fuller picture, start with <a href="/calculators/tdee/">your daily calories</a>, then use the results to plan meals that fit. Remember that every result is an estimate for general guidance, not a medical diagnosis.</p>
     </section>
   </div>
 
@@ -73,6 +76,8 @@ const itemList = {
     @media(max-width:720px){.idx-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:460px){.idx-grid{grid-template-columns:1fr}}
     .idx-tile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:.15s}
+    .idx-icon{color:var(--accent);margin-bottom:4px}
+    .idx-icon :global(.calc-icon){width:30px;height:30px}
     a.idx-tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
     .idx-name{font-weight:700;font-size:1.08rem;color:var(--ink)}
     .idx-desc{font-size:.9rem;color:var(--muted);line-height:1.45;flex:1}

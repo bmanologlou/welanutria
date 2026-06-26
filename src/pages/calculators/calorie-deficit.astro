@@ -31,7 +31,7 @@ const faqs = [
 ];
 ---
 <Base
-  title="Calorie Deficit Calculator — Weight Loss Planner | welanutria"
+  title="Calorie Deficit Calculator: Weight Loss Planner | welanutria"
   description="Free calorie deficit calculator. Find the daily deficit you need to lose weight at your chosen rate, and the calories to eat each day."
   current="calculators"
 >
@@ -44,7 +44,7 @@ const faqs = [
     <header class="calc-head">
       <p class="eyebrow">Calculator</p>
       <h1>Calorie Deficit Calculator</h1>
-      <p class="lede">Pick how fast you want to lose weight, and see the daily calorie deficit — and target intake — to get there. Enter your maintenance calories (your TDEE) to start.</p>
+      <p class="lede">Pick how fast you want to lose weight, and see the daily calorie deficit, and target intake, to get there. Enter your maintenance calories (your TDEE) to start.</p>
     </header>
 
     <div class="calc-grid">
@@ -81,17 +81,17 @@ const faqs = [
 
     <section class="explainer">
       <h2>How a calorie deficit works</h2>
-      <p>To lose weight you need to take in fewer calories than you burn — a <strong>calorie deficit</strong>. Your body makes up the difference from stored energy, mostly fat. About <strong>7,700 calories</strong> equals roughly one kilogram of body fat, so a 500-calorie daily deficit leads to about half a kilo of loss per week.</p>
+      <p>To lose weight you need to take in fewer calories than you burn, a <strong>calorie deficit</strong>. Your body makes up the difference from stored energy, mostly fat. About <strong>7,700 calories</strong> equals roughly one kilogram of body fat, so a 500-calorie daily deficit leads to about half a kilo of loss per week.</p>
 
       <h2>Choosing a sustainable rate</h2>
-      <p>Bigger deficits lose weight faster but are harder to stick to and can cost muscle. For most people, a moderate deficit that loses around 0.5 to 1 kg per week is the sweet spot — fast enough to see progress, slow enough to sustain. Pair your deficit with enough <a href="/calculators/protein/">protein</a> to protect muscle.</p>
+      <p>Bigger deficits lose weight faster but are harder to stick to and can cost muscle. For most people, a moderate deficit that loses around 0.5 to 1 kg per week is the sweet spot, fast enough to see progress, slow enough to sustain. Pair your deficit with enough <a href="/calculators/protein/">protein</a> to protect muscle.</p>
 
       <div class="next-links">
         <h3>Next steps</h3>
         <ul>
-          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — find your maintenance calories first</li>
-          <li><a href="/calculators/protein/">Protein calculator</a> — preserve muscle in a deficit</li>
-          <li><a href="/recipes/">Low-calorie recipes</a> — eat well within your target</li>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a>, find your maintenance calories first</li>
+          <li><a href="/calculators/protein/">Protein calculator</a>, preserve muscle in a deficit</li>
+          <li><a href="/recipes/">Low-calorie recipes</a>, eat well within your target</li>
         </ul>
       </div>
     </section>
@@ -176,7 +176,7 @@ const faqs = [
         // warning logic
         let warn='A sustainable, moderate pace.';
         if(intake < 1200){ warn='Heads up: this puts intake very low. Very low-calorie diets need professional supervision.'; }
-        else if(rate>=1){ warn='An aggressive pace — harder to sustain and may cost muscle. Keep protein high.'; }
+        else if(rate>=1){ warn='An aggressive pace, harder to sustain and may cost muscle. Keep protein high.'; }
         else if(rate<=0.25){ warn='A gentle, easy-to-sustain pace.'; }
         $('r-warn').textContent=warn;
       }

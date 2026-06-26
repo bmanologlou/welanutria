@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import JsonLd from '../components/JsonLd.astro';
+import CalcIcon from '../components/CalcIcon.astro';
 
 const calculators = [
   { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Daily calories and your protein, carb and fat split.' },
@@ -35,7 +36,7 @@ const itemList = {
 };
 ---
 <Base
-  title="welanutria — Free Health & Fitness Calculators and Recipes"
+  title="welanutria: Free Health & Fitness Calculators and Recipes"
   description="Free, fast health and fitness calculators plus recipes that fit your goals. TDEE, BMI, protein, water and more. No sign-up."
   current=""
 >
@@ -44,7 +45,7 @@ const itemList = {
     <div class="wrap">
       <p class="eyebrow">Free · No sign-up</p>
       <h1>Straight answers for your health numbers.</h1>
-      <p class="lede">Work out your calories, macros, BMI and more in seconds — then find recipes that fit the result. Every tool is backed by a recognised method and clearly explained.</p>
+      <p class="lede">Work out your calories, macros, BMI and more in seconds, then find recipes that fit the result. Every tool is backed by a recognised method and clearly explained.</p>
       <div class="hero-cta">
         <a href="/calculators/tdee/" class="btn">Calculate my calories</a>
         <a href="/recipes/" class="btn btn-ghost">Browse recipes</a>
@@ -54,10 +55,11 @@ const itemList = {
 
   <section class="wrap section">
     <h2 class="section-title">Calculators</h2>
-    <p class="section-intro">Free, instant tools for the health numbers that matter most. Each one uses a recognised, published method and explains what your result means — so you get answers you can actually trust and act on.</p>
+    <p class="section-intro">Free, instant tools for the health numbers that matter most. Each one uses a recognised, published method and explains what your result means, so you get answers you can actually trust and act on.</p>
     <div class="grid">
       {calculators.map((c) => (
         <a class="tile" href={c.href}>
+          <span class="tile-icon"><CalcIcon name={c.href.split('/').filter(Boolean).pop()} /></span>
           <span class="tile-name">{c.name}</span>
           <span class="tile-desc">{c.desc}</span>
         </a>
@@ -96,9 +98,10 @@ const itemList = {
     .section-title{font-size:1.5rem;letter-spacing:-.02em;margin:0 0 10px}
     .section-intro{color:#33433D;max-width:60ch;margin:0 0 22px;line-height:1.6}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media(max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:460px){.grid{grid-template-columns:1fr}}
+    @media(max-width:720px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
     .tile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;transition:.15s}
+    .tile-icon{color:var(--accent);margin-bottom:4px}
+    .tile-icon :global(.calc-icon){width:30px;height:30px}
     .tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
     .tile-name{font-weight:700;font-size:1.05rem;color:var(--ink)}
     .tile-desc{font-size:.9rem;color:var(--muted);line-height:1.45}
