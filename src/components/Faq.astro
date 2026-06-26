@@ -42,3 +42,16 @@ const faqSchema = {
   .faq-a{padding:0 16px 16px;color:#33433D;line-height:1.6;font-size:.94rem}
   .faq-a p{margin:0}
 </style>
+
+<script>
+  document.querySelectorAll('.faq').forEach((group) => {
+    const items = group.querySelectorAll('details.faq-item');
+    items.forEach((d) => {
+      d.addEventListener('toggle', () => {
+        if (d.open) {
+          items.forEach((other) => { if (other !== d) other.open = false; });
+        }
+      });
+    });
+  });
+</script>

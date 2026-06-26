@@ -7,8 +7,8 @@ const calculators = [
   { href: '/calculators/bmi/', name: 'BMI', desc: 'Body mass index and what the range means for you.', ready: true },
   { href: '/calculators/ideal-weight/', name: 'Ideal Weight', desc: 'A healthy weight range based on your height.', ready: true },
   { href: '/calculators/protein/', name: 'Protein', desc: 'How much protein you need each day.', ready: true },
-  { href: '/calculators/water/', name: 'Water Intake', desc: 'A daily water target from your weight and activity.', ready: false },
-  { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a few tape measurements.', ready: false },
+  { href: '/calculators/water/', name: 'Water Intake', desc: 'A daily water target from your weight and activity.', ready: true },
+  { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a few tape measurements.', ready: true },
 ];
 
 const itemList = {
@@ -66,7 +66,9 @@ const itemList = {
     .idx-head{margin-bottom:26px}
     .idx-head h1{font-size:clamp(1.8rem,4vw,2.4rem);letter-spacing:-.02em;margin:.1em 0 .3em}
     .idx-head .lede{color:#33433D;max-width:58ch;margin:0;font-size:1.05rem}
-    .idx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+    .idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:720px){.idx-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:460px){.idx-grid{grid-template-columns:1fr}}
     .idx-tile{display:flex;flex-direction:column;gap:6px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:.15s}
     a.idx-tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
     .idx-name{font-weight:700;font-size:1.08rem;color:var(--ink)}

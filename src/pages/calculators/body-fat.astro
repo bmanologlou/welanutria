@@ -1,0 +1,221 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Body Fat Calculator',
+  url: 'https://welanutria.com/calculators/body-fat/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Estimate your body fat percentage using the U.S. Navy circumference method.',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Calculators', item: 'https://welanutria.com/calculators/' },
+    { '@type': 'ListItem', position: 2, name: 'Body Fat', item: 'https://welanutria.com/calculators/body-fat/' },
+  ],
+};
+
+const faqs = [
+  { q: 'How does this body fat calculator work?', a: 'It uses the U.S. Navy circumference method, which estimates body fat from tape measurements of your neck and waist (and hips for women) together with your height. It needs only a tape measure, no special equipment.' },
+  { q: 'How accurate is it?', a: 'The Navy method is a practical estimate, typically within about 3 to 4 percentage points of lab methods like DEXA. Measure carefully and consistently for the best result.' },
+  { q: 'Where do I measure?', a: 'Measure your neck below the larynx, your waist at the navel (for men) or the narrowest point (for women), and for women the hips at the widest point. Keep the tape snug but not compressing the skin.' },
+  { q: 'What is a healthy body fat percentage?', a: 'It varies by sex and age. As a rough guide, fitness ranges are often around 14 to 24 percent for men and 21 to 31 percent for women, but consult a professional for guidance specific to you.' },
+];
+---
+<Base
+  title="Body Fat Calculator — U.S. Navy Method | welanutria"
+  description="Free body fat calculator using the U.S. Navy circumference method. Estimate your body fat percentage with just a tape measure."
+  current="calculators"
+>
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={breadcrumb} />
+
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Body Fat</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>Body Fat Calculator</h1>
+      <p class="lede">Estimate your body fat percentage with the U.S. Navy method — just a few tape measurements, no special equipment.</p>
+    </header>
+
+    <div class="calc-grid">
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+        <div class="field"><label>Sex</label>
+          <div class="seg" id="seg-sex">
+            <button type="button" data-s="male" aria-pressed="true">Male</button>
+            <button type="button" data-s="female" aria-pressed="false">Female</button>
+          </div>
+        </div>
+        <div class="row row-3">
+          <div class="field"><label id="h-label">Height (cm)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease height">−</button><input type="number" id="height" value="175"><button type="button" data-step="1" aria-label="Increase height">+</button></div>
+          </div>
+          <div class="field"><label id="n-label">Neck (cm)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease neck">−</button><input type="number" id="neck" value="38"><button type="button" data-step="1" aria-label="Increase neck">+</button></div>
+          </div>
+          <div class="field"><label id="wa-label">Waist (cm)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease waist">−</button><input type="number" id="waist" value="85"><button type="button" data-step="1" aria-label="Increase waist">+</button></div>
+          </div>
+        </div>
+        <div class="field hip-field hidden" id="hip-field"><label id="hip-label">Hip (cm)</label>
+          <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease hip">−</button><input type="number" id="hip" value="95"><button type="button" data-step="1" aria-label="Increase hip">+</button></div>
+        </div>
+      </section>
+
+      <section class="panel result">
+        <h2 class="panel-title">Estimated body fat</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-bf">18.5</span>
+          <span class="big-lbl">%</span>
+        </div>
+        <p class="r-category" id="r-cat">Fitness</p>
+        <p class="margin-note">An estimate from the U.S. Navy method, typically within 3–4 percentage points of lab measurement. Measure carefully for the best result.</p>
+      </section>
+    </div>
+
+    <section class="explainer">
+      <h2>The U.S. Navy method</h2>
+      <p>This calculator uses the <strong>U.S. Navy circumference method</strong>, which estimates body fat from a few tape measurements rather than expensive equipment. It's a practical, repeatable way to track changes over time — especially useful alongside BMI, which can't tell muscle from fat.</p>
+
+      <h2>How to measure</h2>
+      <p>Measure your <strong>neck</strong> just below the larynx, your <strong>waist</strong> at the navel (men) or narrowest point (women), and for women the <strong>hips</strong> at the widest point. Use a flexible tape, keep it level and snug without compressing the skin, and measure at the same time of day for consistency.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/bmi/">BMI calculator</a> — a quick weight-category check</li>
+          <li><a href="/calculators/tdee/">TDEE &amp; macros</a> — your daily calorie needs</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faq-wrap"><Faq items={faqs} /></div>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}.crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr;align-items:start}}
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+    .field{margin-bottom:16px}.field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .hidden{display:none}
+    .row{display:grid;gap:13px}
+    .row-3{grid-template-columns:1fr 1fr 1fr;gap:10px}
+    @media(max-width:460px){.row-3{grid-template-columns:1fr}}
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}.stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-category{font-weight:700;font-size:1.05rem;margin:0 0 16px;color:var(--ink)}
+    .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    .faq-wrap{max-width:calc((100% - 16px) / 2)}
+    @media(max-width:780px){.explainer,.page-disclaimer,.faq-wrap{max-width:100%}}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $=(id)=>document.getElementById(id);
+      let units='metric', sex='male';
+      function setLabels(){
+        const u = units==='metric' ? 'cm' : 'in';
+        $('h-label').textContent='Height ('+u+')';
+        $('n-label').textContent='Neck ('+u+')';
+        $('wa-label').textContent='Waist ('+u+')';
+        $('hip-label').textContent='Hip ('+u+')';
+      }
+      $('seg-units').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        const nu=b.dataset.u; if(nu===units)return;
+        ['height','neck','waist','hip'].forEach(id=>{
+          const el=$(id); const v=parseFloat(el.value)||0;
+          el.value = nu==='imperial' ? Math.round(v/2.54*10)/10 : Math.round(v*2.54*10)/10;
+        });
+        units=nu; setLabels();
+        [...$('seg-units').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        calc();
+      });
+      $('seg-sex').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return;
+        sex=b.dataset.s;
+        [...$('seg-sex').children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+        $('hip-field').classList.toggle('hidden', sex!=='female');
+        calc();
+      });
+      document.addEventListener('click',(e)=>{
+        const btn=e.target.closest('.stepper button'); if(!btn)return;
+        const input=btn.parentElement.querySelector('input');
+        const step=parseFloat(btn.dataset.step)||1;
+        let v=(parseFloat(input.value)||0)+step; if(v<0)v=0; input.value=v; calc();
+      });
+      ['height','neck','waist','hip'].forEach(id=>$(id).addEventListener('input',calc));
+
+      function calc(){
+        let h=parseFloat($('height').value)||0;
+        let n=parseFloat($('neck').value)||0;
+        let wa=parseFloat($('waist').value)||0;
+        let hip=parseFloat($('hip').value)||0;
+        if(units==='imperial'){ h*=2.54; n*=2.54; wa*=2.54; hip*=2.54; } // to cm
+        let bf=0;
+        try {
+          if(sex==='male'){
+            bf = 495/(1.0324 - 0.19077*Math.log10(wa-n) + 0.15456*Math.log10(h)) - 450;
+          } else {
+            bf = 495/(1.29579 - 0.35004*Math.log10(wa+hip-n) + 0.22100*Math.log10(h)) - 450;
+          }
+        } catch(e){ bf=0; }
+        if(!isFinite(bf)||bf<0) bf=0;
+        if(bf>70) bf=70;
+        $('r-bf').textContent = bf.toFixed(1);
+
+        // category (rough, sex-specific)
+        let cat='', col='';
+        const m = sex==='male';
+        if(bf < (m?6:14)){cat='Essential fat';col='#6DA98C';}
+        else if(bf < (m?14:21)){cat='Athletes';col='#2E6B57';}
+        else if(bf < (m?18:25)){cat='Fitness';col='#2E6B57';}
+        else if(bf < (m?25:32)){cat='Average';col='#D99A2B';}
+        else {cat='Above average';col='#C25A4D';}
+        const ce=$('r-cat'); ce.textContent=cat; ce.style.color=col;
+      }
+      calc();
+    })();
+  </script>
+</Base>
