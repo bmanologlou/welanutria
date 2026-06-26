@@ -1,11 +1,32 @@
 ---
 import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'BMI Calculator',
+  url: 'https://welanutria.com/calculators/bmi/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Calculate your body mass index (BMI) from your height and weight and see your category.',
+};
+
+const faqs = [
+  { q: 'What is BMI?', a: 'Body mass index is a ratio of your weight to your height, calculated as weight in kilograms divided by height in metres squared. It is widely used as a quick screening tool for weight categories.' },
+  { q: 'What is a healthy BMI?', a: 'A BMI between 18.5 and 24.9 is generally considered the healthy range. Below 18.5 is underweight, 25 to 29.9 is overweight, and 30 or above is in the obese range.' },
+  { q: 'Is BMI accurate?', a: 'BMI is a useful screening tool but it cannot tell muscle from fat. Very muscular people may have a high BMI with little fat, and it can miss low muscle mass in older adults. Treat it as one signal among several.' },
+  { q: 'Should I rely on BMI alone?', a: 'No. Pair it with measures like body fat and waist circumference, and remember welanutria provides estimates for general information only, not medical advice.' },
+];
 ---
 <Base
   title="BMI Calculator — Body Mass Index | welanutria"
   description="Free BMI calculator. Work out your body mass index from your height and weight, see your category, and understand what it means."
   current="calculators"
 >
+  <JsonLd schema={appSchema} />
   <div class="calc-page wrap">
     <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>BMI</span></nav>
 
@@ -83,6 +104,8 @@ import Base from '../../layouts/Base.astro';
       </div>
     </section>
 
+    <Faq items={faqs} />
+
     <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice. Consult a qualified professional about your weight and health.</p>
   </div>
 
@@ -137,7 +160,8 @@ import Base from '../../layouts/Base.astro';
     .dot.under{background:#6DA98C}.dot.normal{background:#2E6B57}.dot.over{background:#D99A2B}.dot.obese{background:#C25A4D}
 
     .margin-note{font-size:.78rem;color:var(--muted);margin:14px 0 0;line-height:1.5}
-    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    @media(max-width:780px){.explainer,.page-disclaimer{max-width:100%}}
     .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
     .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
     .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
@@ -145,7 +169,7 @@ import Base from '../../layouts/Base.astro';
     .next-links h3{margin:0 0 8px}
     .next-links ul{margin:0;padding-left:1.2em;line-height:1.7}
     .next-links a{font-weight:500}
-    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
   </style>
 
   <script>

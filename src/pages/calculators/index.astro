@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
 
 const calculators = [
   { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Your daily calories and a protein, carb and fat split for your goal.', ready: true },
@@ -9,12 +10,25 @@ const calculators = [
   { href: '/calculators/water/', name: 'Water Intake', desc: 'A daily water target from your weight and activity.', ready: false },
   { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a few tape measurements.', ready: false },
 ];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Health & fitness calculators',
+  itemListElement: calculators.filter((c) => c.ready).map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    url: 'https://welanutria.com' + c.href,
+  })),
+};
 ---
 <Base
   title="Free Health & Fitness Calculators | welanutria"
   description="Free calculators for calories, macros, BMI, ideal weight, protein, water intake and body fat. No sign-up, instant results, each method explained."
   current="calculators"
 >
+  <JsonLd schema={itemList} />
   <div class="wrap idx">
     <header class="idx-head">
       <p class="eyebrow">Calculators</p>

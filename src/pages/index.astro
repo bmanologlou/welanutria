@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import JsonLd from '../components/JsonLd.astro';
 
 const calculators = [
   { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Daily calories and your protein, carb and fat split.' },
@@ -9,12 +11,32 @@ const calculators = [
   { href: '/calculators/water/', name: 'Water Intake', desc: 'Daily water target from your weight and activity.' },
   { href: '/calculators/body-fat/', name: 'Body Fat', desc: 'Estimate body fat with a tape measure.' },
 ];
+
+const faqs = [
+  { q: 'Are the calculators free?', a: 'Yes. Every calculator on welanutria is completely free and works instantly in your browser, with no account or sign-up required.' },
+  { q: 'How accurate are the results?', a: 'Each tool uses a recognised, published method and we tell you which one. Results are estimates with a stated margin of error, meant as a practical starting point rather than a precise measurement.' },
+  { q: 'Is welanutria medical advice?', a: 'No. welanutria provides general information and estimates only. It is not a substitute for professional medical or dietary advice.' },
+  { q: 'Do I need to create an account?', a: 'No. There are no accounts and nothing to sign up for. Just open a calculator and use it.' },
+];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria calculators',
+  itemListElement: calculators.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    url: 'https://welanutria.com' + c.href,
+  })),
+};
 ---
 <Base
   title="welanutria — Free Health & Fitness Calculators and Recipes"
   description="Free, fast health and fitness calculators plus recipes that fit your goals. TDEE, BMI, protein, water and more. No sign-up."
   current=""
 >
+  <JsonLd schema={itemList} />
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">Free · No sign-up</p>
@@ -55,6 +77,10 @@ const calculators = [
         <span class="feature-link">See meal plans →</span>
       </a>
     </div>
+  </section>
+
+  <section class="wrap section">
+    <Faq items={faqs} />
   </section>
 
   <style>

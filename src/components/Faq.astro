@@ -1,0 +1,42 @@
+---
+import JsonLd from './JsonLd.astro';
+// Pass `items`: array of { q: string, a: string }. Optional `heading`.
+const { items = [], heading = 'Frequently asked questions' } = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((it) => ({
+    '@type': 'Question',
+    name: it.q,
+    acceptedAnswer: { '@type': 'Answer', text: it.a },
+  })),
+};
+---
+{items.length > 0 && (
+  <section class="faq">
+    <h2>{heading}</h2>
+    <div class="faq-list">
+      {items.map((it) => (
+        <details class="faq-item">
+          <summary>{it.q}</summary>
+          <div class="faq-a"><p>{it.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </section>
+  <JsonLd schema={faqSchema} />
+)}
+
+<style>
+  .faq{max-width:68ch;margin:36px 0 0}
+  .faq > h2{font-size:1.3rem;letter-spacing:-.01em;margin:0 0 14px}
+  .faq-list{display:flex;flex-direction:column;gap:10px}
+  .faq-item{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+  .faq-item summary{cursor:pointer;padding:14px 16px;font-weight:600;font-size:.98rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-size:1.3rem;color:var(--accent);font-weight:400;flex:none;transition:.15s}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-a{padding:0 16px 16px;color:#33433D;line-height:1.6;font-size:.94rem}
+  .faq-a p{margin:0}
+</style>

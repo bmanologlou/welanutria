@@ -1,11 +1,31 @@
 ---
 import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Ideal Weight Calculator',
+  url: 'https://welanutria.com/calculators/ideal-weight/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Find a healthy weight range for your height, based on the healthy BMI range.',
+};
+
+const faqs = [
+  { q: 'Why show a weight range instead of one number?', a: 'No single weight is right for everyone of the same height, because build and muscle mass differ. A healthy range is more honest and useful: anywhere inside it is generally a healthy weight for your height.' },
+  { q: 'How is the ideal weight range calculated?', a: 'We take the healthy BMI range of 18.5 to 24.9 and work backwards for your height to find the weights that fall inside it.' },
+  { q: 'Is my best weight always in this range?', a: 'It is a guide based on height alone. Your best weight also depends on muscle, build and overall health, so use it alongside other measures and professional guidance.' },
+];
 ---
 <Base
   title="Ideal Weight Calculator — Healthy Weight Range | welanutria"
   description="Free ideal weight calculator. Find a healthy weight range for your height, based on the healthy BMI range. A range, not a single number."
   current="calculators"
 >
+  <JsonLd schema={appSchema} />
   <div class="calc-page wrap">
     <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Ideal Weight</span></nav>
 
@@ -57,6 +77,8 @@ import Base from '../../layouts/Base.astro';
       </div>
     </section>
 
+    <Faq items={faqs} />
+
     <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice. Consult a qualified professional about a healthy weight for you.</p>
   </div>
 
@@ -85,13 +107,14 @@ import Base from '../../layouts/Base.astro';
     .big-lbl{font-size:.95rem;color:var(--muted)}
     .r-context{color:#33433D;font-size:.92rem;margin:0 0 14px}
     .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
-    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    @media(max-width:780px){.explainer,.page-disclaimer{max-width:100%}}
     .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
     .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
     .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
     .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
     .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
-    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
   </style>
 
   <script>

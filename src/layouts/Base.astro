@@ -5,6 +5,7 @@ const {
   title = 'welanutria — Free Health & Fitness Calculators',
   description = 'Free, fast health and fitness calculators and recipes. TDEE, BMI, ideal weight, protein, water and body fat. No sign-up.',
   current = '',
+  ogType = 'website',
 } = Astro.props;
 
 const nav = [
@@ -13,6 +14,31 @@ const nav = [
   { href: '/meal-plans/', label: 'Meal Plans', key: 'meal-plans' },
   { href: '/food-lists/', label: 'Food Lists', key: 'food-lists' },
 ];
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
+const ogImage = Astro.site ? new URL('/img/og.png', Astro.site).href : '/img/og.png';
+
+// Site-wide Organization + WebSite structured data (appears on every page)
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://welanutria.com/#organization',
+      name: 'welanutria',
+      url: 'https://welanutria.com/',
+      description: 'Free health and fitness calculators and recipes.',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://welanutria.com/#website',
+      url: 'https://welanutria.com/',
+      name: 'welanutria',
+      description: 'Free health and fitness calculators and recipes.',
+      publisher: { '@id': 'https://welanutria.com/#organization' },
+    },
+  ],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -21,7 +47,23 @@ const nav = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url.pathname} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content="welanutria" />
+  <meta property="og:image" content={ogImage} />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />

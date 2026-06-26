@@ -1,11 +1,28 @@
 ---
 import Prose from '../layouts/Prose.astro';
+import JsonLd from '../components/JsonLd.astro';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About welanutria',
+  url: 'https://welanutria.com/about/',
+  description: 'What welanutria is, who it is for, and the principles behind our free health and fitness calculators and recipes.',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'welanutria',
+    url: 'https://welanutria.com/',
+    email: 'hello@welanutria.com',
+    description: 'A free collection of health and fitness calculators and recipes, each backed by a recognised method and clearly explained.',
+  },
+};
 ---
 <Prose
   title="About — welanutria"
   description="What welanutria is, who it's for, and the principles behind our free health and fitness calculators and recipes."
   heading="About welanutria"
 >
+  <JsonLd schema={aboutSchema} />
   <p><strong>welanutria</strong> is a free collection of health and fitness calculators and recipes. The idea is simple: give people a fast, clear, honest answer to everyday questions about calories, macros, weight and nutrition — with no sign-up, no clutter, and no selling.</p>
 
   <h2>What we offer</h2>

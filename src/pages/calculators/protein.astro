@@ -1,11 +1,32 @@
 ---
 import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Protein Calculator',
+  url: 'https://welanutria.com/calculators/protein/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Find how much protein you need each day based on your weight, activity level and goal.',
+};
+
+const faqs = [
+  { q: 'How much protein do I need per day?', a: 'Protein needs are usually expressed as grams per kilogram of body weight. Sedentary people need less, while those training regularly or building muscle need more. This calculator adjusts the figure for your activity and goal.' },
+  { q: 'Does more protein help with fat loss?', a: 'Protein is the most filling macronutrient and helps preserve muscle while losing fat, which is why a higher intake often makes fat loss easier to sustain.' },
+  { q: 'Should I spread protein across the day?', a: 'Yes. Spreading protein across several meals, rather than one large serving, helps your body use it effectively.' },
+  { q: 'Is this medical advice?', a: 'No. These are general guidelines, not a prescription. welanutria provides estimates for general information only.' },
+];
 ---
 <Base
   title="Protein Calculator — Daily Protein Needs | welanutria"
   description="Free protein calculator. Find how much protein you need each day based on your weight, activity level and goal."
   current="calculators"
 >
+  <JsonLd schema={appSchema} />
   <div class="calc-page wrap">
     <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>Protein</span></nav>
 
@@ -74,6 +95,8 @@ import Base from '../../layouts/Base.astro';
       </div>
     </section>
 
+    <Faq items={faqs} />
+
     <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical or dietary advice.</p>
   </div>
 
@@ -112,13 +135,14 @@ import Base from '../../layouts/Base.astro';
     .pe-row{display:flex;justify-content:space-between;font-size:.9rem;padding:5px 0;color:#33433D}
     .pe-row strong{color:var(--ink)}
     .margin-note{font-size:.78rem;color:var(--muted);margin:0;line-height:1.5}
-    .explainer{max-width:68ch;margin:28px 0 0}
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    @media(max-width:780px){.explainer,.page-disclaimer{max-width:100%}}
     .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
     .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
     .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
     .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
     .next-links h3{margin:0 0 8px}.next-links ul{margin:0;padding-left:1.2em;line-height:1.7}.next-links a{font-weight:500}
-    .page-disclaimer{max-width:68ch;font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
   </style>
 
   <script>

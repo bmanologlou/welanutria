@@ -1,0 +1,24 @@
+# welanutria
+
+> Free health and fitness calculators and recipes for an international, English-speaking audience. Fast, accurate, no sign-up answers — each tool backed by a recognised method (Mifflin-St Jeor, US Navy body-fat, USDA nutrition data).
+
+welanutria helps people answer everyday health and nutrition questions: daily calories and macros, BMI, ideal weight, protein needs, water intake, and body fat. Results are estimates for general information only and are not medical advice.
+
+## Calculators
+
+- [TDEE & Macros](https://welanutria.com/calculators/tdee/): Daily calorie needs and a protein/carb/fat split, using the Mifflin-St Jeor equation.
+- [BMI](https://welanutria.com/calculators/bmi/): Body mass index from height and weight, with category context.
+- [Ideal Weight](https://welanutria.com/calculators/ideal-weight/): A healthy weight range for your height, based on the healthy BMI band.
+- [Protein](https://welanutria.com/calculators/protein/): Daily protein target based on weight, activity and goal.
+- [All calculators](https://welanutria.com/calculators/): The full list of tools.
+
+## About
+
+- [About](https://welanutria.com/about/): What welanutria is and the principles behind it.
+- [Methodology](https://welanutria.com/methodology/): The formulas, methods and data sources behind every calculator.
+
+## Notes
+
+- All results are estimates for general information only, not medical advice.
+- Nutrition data is derived from the USDA FoodData Central database.
+- Recipes are adapted from public-domain sources (USDA MyPlate, CC0 collections).
