@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import JsonLd from '../../components/JsonLd.astro';
 import Faq from '../../components/Faq.astro';
-import FoodIcon from '../../components/FoodIcon.astro';
 import { foodLists, getList } from '../../data/foodLists.js';
 import { foods, perServing } from '../../data/foods.js';
 
@@ -69,6 +68,16 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
       <p class="eyebrow">Food List</p>
       <h1>{list.h1}</h1>
       <p class="lede">{list.intro}</p>
+      <div class="share-row">
+        <button class="share-btn" id="shareBtn" type="button" aria-label="Share this list">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+          Share
+        </button>
+        <button class="share-btn" id="printBtn" type="button" aria-label="Print this list">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
+      </div>
     </header>
 
     <div class="table-wrap">
@@ -86,7 +95,7 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
             <tr>
               <td class="td-food">
                 <span class="f-name">{r.name}</span>
-                <span class="f-cat"><span class="f-cat-icon"><FoodIcon category={r.category} /></span>{r.category}</span>
+                <span class="f-cat">{r.category}</span>
               </td>
               <td class="td-metric"><strong>{metricValue(r)}{list.metricUnit === 'g' ? ' g' : list.metricUnit === 'kcal' ? '' : ''}</strong>{list.metricUnit === 'kcal' ? ' kcal' : list.metric === 'efficiency' ? ' g' : ''}</td>
               <td class="td-100">
@@ -144,6 +153,17 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .fl-head{margin-bottom:24px;max-width:65ch}
     .fl-head h1{font-size:clamp(1.8rem,4.5vw,2.5rem);letter-spacing:-.02em;line-height:1.14;margin:.1em 0 .35em}
     .fl-head .lede{font-size:1.15rem;color:var(--ink);margin:0;line-height:1.6}
+    .share-row{display:flex;gap:10px;margin-top:18px}
+    .share-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:.85rem;font-weight:600;font-family:inherit;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.15s}
+    .share-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .share-btn svg{color:var(--accent)}
+    @media print{
+      .site-header,.site-footer,.share-row,.related,.highlight-box{display:none !important}
+      .table-wrap{overflow:visible;border:none}
+      .food-table{font-size:.8rem}
+      .fl{padding:0}
+      a{color:#000 !important;text-decoration:none}
+    }
 
     .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
     .food-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem;min-width:560px}
@@ -155,9 +175,8 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .food-table tbody tr:nth-child(even){background:#fff}
     .td-food{min-width:150px}
     .f-name{display:block;font-weight:600;color:var(--ink)}
-    .f-cat{display:flex;align-items:center;gap:5px;font-size:.74rem;color:var(--muted);margin-top:2px}
-    .f-cat-icon{color:var(--sage);display:inline-flex}
-    .td-metric{background:var(--cool-2);white-space:nowrap}
+    .f-cat{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
+    .td-metric{white-space:nowrap}
     .td-metric strong{font-size:1.15rem;color:var(--accent);font-weight:800}
     .macro-line{display:block;font-weight:600;color:var(--ink);white-space:nowrap}
     .macro-sub{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}
@@ -171,8 +190,8 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .related-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media(max-width:560px){.related-grid{grid-template-columns:1fr}}
     .rel-card{display:flex;flex-direction:column;gap:3px;border-radius:12px;padding:16px 18px;transition:.15s;border:1px solid var(--line)}
-    .rel-calc{background:var(--cool-2);border-color:var(--cool-line)}
-    .rel-article{background:var(--paper-2)}
+    .rel-calc{background:#fff;border-color:var(--line)}
+    .rel-article{background:#fff;border-color:var(--line)}
     .rel-card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
     .rel-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
     .rel-name{font-weight:600;color:var(--ink);font-size:1rem}
@@ -183,4 +202,35 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .fl-source{font-size:.76rem;color:var(--muted);margin:28px 0 0;line-height:1.5}
     .page-disclaimer{font-size:.78rem;color:var(--muted);margin:12px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
   </style>
+
+  <script>
+    const shareBtn = document.getElementById('shareBtn');
+    const printBtn = document.getElementById('printBtn');
+    const pageUrl = window.location.href;
+    const pageTitle = document.title;
+
+    if (shareBtn) {
+      if (navigator.share) {
+        shareBtn.addEventListener('click', async () => {
+          try { await navigator.share({ title: pageTitle, url: pageUrl }); }
+          catch (e) { /* cancelled */ }
+        });
+      } else {
+        // fallback: copy link
+        shareBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(pageUrl);
+            const label = shareBtn.childNodes[shareBtn.childNodes.length - 1];
+            const original = label.textContent;
+            label.textContent = ' Copied!';
+            setTimeout(() => { label.textContent = original; }, 1800);
+          } catch (e) { /* ignore */ }
+        });
+      }
+    }
+
+    if (printBtn) {
+      printBtn.addEventListener('click', () => window.print());
+    }
+  </script>
 </Base>

@@ -116,3 +116,10 @@ a:hover{text-decoration:underline}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* ---------- related article link on calculator pages ---------- */
+.result-article{display:flex;flex-direction:column;gap:3px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:.15s}
+.result-article:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+.result-article .ra-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+.result-article .ra-title{font-weight:600;color:var(--ink);font-size:1rem;line-height:1.3}
+.result-article .ra-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
