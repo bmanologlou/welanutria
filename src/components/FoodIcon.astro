@@ -1,0 +1,24 @@
+---
+// One line icon per food category, using Lucide-style paths (recognisable, consistent).
+// Stroke inherits currentColor so CSS controls the color.
+const { category } = Astro.props;
+
+const icons = {
+  'Meat & poultry': '<path d="M15.4 15.6a8 8 0 1 0-7-7"/><path d="M8.5 8.5 3 14a2.83 2.83 0 0 0 4 4l5.5-5.5"/>',
+  'Fish & seafood': '<path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/>',
+  'Eggs & dairy': '<path d="M12 22c-4.97 0-9-3.582-9-8 0-4.418 3-12 9-12s9 7.582 9 12-4.03 8-9 8Z"/>',
+  'Legumes': '<path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8Z"/><path d="M14.1 6c-.9.8-2 2.3-2.6 3.5-.4.8-.8 2-1 3 2.1 0 3.5-.5 4.6-1.4 1.1-1 1.8-2.5 2.3-4.6-1.7-.3-2.8 0-3.3.5Z"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/>',
+  'Nuts & seeds': '<path d="M12 2c3 0 6 2.5 6 7a6 6 0 0 1-12 0c0-4.5 3-7 6-7Z"/><path d="M9 8c2 1 4 1 6 0M9 12c2 1 4 1 6 0"/>',
+  'Grains': '<path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/>',
+  'Vegetables': '<path d="M2.27 21.7s9.87-3.5 12.73-6.36a4.5 4.5 0 0 0-6.36-6.37C5.77 11.84 2.27 21.7 2.27 21.7ZM8.64 14l-2.05-2.04M15.34 15l-2.46-2.46"/><path d="M22 9s-1.33-2-3.5-2C16.86 7 15 9 15 9s1.33 2 3.5 2S22 9 22 9Z"/><path d="M15 2s-2 1.33-2 3.5S15 9 15 9s2-1.84 2-3.5C17 3.33 15 2 15 2Z"/>',
+  'Fruit': '<path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/>',
+  'Oils & fats': '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/>',
+};
+
+const path = icons[category] || icons['Vegetables'];
+---
+<svg class="food-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={path}></svg>
+
+<style>
+  .food-icon{width:18px;height:18px;display:block;flex-shrink:0}
+</style>

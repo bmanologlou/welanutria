@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { foodLists } from '../../data/foodLists.js';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria food lists',
+  itemListElement: foodLists.map((l, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: l.title,
+    url: `https://welanutria.com/food-lists/${l.slug}/`,
+  })),
+};
+---
+<Base
+  title="Food Lists: Protein, Calories, Fiber and More | welanutria"
+  description="Ranked food lists with calories and macros per 100 g and per serving. Find high-protein, low-calorie, high-fiber and low-carb foods at a glance."
+  current="food-lists"
+>
+  <JsonLd schema={itemList} />
+
+  <div class="fli wrap">
+    <header class="fli-head">
+      <p class="eyebrow">Food Lists</p>
+      <h1>Food lists, ranked and easy to scan</h1>
+      <p class="lede">Clear, ranked lists of foods by what matters to you, protein, calories, fiber and more, with full nutrition per 100 g and per serving. Backed by USDA data, free of fluff.</p>
+    </header>
+
+    <div class="fli-grid">
+      {foodLists.map((l) => (
+        <a class="fli-tile" href={`/food-lists/${l.slug}/`}>
+          <span class="fli-name">{l.title}</span>
+          <span class="fli-desc">{l.description}</span>
+          <span class="fli-go">View list →</span>
+        </a>
+      ))}
+    </div>
+
+    <section class="fli-intro">
+      <h2>Nutrition you can actually use</h2>
+      <p>Every list here is built from the same trusted source, the USDA FoodData Central database, and shown two ways: per 100 g so you can compare foods fairly, and per typical serving so the numbers mean something on your plate. Each list also links to the calculator and guide that go with it, so you can turn the information into a plan.</p>
+    </section>
+  </div>
+
+  <style>
+    .fli{padding:40px 0 0}
+    .fli-head{margin-bottom:28px;max-width:62ch}
+    .fli-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:.1em 0 .35em}
+    .fli-head .lede{font-size:1.1rem;color:#33433D;margin:0;line-height:1.6}
+    .fli-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:760px){.fli-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:460px){.fli-grid{grid-template-columns:1fr}}
+    .fli-tile{display:flex;flex-direction:column;gap:7px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;transition:.15s}
+    .fli-tile:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .fli-name{font-weight:700;font-size:1.1rem;color:var(--ink)}
+    .fli-desc{font-size:.88rem;color:var(--muted);line-height:1.5;flex:1}
+    .fli-go{font-weight:600;color:var(--accent);font-size:.88rem;margin-top:2px}
+    .fli-intro{max-width:68ch;margin:36px 0 0}
+    .fli-intro h2{font-size:1.3rem;letter-spacing:-.01em;margin:0 0 .5em}
+    .fli-intro p{color:#33433D;line-height:1.65;margin:0}
+  </style>
+</Base>

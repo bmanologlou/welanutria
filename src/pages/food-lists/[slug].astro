@@ -1,0 +1,186 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+import FoodIcon from '../../components/FoodIcon.astro';
+import { foodLists, getList } from '../../data/foodLists.js';
+import { foods, perServing } from '../../data/foods.js';
+
+export async function getStaticPaths() {
+  return foodLists.map((list) => ({
+    params: { slug: list.slug },
+    props: { list },
+  }));
+}
+
+const { list } = Astro.props;
+const url = `https://welanutria.com/food-lists/${list.slug}/`;
+
+// Build and sort the food rows for this list
+let rows = foods.filter(list.filter).map((f) => {
+  const ps = perServing(f);
+  const efficiency = Math.round((f.protein / f.cal) * 100 * 10) / 10; // protein per 100 kcal
+  return { ...f, ps, efficiency };
+});
+rows.sort((a, b) => {
+  const key = list.sortBy;
+  const av = a[key], bv = b[key];
+  return list.sortDir === 'desc' ? bv - av : av - bv;
+});
+
+const metricValue = (r) => {
+  if (list.metric === 'efficiency') return r.efficiency;
+  return r[list.metric];
+};
+
+// Schema: ItemList of the foods
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: list.title,
+  description: list.description,
+  itemListElement: rows.slice(0, 25).map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: r.name,
+  })),
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Food Lists', item: 'https://welanutria.com/food-lists/' },
+    { '@type': 'ListItem', position: 2, name: list.title, item: url },
+  ],
+};
+
+// Resolve related lists
+const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Boolean);
+---
+<Base title={`${list.title}: Ranked by ${list.metricLabel} | welanutria`} description={list.description} current="food-lists">
+  <JsonLd schema={itemList} />
+  <JsonLd schema={breadcrumb} />
+
+  <div class="fl wrap">
+    <nav class="crumbs"><a href="/food-lists/">Food Lists</a> / <span>{list.title}</span></nav>
+
+    <header class="fl-head">
+      <p class="eyebrow">Food List</p>
+      <h1>{list.h1}</h1>
+      <p class="lede">{list.intro}</p>
+    </header>
+
+    <div class="table-wrap">
+      <table class="food-table">
+        <thead>
+          <tr>
+            <th class="th-food">Food</th>
+            <th class="th-metric">{list.metricLabel}</th>
+            <th>Per 100 g</th>
+            <th class="th-serving">Per serving</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td class="td-food">
+                <span class="f-name">{r.name}</span>
+                <span class="f-cat"><span class="f-cat-icon"><FoodIcon category={r.category} /></span>{r.category}</span>
+              </td>
+              <td class="td-metric"><strong>{metricValue(r)}{list.metricUnit === 'g' ? ' g' : list.metricUnit === 'kcal' ? '' : ''}</strong>{list.metricUnit === 'kcal' ? ' kcal' : list.metric === 'efficiency' ? ' g' : ''}</td>
+              <td class="td-100">
+                <span class="macro-line">{r.cal} kcal</span>
+                <span class="macro-sub">P {r.protein} · C {r.carbs} · F {r.fat}{r.fiber ? ` · Fib ${r.fiber}` : ''}</span>
+              </td>
+              <td class="td-serving">
+                <span class="macro-line">{r.servingG} g <span class="oz">({r.ps.oz} oz)</span></span>
+                <span class="macro-sub">{r.ps.cal} kcal · P {r.ps.protein}</span>
+                <span class="serving-label">1 {r.serving}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <p>{list.highlight}</p>
+    </div>
+
+    <aside class="related">
+      <div class="related-grid">
+        <a class="rel-card rel-calc" href={list.related.calculator.href}>
+          <span class="rel-kicker">Calculator</span>
+          <span class="rel-name">{list.related.calculator.name}</span>
+          <span class="rel-go">Open →</span>
+        </a>
+        <a class="rel-card rel-article" href={list.related.article.href}>
+          <span class="rel-kicker">Read</span>
+          <span class="rel-name">{list.related.article.name}</span>
+          <span class="rel-go">Read →</span>
+        </a>
+      </div>
+      {relatedLists.length > 0 && (
+        <div class="other-lists">
+          <span class="ol-label">Related lists:</span>
+          {relatedLists.map((rl, i) => (
+            <span><a href={`/food-lists/${rl.slug}/`}>{rl.title}</a>{i < relatedLists.length - 1 ? ', ' : ''}</span>
+          ))}
+        </div>
+      )}
+    </aside>
+
+    <Faq items={list.faqs} />
+
+    <p class="fl-source">Nutrition values are approximate, per 100 g, derived from the USDA FoodData Central database. Serving sizes are typical examples and will vary.</p>
+    <p class="page-disclaimer">welanutria provides general information only and is not medical or dietary advice.</p>
+  </div>
+
+  <style>
+    .fl{padding:32px 0 0;max-width:860px}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+    .crumbs a{color:var(--muted)}
+    .fl-head{margin-bottom:24px;max-width:65ch}
+    .fl-head h1{font-size:clamp(1.8rem,4.5vw,2.5rem);letter-spacing:-.02em;line-height:1.14;margin:.1em 0 .35em}
+    .fl-head .lede{font-size:1.15rem;color:var(--ink);margin:0;line-height:1.6}
+
+    .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+    .food-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem;min-width:560px}
+    .food-table thead{background:var(--accent)}
+    .food-table th{text-align:left;padding:12px 14px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#fff;font-weight:700;white-space:nowrap}
+    .th-metric{background:var(--accent-deep)}
+    .food-table td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+    .food-table tbody tr:nth-child(odd){background:var(--paper-2)}
+    .food-table tbody tr:nth-child(even){background:#fff}
+    .td-food{min-width:150px}
+    .f-name{display:block;font-weight:600;color:var(--ink)}
+    .f-cat{display:flex;align-items:center;gap:5px;font-size:.74rem;color:var(--muted);margin-top:2px}
+    .f-cat-icon{color:var(--sage);display:inline-flex}
+    .td-metric{background:var(--cool-2);white-space:nowrap}
+    .td-metric strong{font-size:1.15rem;color:var(--accent);font-weight:800}
+    .macro-line{display:block;font-weight:600;color:var(--ink);white-space:nowrap}
+    .macro-sub{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}
+    .oz{color:var(--muted);font-weight:400;font-size:.85em}
+    .serving-label{display:block;font-size:.74rem;color:var(--sage);margin-top:2px;font-style:italic}
+
+    .highlight-box{background:var(--cool-2);border:1px solid var(--cool-line);border-radius:12px;padding:18px 22px;margin:24px 0}
+    .highlight-box p{margin:0;color:var(--ink);line-height:1.6}
+
+    .related{margin:28px 0 0}
+    .related-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:560px){.related-grid{grid-template-columns:1fr}}
+    .rel-card{display:flex;flex-direction:column;gap:3px;border-radius:12px;padding:16px 18px;transition:.15s;border:1px solid var(--line)}
+    .rel-calc{background:var(--cool-2);border-color:var(--cool-line)}
+    .rel-article{background:var(--paper-2)}
+    .rel-card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+    .rel-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+    .rel-name{font-weight:600;color:var(--ink);font-size:1rem}
+    .rel-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
+    .other-lists{margin-top:16px;font-size:.9rem;color:#33433D}
+    .ol-label{color:var(--muted);margin-right:4px}
+
+    .fl-source{font-size:.76rem;color:var(--muted);margin:28px 0 0;line-height:1.5}
+    .page-disclaimer{font-size:.78rem;color:var(--muted);margin:12px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+</Base>

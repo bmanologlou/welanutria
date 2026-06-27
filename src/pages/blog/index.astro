@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria blog',
+  itemListElement: posts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.data.title,
+    url: `https://welanutria.com/blog/${p.slug}/`,
+  })),
+};
+
+const fmt = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base
+  title="Blog: Guides to Calories, Protein, Weight and Health | welanutria"
+  description="Clear, practical guides to the health questions people actually ask, from how many calories to lose weight to how much protein you really need. Backed by science, free of fluff."
+  current="blog"
+>
+  <JsonLd schema={itemList} />
+
+  <div class="blog-idx wrap">
+    <header class="blog-head">
+      <p class="eyebrow">Blog</p>
+      <h1>Straight answers to your health questions</h1>
+      <p class="lede">Practical, no-nonsense guides to the questions people actually ask, each one backed by a recognised method and paired with a free calculator to put it into action.</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="empty">Articles are on the way. Check back soon.</p>
+    ) : (
+      <div class="post-list">
+        {posts.map((p) => (
+          <a class="post-card" href={`/blog/${p.slug}/`}>
+            <h2 class="pc-title">{p.data.title}</h2>
+            <p class="pc-desc">{p.data.description}</p>
+            <span class="pc-meta">{fmt(p.data.pubDate)} · Read →</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <style>
+    .blog-idx{padding:40px 0 0}
+    .blog-head{margin-bottom:30px;max-width:60ch}
+    .blog-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:.1em 0 .35em}
+    .blog-head .lede{color:#33433D;font-size:1.05rem;margin:0;line-height:1.6}
+    .post-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:680px){.post-list{grid-template-columns:1fr}}
+    .post-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;transition:.15s}
+    .post-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .pc-title{font-size:1.2rem;letter-spacing:-.01em;color:var(--ink);margin:0;line-height:1.25}
+    .pc-desc{font-size:.92rem;color:var(--muted);line-height:1.5;margin:0;flex:1}
+    .pc-meta{font-size:.82rem;color:var(--accent);font-weight:600;margin-top:4px}
+    .empty{color:var(--muted);font-size:1.05rem}
+  </style>
+</Base>
