@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { recipes, allTags, allMealTypes } from '../../data/recipes.js';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria recipes',
+  itemListElement: recipes.map((r, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: r.title,
+    url: `https://welanutria.com/recipes/${r.slug}/`,
+  })),
+};
+---
+<Base
+  title="Healthy Recipes with Full Nutrition | welanutria"
+  description="Simple, healthy recipes with full nutrition per serving. Filter by meal, high-protein, low-calorie, vegetarian and more. Every recipe backed by real macros."
+  current="recipes"
+>
+  <JsonLd schema={itemList} />
+
+  <div class="rx wrap">
+    <header class="rx-head">
+      <p class="eyebrow">Recipes</p>
+      <h1>Recipes that fit your goals</h1>
+      <p class="lede">Simple, healthy recipes with full nutrition per serving. Every one shows its calories and macros up front, so you can match meals to your targets.</p>
+    </header>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all" type="button">All</button>
+      {allMealTypes.map((m) => <button class="filter-btn" data-filter={m} type="button">{m}</button>)}
+      {allTags.map((t) => <button class="filter-btn" data-filter={t} type="button">{t}</button>)}
+    </div>
+
+    <div class="rx-grid" id="grid">
+      {recipes.map((r) => (
+        <a class="rx-card" href={`/recipes/${r.slug}/`} data-tags={`${r.mealType} ${r.tags.join(' ')}`}>
+          {r.image ? (
+            <img class="rx-img" src={`/img/recipes/${r.image}`} alt={r.title} width="400" height="267" loading="lazy" />
+          ) : (
+            <div class="rx-img rx-placeholder"><span>{r.mealType}</span></div>
+          )}
+          <div class="rx-body">
+            <span class="rx-title">{r.title}</span>
+            <div class="rx-macros">
+              <span class="rx-cal">{r.macros.cal} kcal</span>
+              <span class="rx-sub">P {r.macros.protein} · C {r.macros.carbs} · F {r.macros.fat}</span>
+            </div>
+            <div class="rx-meta"><span>{r.time} min</span> · <span>{r.servings} servings</span></div>
+          </div>
+        </a>
+      ))}
+    </div>
+    <p class="rx-empty" id="empty" hidden>No recipes match that filter yet.</p>
+  </div>
+
+  <style>
+    .rx{padding:40px 0 0}
+    .rx-head{margin-bottom:24px;max-width:62ch}
+    .rx-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:.1em 0 .35em}
+    .rx-head .lede{font-size:1.1rem;color:#33433D;margin:0;line-height:1.6}
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .filter-btn{font-size:.85rem;font-weight:600;font-family:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:20px;padding:7px 15px;cursor:pointer;transition:.15s}
+    .filter-btn:hover{border-color:var(--accent)}
+    .filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .rx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:760px){.rx-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:460px){.rx-grid{grid-template-columns:1fr}}
+    .rx-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.15s}
+    .rx-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .rx-img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+    .rx-placeholder{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cool) 0%,var(--paper-2) 100%);color:var(--sage)}
+    .rx-placeholder span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+    .rx-body{padding:16px;display:flex;flex-direction:column;gap:7px}
+    .rx-title{font-weight:700;font-size:1.05rem;color:var(--ink);line-height:1.25}
+    .rx-macros{display:flex;flex-direction:column;gap:1px}
+    .rx-cal{font-weight:700;color:var(--accent);font-size:.95rem}
+    .rx-sub{font-size:.8rem;color:var(--muted)}
+    .rx-meta{font-size:.8rem;color:var(--muted);margin-top:2px}
+    .rx-empty{color:var(--muted);font-size:1.05rem;margin-top:8px}
+  </style>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.rx-card');
+    const empty = document.getElementById('empty');
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        let visible = 0;
+        cards.forEach((card) => {
+          const tags = card.dataset.tags;
+          const show = filter === 'all' || tags.includes(filter);
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (empty) empty.hidden = visible > 0;
+      });
+    });
+  </script>
+</Base>

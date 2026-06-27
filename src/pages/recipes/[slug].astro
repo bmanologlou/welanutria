@@ -1,0 +1,209 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { recipes, getRecipe } from '../../data/recipes.js';
+
+export async function getStaticPaths() {
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const url = `https://welanutria.com/recipes/${recipe.slug}/`;
+const imgUrl = recipe.image ? `https://welanutria.com/img/recipes/${recipe.image}` : null;
+
+// Recipe JSON-LD (rich result eligible)
+const recipeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Recipe',
+  name: recipe.title,
+  description: recipe.description,
+  url: url,
+  ...(imgUrl ? { image: [imgUrl] } : {}),
+  author: { '@type': 'Organization', name: 'welanutria' },
+  recipeCategory: recipe.mealType,
+  keywords: recipe.tags.join(', '),
+  totalTime: `PT${recipe.time}M`,
+  recipeYield: `${recipe.servings} servings`,
+  recipeIngredient: recipe.ingredients.map((i) => `${i.metric} ${i.item}`),
+  recipeInstructions: recipe.steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    text: s,
+  })),
+  nutrition: {
+    '@type': 'NutritionInformation',
+    calories: `${recipe.macros.cal} kcal`,
+    proteinContent: `${recipe.macros.protein} g`,
+    carbohydrateContent: `${recipe.macros.carbs} g`,
+    fatContent: `${recipe.macros.fat} g`,
+    servingSize: '1 serving',
+  },
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Recipes', item: 'https://welanutria.com/recipes/' },
+    { '@type': 'ListItem', position: 2, name: recipe.title, item: url },
+  ],
+};
+---
+<Base title={`${recipe.title} Recipe | welanutria`} description={recipe.description} current="recipes" ogType="article">
+  <JsonLd schema={recipeSchema} />
+  <JsonLd schema={breadcrumb} />
+
+  <article class="recipe wrap">
+    <nav class="crumbs"><a href="/recipes/">Recipes</a> / <span>{recipe.title}</span></nav>
+
+    <header class="recipe-head">
+      <div class="tags">
+        {recipe.tags.map((t) => <span class="tag">{t}</span>)}
+      </div>
+      <h1>{recipe.title}</h1>
+      <p class="lede">{recipe.description}</p>
+      <div class="share-row">
+        <button class="share-btn" id="shareBtn" type="button" aria-label="Share this recipe">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+          Share
+        </button>
+        <button class="share-btn" id="printBtn" type="button" aria-label="Print this recipe">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
+      </div>
+    </header>
+
+    {recipe.image && (
+      <img class="recipe-img" src={`/img/recipes/${recipe.image}`} alt={recipe.title} width="800" height="533" loading="eager" />
+    )}
+
+    <div class="meta-bar">
+      <div class="meta-item"><span class="mi-label">Time</span><span class="mi-val">{recipe.time} min</span></div>
+      <div class="meta-item"><span class="mi-label">Servings</span><span class="mi-val">{recipe.servings}</span></div>
+      <div class="meta-item"><span class="mi-label">Meal</span><span class="mi-val">{recipe.mealType}</span></div>
+    </div>
+
+    <div class="macro-bar">
+      <div class="macro-cell macro-cal"><span class="mc-val">{recipe.macros.cal}</span><span class="mc-label">kcal</span></div>
+      <div class="macro-cell"><span class="mc-val">{recipe.macros.protein}g</span><span class="mc-label">Protein</span></div>
+      <div class="macro-cell"><span class="mc-val">{recipe.macros.carbs}g</span><span class="mc-label">Carbs</span></div>
+      <div class="macro-cell"><span class="mc-val">{recipe.macros.fat}g</span><span class="mc-label">Fat</span></div>
+      <span class="macro-note">per serving</span>
+    </div>
+
+    <div class="recipe-body">
+      <section class="ingredients">
+        <h2>Ingredients</h2>
+        <p class="serves-note">Makes {recipe.servings} {recipe.servings === 1 ? 'serving' : 'servings'}</p>
+        <ul class="ing-list">
+          {recipe.ingredients.map((i) => (
+            <li>
+              <span class="ing-item">{i.item}</span>
+              <span class="ing-amount">{i.metric}{i.imperial !== i.metric ? ` / ${i.imperial}` : ''}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="method">
+        <h2>Method</h2>
+        <ol class="step-list">
+          {recipe.steps.map((s) => <li>{s}</li>)}
+        </ol>
+      </section>
+    </div>
+
+    <div class="recipe-calc">
+      <a class="rc-link" href="/calculators/tdee/">
+        <span class="rc-kicker">Plan your day</span>
+        <span class="rc-title">See how this fits your daily calories</span>
+        <span class="rc-go">Open the TDEE calculator →</span>
+      </a>
+    </div>
+
+    <p class="recipe-disclaimer">Nutrition values are estimates per serving, calculated from typical ingredient values. Actual values vary with brands and portion sizes.</p>
+  </article>
+
+  <style>
+    .recipe{padding:32px 0 0;max-width:760px}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:16px}
+    .crumbs a{color:var(--muted)}
+    .recipe-head{margin-bottom:20px}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+    .tag{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-deep);background:var(--cool-2);border:1px solid var(--cool-line);border-radius:20px;padding:4px 11px}
+    .recipe-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:0 0 .3em}
+    .recipe-head .lede{font-size:1.15rem;color:var(--ink);margin:0;line-height:1.55}
+    .share-row{display:flex;gap:10px;margin-top:16px}
+    .share-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);color:var(--ink);font-size:.85rem;font-weight:600;font-family:inherit;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.15s}
+    .share-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .share-btn svg{color:var(--accent)}
+
+    .recipe-img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:16px;margin:8px 0 20px;display:block}
+
+    .meta-bar{display:flex;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:20px 0 14px}
+    .meta-item{flex:1;display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid var(--line)}
+    .meta-item:last-child{border-right:none}
+    .mi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+    .mi-val{font-size:1.05rem;color:var(--ink);font-weight:600}
+
+    .macro-bar{display:flex;align-items:center;gap:0;background:var(--accent);border-radius:12px;overflow:hidden;margin:0 0 28px;position:relative;flex-wrap:wrap}
+    .macro-cell{flex:1;min-width:70px;display:flex;flex-direction:column;gap:1px;padding:14px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.18)}
+    .macro-cell:last-of-type{border-right:none}
+    .mc-val{font-size:1.2rem;font-weight:800;color:#fff}
+    .mc-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);font-weight:600}
+    .macro-cal{background:var(--accent-deep)}
+    .macro-note{width:100%;text-align:center;font-size:.72rem;color:rgba(255,255,255,.8);padding:0 0 8px;margin-top:-4px}
+
+    .recipe-body{display:grid;grid-template-columns:1fr 1.4fr;gap:32px}
+    @media(max-width:680px){.recipe-body{grid-template-columns:1fr;gap:24px}}
+    .recipe-body h2{font-size:1.3rem;letter-spacing:-.01em;margin:0 0 .5em;color:var(--ink)}
+    .serves-note{font-size:.82rem;color:var(--muted);margin:0 0 12px}
+    .ing-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+    .ing-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+    .ing-item{color:var(--ink)}
+    .ing-amount{color:var(--muted);text-align:right;white-space:nowrap;font-weight:500}
+    .step-list{margin:0;padding:0;list-style:none;counter-reset:step}
+    .step-list li{position:relative;padding:0 0 16px 40px;counter-increment:step;line-height:1.6;color:#33433D}
+    .step-list li::before{content:counter(step);position:absolute;left:0;top:0;width:28px;height:28px;background:var(--cool-2);color:var(--accent-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+
+    .recipe-calc{margin:32px 0 0}
+    .rc-link{display:flex;flex-direction:column;gap:3px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:.15s}
+    .rc-link:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+    .rc-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+    .rc-title{font-weight:600;color:var(--ink);font-size:1.05rem}
+    .rc-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
+
+    .recipe-disclaimer{font-size:.78rem;color:var(--muted);margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+
+    @media print{
+      .site-header,.site-footer,.share-row,.recipe-calc,.crumbs{display:none !important}
+      .recipe{padding:0}
+      a{color:#000 !important}
+    }
+  </style>
+
+  <script>
+    const shareBtn = document.getElementById('shareBtn');
+    const printBtn = document.getElementById('printBtn');
+    const pageUrl = window.location.href;
+    const pageTitle = document.title;
+    if (shareBtn) {
+      if (navigator.share) {
+        shareBtn.addEventListener('click', async () => { try { await navigator.share({ title: pageTitle, url: pageUrl }); } catch(e){} });
+      } else {
+        shareBtn.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(pageUrl);
+            const label = shareBtn.childNodes[shareBtn.childNodes.length-1];
+            const o = label.textContent; label.textContent=' Copied!';
+            setTimeout(()=>{label.textContent=o;},1800);
+          } catch(e){}
+        });
+      }
+    }
+    if (printBtn) printBtn.addEventListener('click', () => window.print());
+  </script>
+</Base>
