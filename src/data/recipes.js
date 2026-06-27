@@ -45,7 +45,7 @@ export const recipes = [
     tags: ['High-protein', 'Vegetarian', 'Quick'],
     time: 5,
     servings: 1,
-    image: null,
+    image: 'greek-yogurt-protein-bowl.webp',
     ingredients: [
       { item: 'Greek yogurt (0% fat)', metric: '200 g', imperial: '7 oz' },
       { item: 'Mixed berries', metric: '80 g', imperial: '2.8 oz' },
@@ -68,7 +68,7 @@ export const recipes = [
     tags: ['High-protein', 'Balanced', 'Gluten-free'],
     time: 35,
     servings: 2,
-    image: null,
+    image: 'salmon-roasted-vegetables.webp',
     ingredients: [
       { item: 'Salmon fillets', metric: '2 x 150 g', imperial: '2 x 5.3 oz' },
       { item: 'Broccoli florets', metric: '200 g', imperial: '7 oz' },
@@ -93,7 +93,7 @@ export const recipes = [
     tags: ['Vegan', 'High-fiber', 'Low-calorie'],
     time: 40,
     servings: 4,
-    image: null,
+    image: 'lentil-vegetable-soup.webp',
     ingredients: [
       { item: 'Dried lentils', metric: '200 g', imperial: '7 oz' },
       { item: 'Carrots, diced', metric: '150 g', imperial: '5.3 oz' },
@@ -119,7 +119,7 @@ export const recipes = [
     tags: ['High-protein', 'Vegetarian', 'Make-ahead'],
     time: 5,
     servings: 1,
-    image: null,
+    image: 'overnight-oats-protein.webp',
     ingredients: [
       { item: 'Rolled oats', metric: '60 g', imperial: '2.1 oz' },
       { item: 'Greek yogurt (0% fat)', metric: '100 g', imperial: '3.5 oz' },
