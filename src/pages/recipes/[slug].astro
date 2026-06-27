@@ -11,6 +11,18 @@ export async function getStaticPaths() {
 }
 
 const { recipe } = Astro.props;
+
+// Related recipes: share at least one tag or meal type, not itself, up to 3
+const related = recipes
+  .filter((r) => r.slug !== recipe.slug)
+  .map((r) => {
+    const shared = r.tags.filter((t) => recipe.tags.includes(t)).length + (r.mealType === recipe.mealType ? 1 : 0);
+    return { r, shared };
+  })
+  .filter((x) => x.shared > 0)
+  .sort((a, b) => b.shared - a.shared)
+  .slice(0, 3)
+  .map((x) => x.r);
 const url = `https://welanutria.com/recipes/${recipe.slug}/`;
 const imgUrl = recipe.image ? `https://welanutria.com/img/recipes/${recipe.image}` : null;
 
@@ -81,6 +93,8 @@ const breadcrumb = {
       <img class="recipe-img" src={`/img/recipes/${recipe.image}`} alt={recipe.title} width="800" height="533" loading="eager" />
     )}
 
+    {recipe.intro && <p class="recipe-intro">{recipe.intro}</p>}
+
     <div class="meta-bar">
       <div class="meta-item"><span class="mi-label">Time</span><span class="mi-val">{recipe.time} min</span></div>
       <div class="meta-item"><span class="mi-label">Servings</span><span class="mi-val">{recipe.servings}</span></div>
@@ -92,8 +106,8 @@ const breadcrumb = {
       <div class="macro-cell"><span class="mc-val">{recipe.macros.protein}g</span><span class="mc-label">Protein</span></div>
       <div class="macro-cell"><span class="mc-val">{recipe.macros.carbs}g</span><span class="mc-label">Carbs</span></div>
       <div class="macro-cell"><span class="mc-val">{recipe.macros.fat}g</span><span class="mc-label">Fat</span></div>
-      <span class="macro-note">per serving</span>
     </div>
+    <p class="macro-note">Nutrition per serving</p>
 
     <div class="recipe-body">
       <section class="ingredients">
@@ -115,15 +129,50 @@ const breadcrumb = {
           {recipe.steps.map((s) => <li>{s}</li>)}
         </ol>
       </section>
+
+      {recipe.tips && recipe.tips.length > 0 && (
+        <section class="tips">
+          <h2>Tips</h2>
+          <ul class="tip-list">
+            {recipe.tips.map((t) => <li>{t}</li>)}
+          </ul>
+        </section>
+      )}
     </div>
 
-    <div class="recipe-calc">
-      <a class="rc-link" href="/calculators/tdee/">
-        <span class="rc-kicker">Plan your day</span>
-        <span class="rc-title">See how this fits your daily calories</span>
-        <span class="rc-go">Open the TDEE calculator →</span>
+    <div class="recipe-related">
+      <a class="rr-card rr-calc" href="/calculators/tdee/">
+        <span class="rr-kicker">Plan your day</span>
+        <span class="rr-title">See how this fits your daily calories</span>
+        <span class="rr-go">Open the TDEE calculator →</span>
+      </a>
+      <a class="rr-card rr-article" href={recipe.relatedArticle ? recipe.relatedArticle.href : '/blog/how-much-protein-per-day/'}>
+        <span class="rr-kicker">Read more</span>
+        <span class="rr-title">{recipe.relatedArticle ? recipe.relatedArticle.name : 'How much protein do you need a day?'}</span>
+        <span class="rr-go">Read the guide →</span>
       </a>
     </div>
+
+    {related.length > 0 && (
+      <section class="more-recipes">
+        <h2>You might also like</h2>
+        <div class="mr-grid">
+          {related.map((r) => (
+            <a class="mr-card" href={`/recipes/${r.slug}/`}>
+              {r.image ? (
+                <img class="mr-img" src={`/img/recipes/${r.image}`} alt={r.title} width="280" height="187" loading="lazy" />
+              ) : (
+                <div class="mr-img mr-placeholder"><span>{r.mealType}</span></div>
+              )}
+              <div class="mr-body">
+                <span class="mr-title">{r.title}</span>
+                <span class="mr-cal">{r.macros.cal} kcal · P {r.macros.protein}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <p class="recipe-disclaimer">Nutrition values are estimates per serving, calculated from typical ingredient values. Actual values vary with brands and portion sizes.</p>
   </article>
@@ -143,6 +192,7 @@ const breadcrumb = {
     .share-btn svg{color:var(--accent)}
 
     .recipe-img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:16px;margin:8px 0 20px;display:block}
+    .recipe-intro{font-size:1.05rem;line-height:1.7;color:#33433D;margin:0 0 24px}
 
     .meta-bar{display:flex;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:20px 0 14px}
     .meta-item{flex:1;display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-right:1px solid var(--line)}
@@ -150,19 +200,19 @@ const breadcrumb = {
     .mi-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
     .mi-val{font-size:1.05rem;color:var(--ink);font-weight:600}
 
-    .macro-bar{display:flex;align-items:center;gap:0;background:var(--accent);border-radius:12px;overflow:hidden;margin:0 0 28px;position:relative;flex-wrap:wrap}
+    .macro-bar{display:flex;align-items:stretch;gap:0;background:var(--accent);border-radius:12px;overflow:hidden;margin:0 0 6px;flex-wrap:wrap}
     .macro-cell{flex:1;min-width:70px;display:flex;flex-direction:column;gap:1px;padding:14px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.18)}
     .macro-cell:last-of-type{border-right:none}
     .mc-val{font-size:1.2rem;font-weight:800;color:#fff}
     .mc-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.85);font-weight:600}
     .macro-cal{background:var(--accent-deep)}
-    .macro-note{width:100%;text-align:center;font-size:.72rem;color:rgba(255,255,255,.8);padding:0 0 8px;margin-top:-4px}
+    .macro-note{font-size:.78rem;color:var(--muted);margin:0 0 28px;text-align:right}
 
-    .recipe-body{display:grid;grid-template-columns:1fr 1.4fr;gap:32px}
-    @media(max-width:680px){.recipe-body{grid-template-columns:1fr;gap:24px}}
-    .recipe-body h2{font-size:1.3rem;letter-spacing:-.01em;margin:0 0 .5em;color:var(--ink)}
+    .recipe-body{display:flex;flex-direction:column;gap:36px}
+    .recipe-body h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .5em;color:var(--ink)}
     .serves-note{font-size:.82rem;color:var(--muted);margin:0 0 12px}
-    .ing-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+    .ing-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+    @media(max-width:600px){.ing-list{grid-template-columns:1fr}}
     .ing-list li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
     .ing-item{color:var(--ink)}
     .ing-amount{color:var(--muted);text-align:right;white-space:nowrap;font-weight:500}
@@ -170,17 +220,36 @@ const breadcrumb = {
     .step-list li{position:relative;padding:0 0 16px 40px;counter-increment:step;line-height:1.6;color:#33433D}
     .step-list li::before{content:counter(step);position:absolute;left:0;top:0;width:28px;height:28px;background:var(--cool-2);color:var(--accent-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
 
-    .recipe-calc{margin:32px 0 0}
-    .rc-link{display:flex;flex-direction:column;gap:3px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:.15s}
-    .rc-link:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
-    .rc-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
-    .rc-title{font-weight:600;color:var(--ink);font-size:1.05rem}
-    .rc-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
+    .recipe-related{margin:36px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:600px){.recipe-related{grid-template-columns:1fr}}
+    .rr-card{display:flex;flex-direction:column;gap:3px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:.15s}
+    .rr-card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+    .rr-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+    .rr-title{font-weight:600;color:var(--ink);font-size:1.02rem;line-height:1.3}
+    .rr-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
+
+    .tips{background:var(--cool-2);border:1px solid var(--cool-line);border-radius:14px;padding:22px 24px}
+    .tips h2{font-size:1.25rem;margin:0 0 .5em}
+    .tip-list{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:8px}
+    .tip-list li{line-height:1.6;color:#33433D}
+
+    .more-recipes{margin:40px 0 0}
+    .more-recipes h2{font-size:1.4rem;letter-spacing:-.01em;margin:0 0 16px;color:var(--ink)}
+    .mr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:600px){.mr-grid{grid-template-columns:1fr}}
+    .mr-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.15s}
+    .mr-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .mr-img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+    .mr-placeholder{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cool) 0%,var(--paper-2) 100%);color:var(--sage)}
+    .mr-placeholder span{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+    .mr-body{padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+    .mr-title{font-weight:600;color:var(--ink);font-size:.95rem;line-height:1.25}
+    .mr-cal{font-size:.8rem;color:var(--accent);font-weight:600}
 
     .recipe-disclaimer{font-size:.78rem;color:var(--muted);margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
 
     @media print{
-      .site-header,.site-footer,.share-row,.recipe-calc,.crumbs{display:none !important}
+      .site-header,.site-footer,.share-row,.recipe-related,.more-recipes,.crumbs{display:none !important}
       .recipe{padding:0}
       a{color:#000 !important}
     }

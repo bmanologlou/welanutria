@@ -8,11 +8,13 @@ export const recipes = [
     slug: 'grilled-chicken-quinoa-bowl',
     title: 'Grilled Chicken & Quinoa Bowl',
     description: 'A high-protein bowl of grilled chicken, fluffy quinoa and fresh vegetables. Simple, balanced and ready in under 30 minutes.',
+    intro: 'This bowl is a weeknight staple for good reason: it hits a clean balance of lean protein, slow-release carbs and crisp vegetables, all in one dish. The grilled chicken brings around 45 grams of protein per serving to keep you full, while quinoa adds fibre and a nutty bite. It comes together in under half an hour, works just as well cold the next day, and is easy to scale up for meal prep.',
     mealType: 'Lunch',
     tags: ['High-protein', 'Balanced', 'Gluten-free'],
     time: 25,
     servings: 2,
     image: 'grilled-chicken-quinoa-bowl.webp',
+    relatedArticle: { name: 'How much protein do you need a day?', href: '/blog/how-much-protein-per-day/' },
     ingredients: [
       { item: 'Chicken breast', metric: '300 g', imperial: '10.5 oz' },
       { item: 'Quinoa (dry)', metric: '120 g', imperial: '4.2 oz' },
@@ -29,6 +31,11 @@ export const recipes = [
       'Divide the quinoa between two bowls, top with the sliced chicken and vegetables, and finish with fresh parsley.',
     ],
     macros: { cal: 480, protein: 45, carbs: 45, fat: 13 },
+    tips: [
+      'Cook a double batch of quinoa at the start of the week so the bowl comes together in minutes.',
+      'Let the chicken rest for a few minutes before slicing to keep it juicy.',
+      'Swap the vegetables for whatever you have: roasted peppers, spinach or avocado all work well.',
+    ],
   },
   {
     slug: 'greek-yogurt-protein-bowl',
