@@ -69,14 +69,14 @@ const itemList = {
     .rx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     @media(max-width:760px){.rx-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:460px){.rx-grid{grid-template-columns:1fr}}
-    .rx-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.15s}
-    .rx-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .rx-card{display:flex;flex-direction:column;background:var(--amber-soft);border:1px solid #F0E3CB;border-radius:14px;overflow:hidden;transition:.15s;height:100%}
+    .rx-card:hover{border-color:var(--amber);transform:translateY(-2px);text-decoration:none}
     .rx-img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
     .rx-placeholder{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cool) 0%,var(--paper-2) 100%);color:var(--sage)}
     .rx-placeholder span{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
-    .rx-body{padding:16px;display:flex;flex-direction:column;gap:7px}
+    .rx-body{padding:16px;display:flex;flex-direction:column;gap:7px;flex:1}
     .rx-title{font-weight:700;font-size:1.05rem;color:var(--ink);line-height:1.25}
-    .rx-macros{display:flex;flex-direction:column;gap:1px}
+    .rx-macros{display:flex;flex-direction:column;gap:1px;margin-top:auto}
     .rx-cal{font-weight:700;color:var(--accent);font-size:.95rem}
     .rx-sub{font-size:.8rem;color:var(--muted)}
     .rx-meta{font-size:.8rem;color:var(--muted);margin-top:2px}
