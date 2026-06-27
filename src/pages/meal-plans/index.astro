@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { mealPlans, planAverage } from '../../data/mealPlans.js';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria meal plans',
+  itemListElement: mealPlans.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: `https://welanutria.com/meal-plans/${p.slug}/`,
+  })),
+};
+---
+<Base
+  title="7-Day Meal Plans with Full Macros | welanutria"
+  description="Free 7-day meal plans built from healthy recipes: 1500, 2000 and 2500 calorie plans, plus high-protein, weight loss and vegetarian options. Full daily macros."
+  current="meal-plans"
+>
+  <JsonLd schema={itemList} />
+
+  <div class="mp wrap">
+    <header class="mp-head">
+      <p class="eyebrow">Meal Plans</p>
+      <h1>7-day meal plans that actually add up</h1>
+      <p class="lede">Each plan lays out a full week of breakfasts, lunches, dinners and snacks, built from our recipes with the daily calories and macros worked out for you. Pick the one that matches your goal and click any meal for the full recipe.</p>
+    </header>
+
+    <div class="mp-grid">
+      {mealPlans.map((p) => {
+        const avg = planAverage(p);
+        return (
+          <a class="mp-card" href={`/meal-plans/${p.slug}/`}>
+            <div class="mp-body">
+              <div class="mp-tags">{p.tags.map((t) => <span class="mp-tag">{t}</span>)}</div>
+              <span class="mp-title">{p.title}</span>
+              <span class="mp-target">{p.target}</span>
+              <div class="mp-macros">
+                <span class="mp-cal">{avg.cal} kcal/day</span>
+                <span class="mp-sub">{avg.protein}g protein · 7 days</span>
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+
+  <style>
+    .mp{padding:40px 0 0}
+    .mp-head{margin-bottom:28px;max-width:64ch}
+    .mp-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:.1em 0 .35em}
+    .mp-head .lede{font-size:1.1rem;color:#33433D;margin:0;line-height:1.6}
+    .mp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:760px){.mp-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:460px){.mp-grid{grid-template-columns:1fr}}
+    .mp-card{display:flex;background:var(--amber-soft);border:1px solid #F0E3CB;border-radius:14px;overflow:hidden;transition:.15s;height:100%}
+    .mp-card:hover{border-color:var(--amber);transform:translateY(-2px);text-decoration:none}
+    .mp-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .mp-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .mp-tag{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-deep);background:#fff;border:1px solid #F0E3CB;border-radius:20px;padding:3px 9px}
+    .mp-title{font-weight:700;font-size:1.15rem;color:var(--ink);line-height:1.2;margin-top:2px}
+    .mp-target{font-size:.85rem;color:var(--muted)}
+    .mp-macros{display:flex;flex-direction:column;gap:1px;margin-top:auto;padding-top:8px}
+    .mp-cal{font-weight:700;color:var(--accent);font-size:1rem}
+    .mp-sub{font-size:.8rem;color:var(--muted)}
+  </style>
+</Base>
