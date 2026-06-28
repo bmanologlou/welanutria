@@ -19,7 +19,8 @@ const url = `https://welanutria.com/food-lists/${list.slug}/`;
 let rows = foods.filter(list.filter).map((f) => {
   const ps = perServing(f);
   const efficiency = Math.round((f.protein / f.cal) * 100 * 10) / 10; // protein per 100 kcal
-  return { ...f, ps, efficiency };
+  const boneScore = (f.calcium || 0) + (f.magnesium || 0); // calcium + magnesium combined
+  return { ...f, ps, efficiency, boneScore };
 });
 rows.sort((a, b) => {
   const key = list.sortBy;
