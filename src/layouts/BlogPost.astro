@@ -56,6 +56,10 @@ const dateFmt = new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', 
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
           <span id="copyLabel">Copy link</span>
         </button>
+        <button class="share-btn" id="printBtn" type="button" aria-label="Print this article">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print
+        </button>
       </div>
     </header>
 
@@ -80,6 +84,7 @@ const dateFmt = new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', 
     {faqs.length > 0 && <div class="post-faq"><Faq items={faqs} /></div>}
 
     <p class="page-disclaimer">welanutria provides general information and estimates only, and is not medical or dietary advice. Speak with a qualified professional before making significant changes to your diet, exercise or health routine.</p>
+    <p class="print-credit">Copywriting by welanutria.com · {url}</p>
   </article>
 
   <style>
@@ -128,6 +133,12 @@ const dateFmt = new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', 
 
     .post-faq{margin-top:8px}
     .page-disclaimer{font-size:.78rem;color:var(--muted);margin:32px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+    .print-credit{display:none}
+    @media print{
+      .site-header,.site-footer,.share-row,.related-articles,.article-related,.crumbs,.post-related{display:none !important}
+      a{color:#000 !important}
+      .print-credit{display:block;margin-top:24px;padding-top:12px;border-top:1px solid #ccc;font-size:.8rem;color:#555;text-align:center}
+    }
   </style>
 
   <script>
@@ -162,5 +173,8 @@ const dateFmt = new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', 
         } catch (e) { /* clipboard blocked, ignore */ }
       });
     }
+
+    const printBtn = document.getElementById('printBtn');
+    if (printBtn) printBtn.addEventListener('click', () => window.print());
   </script>
 </Base>
