@@ -55,29 +55,27 @@ const breadcrumb = {
     <p class="avg-note">Average per day across the week ({plan.target})</p>
 
     <div class="days">
-      {plan.days.map((meals, i) => {
-        const t = dayTotals(meals);
-        const dayCal = t.cal + (plan.extras ? plan.extras.cal : 0);
-        const dayProtein = t.protein + (plan.extras ? plan.extras.protein : 0);
+      {plan.days.map((d, i) => {
+        const t = dayTotals(d);
         return (
           <section class="day-card">
             <div class="day-head">
               <h2>{dayNames[i]}</h2>
-              <span class="day-total">{dayCal} kcal · {dayProtein}g protein</span>
+              <span class="day-total">{t.cal} kcal · {t.protein}g protein</span>
             </div>
             <ul class="meal-list">
-              {meals.map((m) => (
+              {d.meals.map((m) => (
                 <li class="meal-row">
                   <span class="meal-type">{m.type}</span>
                   <a class="meal-name" href={`/recipes/${m.slug}/`}>{m.title}</a>
                   <span class="meal-cal">{m.cal} kcal</span>
                 </li>
               ))}
-              {plan.extras && (
+              {d.extras && d.extras.items.length > 0 && (
                 <li class="meal-row meal-extra">
                   <span class="meal-type">Extras</span>
-                  <span class="meal-name meal-extra-note">{plan.extras.note}</span>
-                  <span class="meal-cal">{plan.extras.cal} kcal</span>
+                  <span class="meal-name meal-extra-note">{d.extras.items.map((it) => it.label).join(', ')}</span>
+                  <span class="meal-cal">{d.extras.cal} kcal</span>
                 </li>
               )}
             </ul>
@@ -100,6 +98,7 @@ const breadcrumb = {
     </div>
 
     <p class="plan-disclaimer">This meal plan is a general guide, not personalised nutrition advice. Calorie and macro values are estimates calculated from typical ingredient values and may vary. Adjust portions to your own needs, and consult a qualified professional for tailored advice.</p>
+    <p class="print-credit">Copywriting by welanutria.com · {url}</p>
   </article>
 
   <style>
@@ -154,10 +153,12 @@ const breadcrumb = {
 
     .plan-disclaimer{font-size:.78rem;color:var(--muted);margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
 
+    .print-credit{display:none}
     @media print{
       .site-header,.site-footer,.share-row,.plan-related,.crumbs{display:none !important}
       .plan{padding:0}
       a{color:#000 !important}
+      .print-credit{display:block;margin-top:24px;padding-top:12px;border-top:1px solid #ccc;font-size:.8rem;color:#555;text-align:center}
     }
   </style>
 
