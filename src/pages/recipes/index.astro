@@ -88,20 +88,33 @@ const itemList = {
     const cards = document.querySelectorAll('.rx-card');
     const empty = document.getElementById('empty');
 
-    filterBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        let visible = 0;
-        cards.forEach((card) => {
-          const tags = card.dataset.tags;
-          const show = filter === 'all' || tags.includes(filter);
-          card.style.display = show ? '' : 'none';
-          if (show) visible++;
-        });
-        if (empty) empty.hidden = visible > 0;
+    function applyFilter(filter) {
+      let visible = 0;
+      filterBtns.forEach((b) => {
+        b.classList.toggle('active', b.dataset.filter === filter);
       });
+      cards.forEach((card) => {
+        const tags = card.dataset.tags;
+        const show = filter === 'all' || tags.includes(filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.hidden = visible > 0;
+    }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
     });
+
+    // On load, apply a filter from the URL (e.g. /recipes/?filter=High-protein).
+    // Matched case-insensitively against the available filter buttons.
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get('filter');
+    if (requested) {
+      const match = Array.from(filterBtns).find(
+        (b) => b.dataset.filter.toLowerCase() === requested.toLowerCase()
+      );
+      if (match) applyFilter(match.dataset.filter);
+    }
   </script>
 </Base>
