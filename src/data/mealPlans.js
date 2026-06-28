@@ -1,18 +1,55 @@
 // Meal plan database. Each plan references recipe slugs by meal and day.
 // Macros for each day and the whole plan are computed automatically from recipes.js.
-// Adding a plan = add an object here. Adding/adjusting days = edit the `days` array.
+// Per-day extras are drawn from a palette of whole foods to round out calories.
 
 import { recipes } from './recipes.js';
 
 const bySlug = Object.fromEntries(recipes.map((r) => [r.slug, r]));
 
-// Helper: build a day from meal slugs. Each meal is { type, slug }.
-function day(meals) {
-  return meals.map((m) => {
+// Palette of extra food items (with macros) used to round out daily calories.
+const EXTRAS = {
+  banana: { label: '1 banana', cal: 105, protein: 1, carbs: 27, fat: 0 },
+  apple: { label: '1 apple', cal: 95, protein: 0, carbs: 25, fat: 0 },
+  berries: { label: 'a handful of berries', cal: 50, protein: 1, carbs: 12, fat: 0 },
+  orange: { label: '1 orange', cal: 62, protein: 1, carbs: 15, fat: 0 },
+  pear: { label: '1 pear', cal: 100, protein: 1, carbs: 27, fat: 0 },
+  almonds: { label: 'a handful of almonds (25g)', cal: 145, protein: 5, carbs: 5, fat: 13 },
+  walnuts: { label: 'a handful of walnuts (25g)', cal: 165, protein: 4, carbs: 3, fat: 16 },
+  peanuts: { label: 'a handful of peanuts (25g)', cal: 145, protein: 6, carbs: 4, fat: 12 },
+  pumpkinSeeds: { label: '2 tbsp pumpkin seeds', cal: 90, protein: 5, carbs: 3, fat: 7 },
+  greekYogurt: { label: 'a small pot of Greek yogurt (150g)', cal: 90, protein: 15, carbs: 6, fat: 0 },
+  cheese: { label: '30g cheese', cal: 120, protein: 7, carbs: 1, fat: 10 },
+  milk: { label: 'a glass of milk (250ml)', cal: 125, protein: 8, carbs: 12, fat: 5 },
+  cottageCheese: { label: '100g cottage cheese', cal: 98, protein: 11, carbs: 3, fat: 4 },
+  toast: { label: '2 slices wholegrain toast', cal: 160, protein: 8, carbs: 28, fat: 2 },
+  toastPB: { label: '1 slice wholegrain toast with peanut butter', cal: 180, protein: 7, carbs: 16, fat: 10 },
+  oatcakes: { label: '3 oatcakes', cal: 130, protein: 3, carbs: 20, fat: 4 },
+  hummus: { label: 'carrot sticks with hummus (60g)', cal: 130, protein: 4, carbs: 12, fat: 8 },
+  riceExtra: { label: 'an extra portion of rice (100g cooked)', cal: 130, protein: 3, carbs: 28, fat: 0 },
+  oatsExtra: { label: 'an extra serving of oats (40g)', cal: 150, protein: 5, carbs: 27, fat: 3 },
+  proteinShake: { label: 'a protein shake', cal: 160, protein: 30, carbs: 5, fat: 2 },
+  boiledEgg: { label: '2 boiled eggs', cal: 155, protein: 13, carbs: 1, fat: 11 },
+  avocadoHalf: { label: 'half an avocado', cal: 160, protein: 2, carbs: 9, fat: 15 },
+  darkChocolate: { label: '2 squares dark chocolate', cal: 110, protein: 1, carbs: 9, fat: 8 },
+  oliveOil: { label: '1 tbsp olive oil on salad', cal: 120, protein: 0, carbs: 0, fat: 14 },
+  trailMix: { label: 'a small handful of trail mix', cal: 150, protein: 4, carbs: 14, fat: 9 },
+};
+
+// Build a day's extras from a list of EXTRAS keys, returning items + summed macros.
+function ex(keys) {
+  const items = keys.map((k) => EXTRAS[k]).filter(Boolean);
+  const totals = items.reduce((t, i) => ({
+    cal: t.cal + i.cal, protein: t.protein + i.protein, carbs: t.carbs + i.carbs, fat: t.fat + i.fat,
+  }), { cal: 0, protein: 0, carbs: 0, fat: 0 });
+  return { items, ...totals };
+}
+
+// Helper: build a day from meal slugs and optional extras.
+function day(meals, dayExtras) {
+  const builtMeals = meals.map((m) => {
     const r = bySlug[m.slug];
     return {
-      type: m.type,
-      slug: m.slug,
+      type: m.type, slug: m.slug,
       title: r ? r.title : m.slug,
       cal: r ? r.macros.cal : 0,
       protein: r ? r.macros.protein : 0,
@@ -20,6 +57,7 @@ function day(meals) {
       fat: r ? r.macros.fat : 0,
     };
   });
+  return { meals: builtMeals, extras: dayExtras || null };
 }
 
 export const mealPlans = [
@@ -32,15 +70,14 @@ export const mealPlans = [
     target: '~2000 kcal/day',
     tags: ['Balanced', 'Maintenance'],
     relatedCalculator: { name: 'TDEE Calculator', href: '/calculators/tdee/' },
-        extras: { cal: 550, protein: 20, carbs: 70, fat: 20, note: 'To reach ~2000 kcal, add daily extras such as 2 slices of wholegrain toast, a piece of fruit, a handful of nuts and a coffee with milk, adjusted to your needs.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'chia-pudding-berries' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
+      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['banana', 'almonds', 'milk', 'apple', 'oatcakes'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['greekYogurt', 'berries', 'walnuts', 'orange', 'oatcakes'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'apple', 'almonds', 'milk', 'darkChocolate'])),
+      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['banana', 'greekYogurt', 'pumpkinSeeds', 'pear', 'oatcakes'])),
+      day([{ type: 'Breakfast', slug: 'chia-pudding-berries' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['riceExtra', 'orange', 'walnuts', 'milk', 'darkChocolate'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['greekYogurt', 'berries', 'almonds', 'apple', 'oatcakes'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'banana', 'riceExtra', 'milk', 'darkChocolate'])),
     ],
   },
   {
@@ -52,15 +89,14 @@ export const mealPlans = [
     target: '~1500 kcal/day',
     tags: ['Weight-loss', 'High-protein'],
     relatedCalculator: { name: 'Calorie Deficit Calculator', href: '/calculators/calorie-deficit/' },
-        extras: { cal: 340, protein: 15, carbs: 40, fat: 12, note: 'To reach ~1500 kcal, add small daily extras such as a piece of fruit, a yogurt and a small handful of nuts, adjusted to your needs.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'apple', 'greekYogurt'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['banana', 'almonds', 'orange'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'pumpkinSeeds', 'berries'])),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'orange', 'greekYogurt'])),
+      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'almonds', 'pear'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['banana', 'orange', 'pumpkinSeeds'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'apple', 'greekYogurt'])),
     ],
   },
   {
@@ -72,15 +108,14 @@ export const mealPlans = [
     target: '~2500 kcal/day',
     tags: ['Muscle-gain', 'High-protein'],
     relatedCalculator: { name: 'TDEE Calculator', href: '/calculators/tdee/' },
-        extras: { cal: 940, protein: 35, carbs: 110, fat: 35, note: 'To reach ~2500 kcal, add larger daily extras such as extra rice or oats, 2 pieces of fruit, nut butter on toast and a glass of milk, adjusted to your training needs.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'protein-berry-smoothie' }]),
-      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'protein-berry-smoothie' }]),
-      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'protein-berry-smoothie' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['oatsExtra', 'milk', 'almonds', 'banana', 'greekYogurt', 'apple', 'toastPB', 'orange'])),
+      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'protein-berry-smoothie' }], ex(['toastPB', 'banana', 'walnuts', 'milk', 'riceExtra', 'orange', 'cheese', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['oatsExtra', 'milk', 'almonds', 'banana', 'cheese', 'apple', 'toastPB', 'orange'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'protein-berry-smoothie' }], ex(['toastPB', 'milk', 'walnuts', 'riceExtra', 'banana', 'orange', 'greekYogurt', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'overnight-oats-protein' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['greekYogurt', 'banana', 'almonds', 'milk', 'toast', 'apple', 'cheese', 'orange'])),
+      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'protein-berry-smoothie' }], ex(['oatsExtra', 'milk', 'walnuts', 'banana', 'riceExtra', 'pear', 'toastPB', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'tuna-avocado-rice-bowl' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['toastPB', 'milk', 'almonds', 'banana', 'greekYogurt', 'apple', 'cheese', 'orange'])),
     ],
   },
   {
@@ -92,15 +127,14 @@ export const mealPlans = [
     target: '120g+ protein/day',
     tags: ['High-protein', 'Muscle-gain'],
     relatedCalculator: { name: 'Protein Calculator', href: '/calculators/protein/' },
-        extras: { cal: 300, protein: 25, carbs: 20, fat: 12, note: 'To boost protein further, add daily extras such as a protein shake, extra Greek yogurt or a boiled egg, adjusted to your needs.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
+      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['greekYogurt', 'almonds', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'teriyaki-salmon-rice' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['proteinShake', 'banana'])),
+      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['boiledEgg', 'orange', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'turkey-meatballs-tomato-sauce' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['greekYogurt', 'almonds', 'apple', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['proteinShake', 'banana', 'riceExtra'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-burrito-bowl' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['boiledEgg', 'milk', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'grilled-chicken-quinoa-bowl' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['greekYogurt', 'walnuts', 'orange'])),
     ],
   },
   {
@@ -112,15 +146,14 @@ export const mealPlans = [
     target: '~1400 kcal/day',
     tags: ['Weight-loss', 'Low-calorie'],
     relatedCalculator: { name: 'Calorie Deficit Calculator', href: '/calculators/calorie-deficit/' },
-        extras: { cal: 250, protein: 12, carbs: 28, fat: 9, note: 'Add small daily extras such as a piece of fruit and a yogurt to round out the day, adjusted to your deficit.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'shrimp-garlic-zucchini-noodles' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'greekYogurt'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['orange', 'berries'])),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'tuna-white-bean-salad' }, { type: 'Dinner', slug: 'baked-cod-sweet-potato' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'pumpkinSeeds'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'greek-chicken-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['orange', 'greekYogurt'])),
+      day([{ type: 'Breakfast', slug: 'protein-berry-smoothie' }, { type: 'Lunch', slug: 'chicken-vegetable-soup' }, { type: 'Dinner', slug: 'beef-broccoli-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'berries'])),
+      day([{ type: 'Breakfast', slug: 'egg-white-veggie-scramble' }, { type: 'Lunch', slug: 'lemon-herb-chicken-salad' }, { type: 'Dinner', slug: 'salmon-roasted-vegetables' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['orange', 'greekYogurt'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'turkey-vegetable-stir-fry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['apple', 'pumpkinSeeds'])),
     ],
   },
   {
@@ -132,15 +165,14 @@ export const mealPlans = [
     target: 'Meat-free, balanced',
     tags: ['Vegetarian', 'High-fiber'],
     relatedCalculator: { name: 'TDEE Calculator', href: '/calculators/tdee/' },
-        extras: { cal: 400, protein: 18, carbs: 50, fat: 15, note: 'To round out the day, add extras such as wholegrain toast, fruit, nuts or extra dairy, adjusted to your needs.' },
     days: [
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'chia-pudding-berries' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'sweet-potato-lentil-curry' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
-      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'sweet-potato-lentil-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }]),
-      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }]),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['banana', 'walnuts', 'milk', 'apple'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'orange', 'almonds', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'chia-pudding-berries' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'sweet-potato-lentil-curry' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['cheese', 'apple', 'walnuts', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'avocado-egg-toast' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['banana', 'greekYogurt', 'pumpkinSeeds', 'orange'])),
+      day([{ type: 'Breakfast', slug: 'banana-protein-pancakes' }, { type: 'Lunch', slug: 'quinoa-black-bean-bowl' }, { type: 'Dinner', slug: 'chickpea-spinach-curry' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['greekYogurt', 'berries', 'almonds', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'greek-yogurt-protein-bowl' }, { type: 'Lunch', slug: 'lentil-vegetable-soup' }, { type: 'Dinner', slug: 'sweet-potato-lentil-curry' }, { type: 'Snack', slug: 'cottage-cheese-fruit-bowl' }], ex(['toast', 'cheese', 'apple', 'milk'])),
+      day([{ type: 'Breakfast', slug: 'veggie-omelette' }, { type: 'Lunch', slug: 'mediterranean-chickpea-salad' }, { type: 'Dinner', slug: 'tofu-vegetable-buddha-bowl' }, { type: 'Snack', slug: 'peanut-butter-energy-balls' }], ex(['banana', 'walnuts', 'milk', 'orange'])),
     ],
   },
 ];
@@ -149,28 +181,27 @@ export function getMealPlan(slug) {
   return mealPlans.find((p) => p.slug === slug);
 }
 
-// Compute daily totals for a day (array of meals)
-export function dayTotals(meals) {
-  return meals.reduce((t, m) => ({
-    cal: t.cal + m.cal,
-    protein: t.protein + m.protein,
-    carbs: t.carbs + m.carbs,
-    fat: t.fat + m.fat,
+// Compute totals for a day (meals + extras)
+export function dayTotals(d) {
+  const base = d.meals.reduce((t, m) => ({
+    cal: t.cal + m.cal, protein: t.protein + m.protein, carbs: t.carbs + m.carbs, fat: t.fat + m.fat,
   }), { cal: 0, protein: 0, carbs: 0, fat: 0 });
+  if (d.extras) {
+    base.cal += d.extras.cal; base.protein += d.extras.protein;
+    base.carbs += d.extras.carbs; base.fat += d.extras.fat;
+  }
+  return base;
 }
 
-// Average daily calories across the plan (including any daily extras)
+// Average daily macros across the plan
 export function planAverage(plan) {
-  const extras = plan.extras || { cal: 0, protein: 0, carbs: 0, fat: 0 };
   const totals = plan.days.map((d) => dayTotals(d));
   const sum = totals.reduce((t, d) => ({
     cal: t.cal + d.cal, protein: t.protein + d.protein, carbs: t.carbs + d.carbs, fat: t.fat + d.fat,
   }), { cal: 0, protein: 0, carbs: 0, fat: 0 });
   const n = plan.days.length;
   return {
-    cal: Math.round(sum.cal / n) + extras.cal,
-    protein: Math.round(sum.protein / n) + extras.protein,
-    carbs: Math.round(sum.carbs / n) + extras.carbs,
-    fat: Math.round(sum.fat / n) + extras.fat,
+    cal: Math.round(sum.cal / n), protein: Math.round(sum.protein / n),
+    carbs: Math.round(sum.carbs / n), fat: Math.round(sum.fat / n),
   };
 }
