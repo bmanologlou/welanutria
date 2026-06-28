@@ -97,7 +97,7 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
                 <span class="f-name">{r.name}</span>
                 <span class="f-cat">{r.category}</span>
               </td>
-              <td class="td-metric"><strong>{metricValue(r)}{list.metricUnit === 'g' ? ' g' : list.metricUnit === 'kcal' ? '' : ''}</strong>{list.metricUnit === 'kcal' ? ' kcal' : list.metric === 'efficiency' ? ' g' : ''}</td>
+              <td class="td-metric"><strong>{metricValue(r)}{list.metricUnit === 'g' ? ' g' : ''}</strong>{list.metricUnit === 'kcal' ? ' kcal' : list.metric === 'efficiency' ? ' g' : (list.metricUnit && list.metricUnit !== 'g' ? ' ' + list.metricUnit : '')}</td>
               <td class="td-100">
                 <span class="macro-line">{r.cal} kcal</span>
                 <span class="macro-sub">P {r.protein} · C {r.carbs} · F {r.fat}{r.fiber ? ` · Fib ${r.fiber}` : ''}</span>
