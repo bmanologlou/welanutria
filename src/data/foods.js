@@ -178,6 +178,53 @@ export const foods = [
   { name: 'Pak choi / bok choy', category: 'Vegetables', cal: 13, protein: 1.5, carbs: 2.2, fat: 0.2, fiber: 1, iron: 0.8, calcium: 105, potassium: 252, magnesium: 19, omega3: 0.06, vitaminC: 45, serving: 'cup', servingG: 70 },
   { name: 'Figs (dried)', category: 'Fruit', cal: 249, protein: 3.3, carbs: 64, fat: 0.9, fiber: 10, iron: 2.0, calcium: 162, potassium: 680, magnesium: 68, omega3: 0.01, vitaminC: 1.2, serving: '3 figs', servingG: 50 },
   { name: 'Apricots (dried)', category: 'Fruit', cal: 241, protein: 3.4, carbs: 63, fat: 0.5, fiber: 7.3, iron: 2.7, calcium: 55, potassium: 1162, magnesium: 32, omega3: 0, vitaminC: 1, serving: 'portion', servingG: 40 },
+
+  // ---- More foods (expansion) ----
+  // Meat & poultry
+  { name: 'Chicken drumstick (skinless)', category: 'Meat & poultry', cal: 172, protein: 28, carbs: 0, fat: 6, fiber: 0, iron: 1.3, calcium: 12, potassium: 240, magnesium: 23, omega3: 0.05, vitaminC: 0, serving: 'drumstick', servingG: 100 },
+  { name: 'Veal (lean)', category: 'Meat & poultry', cal: 172, protein: 31, carbs: 0, fat: 5, fiber: 0, iron: 1.0, calcium: 18, potassium: 360, magnesium: 26, omega3: 0.04, vitaminC: 0, serving: 'portion', servingG: 120 },
+  { name: 'Rabbit', category: 'Meat & poultry', cal: 173, protein: 33, carbs: 0, fat: 3.5, fiber: 0, iron: 4.4, calcium: 18, potassium: 378, magnesium: 29, omega3: 0.07, vitaminC: 0, serving: 'portion', servingG: 120 },
+  { name: 'Goat meat', category: 'Meat & poultry', cal: 143, protein: 27, carbs: 0, fat: 3, fiber: 0, iron: 3.7, calcium: 17, potassium: 405, magnesium: 28, omega3: 0.03, vitaminC: 0, serving: 'portion', servingG: 120 },
+  // Fish & seafood
+  { name: 'Herring', category: 'Fish & seafood', cal: 158, protein: 18, carbs: 0, fat: 9, fiber: 0, iron: 1.1, calcium: 57, potassium: 327, magnesium: 32, omega3: 1.7, vitaminC: 0.7, serving: 'fillet', servingG: 120 },
+  { name: 'Pollock', category: 'Fish & seafood', cal: 92, protein: 20, carbs: 0, fat: 1, fiber: 0, iron: 0.5, calcium: 11, potassium: 380, magnesium: 28, omega3: 0.5, vitaminC: 0, serving: 'fillet', servingG: 130 },
+  { name: 'Oysters', category: 'Fish & seafood', cal: 81, protein: 9, carbs: 5, fat: 2.3, fiber: 0, iron: 5.1, calcium: 45, potassium: 168, magnesium: 22, omega3: 0.7, vitaminC: 4, serving: 'portion', servingG: 100 },
+  { name: 'Clams', category: 'Fish & seafood', cal: 86, protein: 15, carbs: 3, fat: 1, fiber: 0, iron: 14, calcium: 46, potassium: 314, magnesium: 9, omega3: 0.2, vitaminC: 13, serving: 'portion', servingG: 100 },
+  { name: 'Squid', category: 'Fish & seafood', cal: 92, protein: 16, carbs: 3, fat: 1.4, fiber: 0, iron: 0.7, calcium: 32, potassium: 246, magnesium: 33, omega3: 0.5, vitaminC: 4.7, serving: 'portion', servingG: 100 },
+  // Eggs & dairy
+  { name: 'Goat cheese', category: 'Eggs & dairy', cal: 364, protein: 22, carbs: 0.1, fat: 30, fiber: 0, iron: 1.6, calcium: 298, potassium: 158, magnesium: 30, omega3: 0.3, vitaminC: 0, serving: 'portion', servingG: 40 },
+  { name: 'Edam cheese', category: 'Eggs & dairy', cal: 357, protein: 25, carbs: 1.4, fat: 28, fiber: 0, iron: 0.4, calcium: 731, potassium: 188, magnesium: 30, omega3: 0.3, vitaminC: 0, serving: 'slice', servingG: 30 },
+  { name: 'Cream cheese (light)', category: 'Eggs & dairy', cal: 201, protein: 8, carbs: 8, fat: 15, fiber: 0, iron: 0.2, calcium: 110, potassium: 130, magnesium: 9, omega3: 0.2, vitaminC: 0, serving: 'portion', servingG: 30 },
+  { name: 'Buttermilk', category: 'Eggs & dairy', cal: 40, protein: 3.3, carbs: 4.8, fat: 0.9, fiber: 0, iron: 0.0, calcium: 116, potassium: 151, magnesium: 11, omega3: 0.02, vitaminC: 1, serving: 'glass', servingG: 240 },
+  // Legumes
+  { name: 'Mung beans (cooked)', category: 'Legumes', cal: 105, protein: 7, carbs: 19, fat: 0.4, fiber: 7.6, iron: 1.4, calcium: 27, potassium: 266, magnesium: 48, omega3: 0.03, vitaminC: 1, serving: 'cup', servingG: 200 },
+  { name: 'Fava beans (cooked)', category: 'Legumes', cal: 110, protein: 8, carbs: 20, fat: 0.4, fiber: 5.4, iron: 1.5, calcium: 36, potassium: 268, magnesium: 43, omega3: 0.04, vitaminC: 0.3, serving: 'cup', servingG: 170 },
+  { name: 'Adzuki beans (cooked)', category: 'Legumes', cal: 128, protein: 8, carbs: 25, fat: 0.1, fiber: 7.3, iron: 2.0, calcium: 28, potassium: 532, magnesium: 52, omega3: 0.1, vitaminC: 0, serving: 'cup', servingG: 230 },
+  { name: 'Green peas (cooked)', category: 'Legumes', cal: 84, protein: 5.4, carbs: 16, fat: 0.2, fiber: 5.5, iron: 1.5, calcium: 27, potassium: 271, magnesium: 39, omega3: 0.04, vitaminC: 14, serving: 'cup', servingG: 160 },
+  // Nuts & seeds
+  { name: 'Pine nuts', category: 'Nuts & seeds', cal: 673, protein: 14, carbs: 13, fat: 68, fiber: 3.7, iron: 5.5, calcium: 16, potassium: 597, magnesium: 251, omega3: 0.1, vitaminC: 0.8, serving: 'handful', servingG: 28 },
+  { name: 'Cashew butter', category: 'Nuts & seeds', cal: 587, protein: 18, carbs: 28, fat: 49, fiber: 2, iron: 5.0, calcium: 43, potassium: 546, magnesium: 258, omega3: 0.06, vitaminC: 0, serving: '2 tbsp', servingG: 32 },
+  { name: 'Poppy seeds', category: 'Nuts & seeds', cal: 525, protein: 18, carbs: 28, fat: 42, fiber: 20, iron: 9.8, calcium: 1438, potassium: 719, magnesium: 347, omega3: 0.3, vitaminC: 1, serving: '2 tbsp', servingG: 18 },
+  { name: 'Cacao nibs', category: 'Nuts & seeds', cal: 615, protein: 14, carbs: 36, fat: 43, fiber: 33, iron: 14, calcium: 128, potassium: 1500, magnesium: 272, omega3: 0.1, vitaminC: 0, serving: 'portion', servingG: 28 },
+  // Grains
+  { name: 'Spelt (cooked)', category: 'Grains', cal: 127, protein: 5.5, carbs: 26, fat: 0.8, fiber: 3.9, iron: 1.7, calcium: 10, potassium: 143, magnesium: 49, omega3: 0.03, vitaminC: 0, serving: 'cup', servingG: 194 },
+  { name: 'Teff (cooked)', category: 'Grains', cal: 101, protein: 3.9, carbs: 20, fat: 0.7, fiber: 2.8, iron: 2.0, calcium: 49, potassium: 107, magnesium: 50, omega3: 0.02, vitaminC: 0, serving: 'cup', servingG: 252 },
+  { name: 'Sourdough bread', category: 'Grains', cal: 256, protein: 11, carbs: 48, fat: 1.8, fiber: 2.4, iron: 3.1, calcium: 86, potassium: 116, magnesium: 24, omega3: 0.05, vitaminC: 0, serving: 'slice', servingG: 50 },
+  { name: 'Rye flakes (dry)', category: 'Grains', cal: 338, protein: 10, carbs: 76, fat: 2.5, fiber: 15, iron: 2.6, calcium: 33, potassium: 510, magnesium: 110, omega3: 0.15, vitaminC: 0, serving: 'portion', servingG: 50 },
+  // Vegetables
+  { name: 'Swiss chard', category: 'Vegetables', cal: 19, protein: 1.8, carbs: 3.7, fat: 0.2, fiber: 1.6, iron: 1.8, calcium: 51, potassium: 379, magnesium: 81, omega3: 0.0, vitaminC: 30, serving: 'cup', servingG: 36 },
+  { name: 'Watercress', category: 'Vegetables', cal: 11, protein: 2.3, carbs: 1.3, fat: 0.1, fiber: 0.5, iron: 0.2, calcium: 120, potassium: 330, magnesium: 21, omega3: 0.02, vitaminC: 43, serving: 'cup', servingG: 34 },
+  { name: 'Leeks', category: 'Vegetables', cal: 61, protein: 1.5, carbs: 14, fat: 0.3, fiber: 1.8, iron: 2.1, calcium: 59, potassium: 180, magnesium: 28, omega3: 0.1, vitaminC: 12, serving: 'portion', servingG: 89 },
+  { name: 'Fennel', category: 'Vegetables', cal: 31, protein: 1.2, carbs: 7, fat: 0.2, fiber: 3.1, iron: 0.7, calcium: 49, potassium: 414, magnesium: 17, omega3: 0.0, vitaminC: 12, serving: 'cup', servingG: 87 },
+  { name: 'Radishes', category: 'Vegetables', cal: 16, protein: 0.7, carbs: 3.4, fat: 0.1, fiber: 1.6, iron: 0.3, calcium: 25, potassium: 233, magnesium: 10, omega3: 0.0, vitaminC: 15, serving: 'cup', servingG: 116 },
+  { name: 'Turnip', category: 'Vegetables', cal: 28, protein: 0.9, carbs: 6.4, fat: 0.1, fiber: 1.8, iron: 0.3, calcium: 30, potassium: 191, magnesium: 11, omega3: 0.0, vitaminC: 21, serving: 'cup', servingG: 130 },
+  { name: 'Parsnip', category: 'Vegetables', cal: 75, protein: 1.2, carbs: 18, fat: 0.3, fiber: 4.9, iron: 0.6, calcium: 36, potassium: 375, magnesium: 29, omega3: 0.0, vitaminC: 17, serving: 'cup', servingG: 133 },
+  // Fruit
+  { name: 'Guava', category: 'Fruit', cal: 68, protein: 2.6, carbs: 14, fat: 1, fiber: 5.4, iron: 0.3, calcium: 18, potassium: 417, magnesium: 22, omega3: 0.1, vitaminC: 228, serving: 'fruit', servingG: 55 },
+  { name: 'Papaya', category: 'Fruit', cal: 43, protein: 0.5, carbs: 11, fat: 0.3, fiber: 1.7, iron: 0.3, calcium: 20, potassium: 182, magnesium: 21, omega3: 0.02, vitaminC: 62, serving: 'cup', servingG: 145 },
+  { name: 'Apricot (fresh)', category: 'Fruit', cal: 48, protein: 1.4, carbs: 11, fat: 0.4, fiber: 2, iron: 0.4, calcium: 13, potassium: 259, magnesium: 10, omega3: 0.0, vitaminC: 10, serving: 'fruit', servingG: 35 },
+  { name: 'Clementine', category: 'Fruit', cal: 47, protein: 0.9, carbs: 12, fat: 0.2, fiber: 1.7, iron: 0.1, calcium: 30, potassium: 177, magnesium: 10, omega3: 0.0, vitaminC: 49, serving: 'fruit', servingG: 74 },
+  { name: 'Lychee', category: 'Fruit', cal: 66, protein: 0.8, carbs: 17, fat: 0.4, fiber: 1.3, iron: 0.3, calcium: 5, potassium: 171, magnesium: 10, omega3: 0.0, vitaminC: 72, serving: 'portion', servingG: 100 },
 ];
 
 // Helper: per-serving values (rounded)
