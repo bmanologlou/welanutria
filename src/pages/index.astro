@@ -3,6 +3,13 @@ import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import JsonLd from '../components/JsonLd.astro';
 import CalcIcon from '../components/CalcIcon.astro';
+import { getCollection } from 'astro:content';
+
+// Three most recent blog articles for the homepage
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
+  .slice(0, 3);
 
 const calculators = [
   { href: '/calculators/tdee/', name: 'TDEE & Macros', desc: 'Daily calories and your protein, carb and fat split.' },
@@ -85,6 +92,21 @@ const itemList = {
   </section>
 
   <section class="wrap section">
+    <h2 class="section-title">From the blog</h2>
+    <p class="section-intro">Clear, practical guides on calories, protein and eating well, written to help you get more from the calculators and recipes.</p>
+    <div class="post-grid">
+      {latestPosts.map((post) => (
+        <a class="post-card" href={`/blog/${post.slug}/`}>
+          <span class="post-card-title">{post.data.title}</span>
+          <span class="post-card-desc">{post.data.description}</span>
+          <span class="post-card-link">Read more →</span>
+        </a>
+      ))}
+    </div>
+    <p class="section-more"><a href="/blog/">See all articles →</a></p>
+  </section>
+
+  <section class="wrap section">
     <Faq items={faqs} columns={2} />
   </section>
 
@@ -116,5 +138,13 @@ const itemList = {
     .feature-warm{background:var(--amber-soft);border-color:#F0E3CB}
     .feature-warm2{background:#FBEEE0;border-color:#F2DcC4}
     @media(max-width:640px){.split{grid-template-columns:1fr}}
+
+    .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:720px){.post-grid{grid-template-columns:1fr}}
+    .post-card{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;transition:.15s;height:100%}
+    .post-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .post-card-title{font-weight:700;font-size:1.08rem;color:var(--ink);line-height:1.25}
+    .post-card-desc{font-size:.9rem;color:var(--muted);line-height:1.5;flex:1}
+    .post-card-link{font-weight:600;color:var(--accent);font-size:.88rem;margin-top:4px}
   </style>
 </Base>
