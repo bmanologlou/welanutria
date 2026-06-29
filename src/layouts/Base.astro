@@ -11,9 +11,10 @@ const {
 const nav = [
   { href: '/calculators/', label: 'Calculators', key: 'calculators' },
   { href: '/recipes/', label: 'Recipes', key: 'recipes' },
-  { href: '/blog/', label: 'Blog', key: 'blog' },
   { href: '/meal-plans/', label: 'Meal Plans', key: 'meal-plans' },
   { href: '/food-lists/', label: 'Food Lists', key: 'food-lists' },
+  { href: '/compare/', label: 'Compare', key: 'compare' },
+  { href: '/blog/', label: 'Blog', key: 'blog' },
 ];
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
@@ -117,9 +118,10 @@ const orgSchema = {
         <h4>Explore</h4>
         <ul>
           <li><a href="/recipes/">Recipes</a></li>
-          <li><a href="/blog/">Blog</a></li>
           <li><a href="/meal-plans/">Meal Plans</a></li>
           <li><a href="/food-lists/">Food Lists</a></li>
+          <li><a href="/compare/">Compare</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </div>
       <div class="f-col">
