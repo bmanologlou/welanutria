@@ -1,0 +1,55 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import { comparisons } from '../../data/comparisons.js';
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'welanutria food comparisons',
+  itemListElement: comparisons.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.title,
+    url: `https://welanutria.com/compare/${c.slug}/`,
+  })),
+};
+---
+<Base
+  title="Food Comparisons: Side-by-Side Nutrition | welanutria"
+  description="Compare foods head-to-head: calories, protein, fats and nutrients side by side, with a clear verdict on which to choose for your goals."
+  current="compare"
+>
+  <JsonLd schema={itemList} />
+
+  <div class="cmpi wrap">
+    <header class="cmpi-head">
+      <p class="eyebrow">Compare</p>
+      <h1>Food comparisons, side by side</h1>
+      <p class="lede">Two foods, one clear table. See how popular foods stack up on calories, protein, fats and key nutrients, with a straightforward verdict on which to choose for your goal.</p>
+    </header>
+
+    <div class="cmpi-grid">
+      {comparisons.map((c) => (
+        <a class="cmpi-card" href={`/compare/${c.slug}/`}>
+          <span class="cmpi-vs"><span>{c.labelA}</span><span class="vs">vs</span><span>{c.labelB}</span></span>
+          <span class="cmpi-go">Compare →</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <style>
+    .cmpi{padding:40px 0 0}
+    .cmpi-head{margin-bottom:28px;max-width:64ch}
+    .cmpi-head h1{font-size:clamp(1.9rem,4.5vw,2.6rem);letter-spacing:-.02em;line-height:1.12;margin:.1em 0 .35em}
+    .cmpi-head .lede{font-size:1.1rem;color:#33433D;margin:0;line-height:1.6}
+    .cmpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    @media(max-width:600px){.cmpi-grid{grid-template-columns:1fr}}
+    .cmpi-card{display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;transition:.15s}
+    .cmpi-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .cmpi-vs{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.15rem;color:var(--ink)}
+    .cmpi-vs .vs{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:var(--sage);padding:3px 9px;border-radius:20px}
+    .cmpi-go{color:var(--accent);font-weight:600;font-size:.9rem}
+  </style>
+</Base>
