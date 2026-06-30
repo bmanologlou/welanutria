@@ -124,16 +124,28 @@ const faqSchema = {
         <h2>Related</h2>
         <div class="rel-grid">
           {relCalculator && (
-            <a class="rel-chip rel-calc" href={relCalculator.href}>{relCalculator.name}</a>
+            <a class="rel-card rel-calc" href={relCalculator.href}>
+              <span class="rel-kicker">Calculator</span>
+              <span class="rel-name">{relCalculator.name}</span>
+            </a>
           )}
           {relArticle && (
-            <a class="rel-chip rel-article" href={relArticle.href}>{relArticle.name}</a>
+            <a class="rel-card rel-article" href={relArticle.href}>
+              <span class="rel-kicker">Read</span>
+              <span class="rel-name">{relArticle.name}</span>
+            </a>
           )}
           {relLists.map((l) => (
-            <a class="rel-chip rel-list" href={`/food-lists/${l.slug}/`}>{l.title}</a>
+            <a class="rel-card rel-list" href={`/food-lists/${l.slug}/`}>
+              <span class="rel-kicker">Food list</span>
+              <span class="rel-name">{l.title}</span>
+            </a>
           ))}
           {relRecipes.map((r) => (
-            <a class="rel-chip rel-recipe" href={`/recipes/${r.slug}/`}>{r.title}</a>
+            <a class="rel-card rel-recipe" href={`/recipes/${r.slug}/`}>
+              <span class="rel-kicker">Recipe</span>
+              <span class="rel-name">{r.title}</span>
+            </a>
           ))}
         </div>
       </section>
@@ -180,13 +192,16 @@ const faqSchema = {
 
     .cmp-related{margin:32px 0 0}
     .cmp-related h2{font-size:1.4rem;margin:0 0 .5em}
-    .rel-grid{display:flex;flex-wrap:wrap;gap:10px}
-    .rel-chip{display:inline-block;padding:9px 16px;border-radius:24px;font-size:.9rem;font-weight:600;border:1px solid var(--line);transition:.15s}
-    .rel-list{background:var(--cool-2);color:var(--accent-deep);border-color:var(--cool-line)}
-    .rel-recipe{background:var(--amber-soft);color:var(--accent-deep);border-color:#F0E3CB}
-    .rel-calc{background:var(--cool);color:var(--accent-deep);border-color:var(--cool-line)}
-    .rel-article{background:var(--paper-2);color:var(--accent-deep);border-color:var(--line)}
-    .rel-chip:hover{transform:translateY(-2px);text-decoration:none;border-color:var(--accent)}
+    .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:560px){.rel-grid{grid-template-columns:1fr}}
+    .rel-card{display:flex;flex-direction:column;gap:3px;border-radius:12px;padding:16px 18px;transition:.15s;border:1px solid var(--line)}
+    .rel-card:hover{border-color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+    .rel-kicker{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700}
+    .rel-name{font-weight:600;color:var(--ink);font-size:1rem}
+    .rel-list{background:var(--cool-2);border-color:var(--cool-line)}
+    .rel-recipe{background:var(--amber-soft);border-color:#F0E3CB}
+    .rel-calc{background:var(--cool);border-color:var(--cool-line)}
+    .rel-article{background:var(--paper-2);border-color:var(--line)}
 
     .cmp-faq{margin:36px 0 0}
     .cmp-faq h2{font-size:1.4rem;margin:0 0 .5em}
