@@ -225,6 +225,23 @@ export const foods = [
   { name: 'Apricot (fresh)', category: 'Fruit', cal: 48, protein: 1.4, carbs: 11, fat: 0.4, fiber: 2, iron: 0.4, calcium: 13, potassium: 259, magnesium: 10, omega3: 0.0, vitaminC: 10, zinc: 0.2, folate: 9, b12: 0, sugar: 9, serving: 'fruit', servingG: 35 },
   { name: 'Clementine', category: 'Fruit', cal: 47, protein: 0.9, carbs: 12, fat: 0.2, fiber: 1.7, iron: 0.1, calcium: 30, potassium: 177, magnesium: 10, omega3: 0.0, vitaminC: 49, zinc: 0.1, folate: 24, b12: 0, sugar: 9, serving: 'fruit', servingG: 74 },
   { name: 'Lychee', category: 'Fruit', cal: 66, protein: 0.8, carbs: 17, fat: 0.4, fiber: 1.3, iron: 0.3, calcium: 5, potassium: 171, magnesium: 10, omega3: 0.0, vitaminC: 72, zinc: 0.1, folate: 14, b12: 0, sugar: 15, serving: 'portion', servingG: 100 },
+
+  // ---- Fermented & gut-health foods (2026 trend) ----
+  { name: 'Kimchi', category: 'Vegetables', cal: 15, protein: 1.1, carbs: 2.4, fat: 0.5, fiber: 1.6, iron: 0.6, calcium: 33, potassium: 151, magnesium: 14, omega3: 0.05, vitaminC: 18, zinc: 0.2, folate: 20, b12: 0, sugar: 1, serving: 'portion', servingG: 85 },
+  { name: 'Sauerkraut', category: 'Vegetables', cal: 19, protein: 0.9, carbs: 4.3, fat: 0.1, fiber: 2.9, iron: 1.5, calcium: 30, potassium: 170, magnesium: 13, omega3: 0.1, vitaminC: 15, zinc: 0.2, folate: 24, b12: 0, sugar: 1.8, serving: 'portion', servingG: 85 },
+  { name: 'Miso paste', category: 'Legumes', cal: 199, protein: 12, carbs: 26, fat: 6, fiber: 5.4, iron: 2.5, calcium: 57, potassium: 210, magnesium: 48, omega3: 0.3, vitaminC: 0, zinc: 2.6, folate: 19, b12: 0.1, sugar: 6.2, serving: 'tbsp', servingG: 17 },
+  { name: 'Natto', category: 'Legumes', cal: 211, protein: 19, carbs: 13, fat: 11, fiber: 5.4, iron: 8.6, calcium: 217, potassium: 729, magnesium: 115, omega3: 0.3, vitaminC: 13, zinc: 3.0, folate: 8, b12: 0, sugar: 5, serving: 'portion', servingG: 85 },
+  { name: 'Kombucha', category: 'Eggs & dairy', cal: 14, protein: 0, carbs: 3.5, fat: 0, fiber: 0, iron: 0, calcium: 0, potassium: 12, magnesium: 1, omega3: 0, vitaminC: 0, zinc: 0, folate: 0, b12: 0.6, sugar: 3, serving: 'glass', servingG: 240 },
+  { name: 'Pickles (fermented)', category: 'Vegetables', cal: 11, protein: 0.5, carbs: 2.3, fat: 0.2, fiber: 1.1, iron: 0.4, calcium: 0, potassium: 116, magnesium: 5, omega3: 0.05, vitaminC: 1, zinc: 0.1, folate: 1, b12: 0, sugar: 1.1, serving: 'portion', servingG: 100 },
+
+  // ---- Anti-inflammatory & trending stars (2026) ----
+  { name: 'Ginger (fresh)', category: 'Vegetables', cal: 80, protein: 1.8, carbs: 18, fat: 0.8, fiber: 2, iron: 0.6, calcium: 16, potassium: 415, magnesium: 43, omega3: 0.03, vitaminC: 5, zinc: 0.3, folate: 11, b12: 0, sugar: 1.7, serving: 'portion', servingG: 15 },
+  { name: 'Turmeric (fresh)', category: 'Vegetables', cal: 312, protein: 9.7, carbs: 67, fat: 3.3, fiber: 22, iron: 55, calcium: 168, potassium: 2080, magnesium: 208, omega3: 0.5, vitaminC: 26, zinc: 4.5, folate: 39, b12: 0, sugar: 3.2, serving: 'tsp', servingG: 3 },
+  { name: 'Cranberries', category: 'Fruit', cal: 46, protein: 0.4, carbs: 12, fat: 0.1, fiber: 4.6, iron: 0.3, calcium: 8, potassium: 85, magnesium: 6, omega3: 0.05, vitaminC: 14, zinc: 0.1, folate: 1, b12: 0, sugar: 4, serving: 'cup', servingG: 100 },
+  { name: 'Goji berries (dried)', category: 'Fruit', cal: 349, protein: 14, carbs: 77, fat: 0.4, fiber: 13, iron: 6.8, calcium: 190, potassium: 1130, magnesium: 90, omega3: 0.1, vitaminC: 48, zinc: 2, folate: 15, b12: 0, sugar: 46, serving: 'portion', servingG: 28 },
+  { name: 'Acai (unsweetened)', category: 'Fruit', cal: 70, protein: 1, carbs: 4, fat: 5, fiber: 2, iron: 0.6, calcium: 20, potassium: 105, magnesium: 17, omega3: 0.1, vitaminC: 1, zinc: 0.2, folate: 3, b12: 0, sugar: 0, serving: 'portion', servingG: 100 },
+  { name: 'Cabbage (red)', category: 'Vegetables', cal: 31, protein: 1.4, carbs: 7.4, fat: 0.2, fiber: 2.1, iron: 0.8, calcium: 45, potassium: 243, magnesium: 16, omega3: 0.05, vitaminC: 57, zinc: 0.2, folate: 18, b12: 0, sugar: 3.8, serving: 'cup', servingG: 89 },
+  { name: 'Green tea', category: 'Eggs & dairy', cal: 1, protein: 0.2, carbs: 0, fat: 0, fiber: 0, iron: 0.02, calcium: 0, potassium: 8, magnesium: 1, omega3: 0, vitaminC: 0.3, zinc: 0.01, folate: 5, b12: 0, sugar: 0, serving: 'cup', servingG: 240 },
 ];
 
 // Helper: per-serving values (rounded)
