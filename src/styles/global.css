@@ -1,25 +1,25 @@
 /* ============================================================
-   welanutria — global design system
+   welanutria global design system
    Palette, type, and shared UI patterns (locked in blueprint)
    ============================================================ */
 
 :root{
   /* brand */
   --ink:#1F3D34;
-  --accent:#2E6B57;        /* forest green — primary */
+  --accent:#2E6B57;        /* forest green, primary */
   --accent-deep:#235244;
   --sage:#6DA98C;          /* secondary */
   --amber:#D99A2B;         /* warm accent */
   --amber-soft:#FBF3E3;    /* recipe card surface */
   --amber-deep:#D67B2E;    /* meal plans (warm zone) */
 
-  /* backgrounds — green-lean turquoise (C) */
+  /* backgrounds, green-lean turquoise (C) */
   --paper:#F4FAF9;
   --paper-2:#E8F4F1;
   --line:#DCEAE6;
   --field:#D6E8E2;
 
-  /* cool accent — blue-lean (D) */
+  /* cool accent, blue-lean (D) */
   --cool:#F2F9FB;
   --cool-2:#E4F1F5;
   --cool-line:#D3E5EA;
