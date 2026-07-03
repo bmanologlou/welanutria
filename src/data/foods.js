@@ -242,6 +242,8 @@ export const foods = [
   { name: 'Acai (unsweetened)', category: 'Fruit', cal: 70, protein: 1, carbs: 4, fat: 5, fiber: 2, iron: 0.6, calcium: 20, potassium: 105, magnesium: 17, omega3: 0.1, vitaminC: 1, zinc: 0.2, folate: 3, b12: 0, sugar: 0, serving: 'portion', servingG: 100 },
   { name: 'Cabbage (red)', category: 'Vegetables', cal: 31, protein: 1.4, carbs: 7.4, fat: 0.2, fiber: 2.1, iron: 0.8, calcium: 45, potassium: 243, magnesium: 16, omega3: 0.05, vitaminC: 57, zinc: 0.2, folate: 18, b12: 0, sugar: 3.8, serving: 'cup', servingG: 89 },
   { name: 'Green tea', category: 'Eggs & dairy', cal: 1, protein: 0.2, carbs: 0, fat: 0, fiber: 0, iron: 0.02, calcium: 0, potassium: 8, magnesium: 1, omega3: 0, vitaminC: 0.3, zinc: 0.01, folate: 5, b12: 0, sugar: 0, serving: 'cup', servingG: 240 },
+  { name: 'Garlic', category: 'Vegetables', cal: 149, protein: 6.4, carbs: 33, fat: 0.5, fiber: 2.1, iron: 1.7, calcium: 181, potassium: 401, magnesium: 25, omega3: 0.02, vitaminC: 31, zinc: 1.2, folate: 3, b12: 0, sugar: 1, serving: 'clove', servingG: 3 },
+  { name: 'Cinnamon (ground)', category: 'Vegetables', cal: 247, protein: 4, carbs: 81, fat: 1.2, fiber: 53, iron: 8.3, calcium: 1002, potassium: 431, magnesium: 60, omega3: 0.02, vitaminC: 3.8, zinc: 1.8, folate: 6, b12: 0, sugar: 2.2, serving: 'tsp', servingG: 3 },
 ];
 
 // Helper: per-serving values (rounded)

@@ -1,6 +1,10 @@
 // Definitions for each food list page. Each list filters and sorts the central
 // foods database, and links out to the related calculator, article and recipes.
 
+// Spices are eaten in tiny amounts, so their per-100g values are misleading.
+// We exclude them from metric-ranked lists where they would rank artificially high.
+const SPICES = ['Turmeric (fresh)', 'Ginger (fresh)', 'Garlic', 'Cinnamon (ground)'];
+
 export const foodLists = [
   {
     slug: 'high-protein-foods',
@@ -59,7 +63,7 @@ export const foodLists = [
     intro: 'Fiber keeps your digestion healthy, steadies blood sugar, and helps you feel full, yet most people fall short of the recommended 25 to 35 g a day. This list ranks foods by fiber content so you can close the gap with real food.',
     sortBy: 'fiber',
     sortDir: 'desc',
-    filter: (f) => f.fiber >= 3,
+    filter: (f) => f.fiber >= 3 && !SPICES.includes(f.name),
     metric: 'fiber',
     metricLabel: 'Fiber',
     metricUnit: 'g',
@@ -222,7 +226,7 @@ export const foodLists = [
     intro: 'Complex carbs deliver steady, lasting energy along with fiber and nutrients, unlike refined carbs that spike and crash. This list ranks quality carb sources by fiber content, so you can choose the ones that keep you fuller for longer.',
     sortBy: 'fiber',
     sortDir: 'desc',
-    filter: (f) => f.carbs >= 15 && ['Grains', 'Legumes', 'Vegetables'].includes(f.category),
+    filter: (f) => f.carbs >= 15 && ['Grains', 'Legumes', 'Vegetables'].includes(f.category) && !SPICES.includes(f.name),
     metric: 'fiber',
     metricLabel: 'Fiber',
     metricUnit: 'g',
@@ -268,7 +272,7 @@ export const foodLists = [
     intro: 'Iron carries oxygen around your body and supports energy, focus and a healthy immune system. Low iron is one of the most common nutritional shortfalls, especially for women, vegetarians and athletes. This list ranks foods by iron content so you can top up from real food.',
     sortBy: 'iron',
     sortDir: 'desc',
-    filter: (f) => f.iron >= 2,
+    filter: (f) => f.iron >= 2 && !SPICES.includes(f.name),
     metric: 'iron',
     metricLabel: 'Iron',
     metricUnit: 'mg',
@@ -292,7 +296,7 @@ export const foodLists = [
     intro: 'Calcium builds and maintains strong bones and teeth, and supports your muscles, nerves and heart. Needs rise with age, particularly for women around menopause. This list ranks foods by calcium content so you can hit your target with or without dairy.',
     sortBy: 'calcium',
     sortDir: 'desc',
-    filter: (f) => f.calcium >= 100,
+    filter: (f) => f.calcium >= 100 && !SPICES.includes(f.name),
     metric: 'calcium',
     metricLabel: 'Calcium',
     metricUnit: 'mg',
@@ -316,7 +320,7 @@ export const foodLists = [
     intro: 'Potassium helps control blood pressure, supports muscle and nerve function, and balances the effects of sodium. Most people fall short of the recommended intake. This list ranks foods by potassium content so you can top up naturally from whole foods.',
     sortBy: 'potassium',
     sortDir: 'desc',
-    filter: (f) => f.potassium >= 350,
+    filter: (f) => f.potassium >= 350 && !SPICES.includes(f.name),
     metric: 'potassium',
     metricLabel: 'Potassium',
     metricUnit: 'mg',
@@ -604,7 +608,7 @@ export const foodLists = [
     intro: 'An anti-inflammatory way of eating focuses on whole foods rich in omega-3 fats, antioxidants and fibre, while limiting ultra-processed foods and added sugar. This list highlights foods often included in an anti-inflammatory diet, from oily fish and berries to leafy greens and nuts.',
     sortBy: 'omega3',
     sortDir: 'desc',
-    filter: (f) => ['Salmon','Mackerel','Sardines (canned)','Herring','Trout','Flaxseed','Chia seeds','Walnuts','Hemp seeds','Blueberries','Strawberries','Raspberries','Blackberries','Cranberries','Goji berries (dried)','Acai (unsweetened)','Spinach','Kale','Broccoli','Swiss chard','Ginger (fresh)','Turmeric (fresh)','Avocado','Olive oil','Dark chocolate (85%)','Cabbage (red)','Green tea'].includes(f.name),
+    filter: (f) => ['Salmon','Mackerel','Sardines (canned)','Herring','Trout','Flaxseed','Chia seeds','Walnuts','Hemp seeds','Blueberries','Strawberries','Raspberries','Blackberries','Cranberries','Goji berries (dried)','Acai (unsweetened)','Spinach','Kale','Broccoli','Swiss chard','Ginger (fresh)','Turmeric (fresh)','Garlic','Cinnamon (ground)','Avocado','Olive oil','Dark chocolate (85%)','Cabbage (red)','Green tea'].includes(f.name),
     metric: 'omega3',
     metricLabel: 'Omega-3',
     metricUnit: 'g',
