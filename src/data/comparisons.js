@@ -76,10 +76,12 @@ export const comparisons = [
       calculator: { name: 'Protein Calculator', href: '/calculators/protein/' },
     },
     faqs: [
-      { q: 'Is skyr or Greek yogurt higher in protein?', a: 'They are very close, but skyr is often marginally higher in protein. Both are excellent high-protein dairy choices, typically providing around 10 to 11 g of protein per 100 g in their plain, fat-free forms.' },
-      { q: 'What is the difference between skyr and Greek yogurt?', a: 'Skyr is technically a strained fresh cheese from Iceland, while Greek yogurt is a strained yogurt. In practice they look, taste and are used similarly. Both are thick, high in protein and low in fat when plain.' },
+      { q: 'Can you substitute skyr for Greek yogurt?', a: 'Yes, you can substitute skyr for Greek yogurt in almost any recipe or meal, and the other way round. They have a very similar thick texture and high protein content, so they work the same in smoothies, bowls, baking, dips and as a topping. Skyr is slightly higher in protein and calcium, but the difference is small enough that you can swap them freely.' },
+      { q: 'Is skyr or Greek yogurt higher in protein?', a: 'They are very close, but skyr is often marginally higher in protein. In their plain, fat-free forms, skyr provides around 11 g of protein per 100 g and Greek yogurt around 10 g. Both are excellent high-protein dairy choices.' },
+      { q: 'Does skyr have more calcium than Greek yogurt?', a: 'Yes, slightly. Plain skyr provides around 150 mg of calcium per 100 g, compared with around 110 mg in fat-free Greek yogurt. Both are good sources of calcium, but skyr has a small edge.' },
+      { q: 'What is the difference between skyr and Greek yogurt?', a: 'Skyr is technically a strained fresh cheese from Iceland, while Greek yogurt is a strained yogurt. In practice they look, taste and are used similarly. Both are thick, high in protein and low in fat when plain. The main nutritional difference is that skyr is marginally higher in protein and calcium.' },
+      { q: 'Is skyr the same as Greek yogurt?', a: 'Not exactly, but they are very similar. Skyr is a traditional Icelandic cultured dairy product made like a soft cheese, while Greek yogurt is strained yogurt. They have almost the same texture, protein content and uses, which is why they are so easily confused and swapped.' },
       { q: 'Which is better for weight loss?', a: 'Both are great for weight loss thanks to their high protein and low fat, which help control hunger. Choose whichever you prefer, and pick plain versions to avoid the added sugar found in flavoured varieties.' },
-      { q: 'Can I use skyr and Greek yogurt interchangeably?', a: 'Yes. In recipes, smoothies, bowls and as a topping, they work the same way. Their similar thickness and protein content make them easy to swap for one another.' },
     ],
   },
   {
