@@ -832,7 +832,7 @@ export const recipes = [
   {
     slug: 'sweet-potato-lentil-curry',
     title: 'Sweet Potato & Lentil Curry',
-    description: 'A hearty vegan curry with sweet potato and red lentils in a fragrant spiced sauce. High in fibre and naturally filling.',
+    description: 'An easy sweet potato and lentil curry recipe: a hearty vegan dish with sweet potato and red lentils in a fragrant spiced sauce. High in fibre and naturally filling.',
     intro: 'This comforting curry brings together sweet potato and red lentils for a dish that is hearty, naturally sweet and deeply satisfying. Red lentils break down as they cook to create a thick, creamy sauce without any dairy, while sweet potato adds substance and slow-release energy. It is high in fibre, completely vegan, and tastes wonderful over rice or with warm flatbread.',
     mealType: 'Dinner',
     tags: ['Vegan', 'High-fiber', 'Budget'],
