@@ -36,6 +36,7 @@ const recipeSchema = {
   ...(imgUrl ? { image: [imgUrl] } : {}),
   author: { '@type': 'Organization', name: 'welanutria' },
   recipeCategory: recipe.mealType,
+  recipeCuisine: recipe.cuisine || 'Healthy',
   keywords: recipe.tags.join(', '),
   totalTime: `PT${recipe.time}M`,
   recipeYield: `${recipe.servings} servings`,
@@ -43,7 +44,10 @@ const recipeSchema = {
   recipeInstructions: recipe.steps.map((s, i) => ({
     '@type': 'HowToStep',
     position: i + 1,
+    name: `Step ${i + 1}`,
     text: s,
+    url: `${url}#step-${i + 1}`,
+    ...(imgUrl ? { image: imgUrl } : {}),
   })),
   nutrition: {
     '@type': 'NutritionInformation',
@@ -126,7 +130,7 @@ const breadcrumb = {
       <section class="method">
         <h2>Method</h2>
         <ol class="step-list">
-          {recipe.steps.map((s) => <li>{s}</li>)}
+          {recipe.steps.map((s, i) => <li id={`step-${i + 1}`}>{s}</li>)}
         </ol>
       </section>
 
