@@ -63,7 +63,7 @@ A little cooking, still well under fifteen minutes.
 
 You do not need recipes to get this right. Use a simple formula: pick a protein base, add fibre, and keep added sugar low.
 
-- **Protein base:** eggs, Greek yogurt, cottage cheese, protein powder
+- **Protein base:** eggs, Greek yogurt, cottage cheese, protein powder ([skyr works too](/blog/skyr-vs-greek-yogurt/), and is slightly higher in protein)
 - **Fibre:** oats, wholegrain toast, berries, seeds, fruit
 - **Flavour:** cinnamon, vanilla, a little honey, nut butter
 
