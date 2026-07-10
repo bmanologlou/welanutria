@@ -244,6 +244,9 @@ export const foods = [
   { name: 'Green tea', category: 'Eggs & dairy', cal: 1, protein: 0.2, carbs: 0, fat: 0, fiber: 0, iron: 0.02, calcium: 0, potassium: 8, magnesium: 1, omega3: 0, vitaminC: 0.3, zinc: 0.01, folate: 5, b12: 0, sugar: 0, serving: 'cup', servingG: 240 },
   { name: 'Garlic', category: 'Vegetables', cal: 149, protein: 6.4, carbs: 33, fat: 0.5, fiber: 2.1, iron: 1.7, calcium: 181, potassium: 401, magnesium: 25, omega3: 0.02, vitaminC: 31, zinc: 1.2, folate: 3, b12: 0, sugar: 1, serving: 'clove', servingG: 3 },
   { name: 'Cinnamon (ground)', category: 'Vegetables', cal: 247, protein: 4, carbs: 81, fat: 1.2, fiber: 53, iron: 8.3, calcium: 1002, potassium: 431, magnesium: 60, omega3: 0.02, vitaminC: 3.8, zinc: 1.8, folate: 6, b12: 0, sugar: 2.2, serving: 'tsp', servingG: 3 },
+  { name: 'Oat milk (unsweetened)', category: 'Eggs & dairy', cal: 43, protein: 1.3, carbs: 6.7, fat: 1.5, fiber: 0.8, iron: 0.2, calcium: 120, potassium: 150, magnesium: 6, omega3: 0.03, vitaminC: 0, zinc: 0.2, folate: 2, b12: 0.5, sugar: 2.5, serving: 'cup', servingG: 240 },
+  { name: 'Almond milk (unsweetened)', category: 'Eggs & dairy', cal: 15, protein: 0.6, carbs: 0.6, fat: 1.2, fiber: 0.3, iron: 0.2, calcium: 120, potassium: 67, magnesium: 6, omega3: 0.0, vitaminC: 0, zinc: 0.1, folate: 1, b12: 0.5, sugar: 0, serving: 'cup', servingG: 240 },
+  { name: 'Soy milk (unsweetened)', category: 'Eggs & dairy', cal: 43, protein: 3.3, carbs: 1.8, fat: 1.8, fiber: 0.6, iron: 0.5, calcium: 120, potassium: 118, magnesium: 15, omega3: 0.1, vitaminC: 0, zinc: 0.3, folate: 9, b12: 0.5, sugar: 0.9, serving: 'cup', servingG: 240 },
 ];
 
 // Helper: per-serving values (rounded)
