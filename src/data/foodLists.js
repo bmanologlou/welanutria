@@ -624,6 +624,31 @@ export const foodLists = [
       { q: 'Does an anti-inflammatory diet work?', a: 'Eating patterns rich in whole foods, omega-3s and antioxidants, like the Mediterranean diet, are associated with lower markers of inflammation and better long-term health. It is the overall pattern, not any single food, that matters most.' },
     ],
   },
+  {
+    slug: 'high-protein-high-fiber-foods',
+    title: 'High-Protein High-Fiber Foods',
+    h1: 'High-Protein High-Fiber Foods',
+    description: 'A list of foods high in both protein and fibre, from beans and lentils to seeds and wholegrains. The perfect combination for fullness, muscle and gut health.',
+    intro: 'Protein and fibre are the two nutrients that keep you fullest, and foods that deliver both are the real workhorses of a healthy diet. This list ranks whole foods that are high in protein and fibre at the same time, from beans and lentils to seeds, nuts and wholegrains. They are ideal for weight management, muscle, gut health and staying satisfied for longer.',
+    sortBy: 'protein',
+    sortDir: 'desc',
+    filter: (f) => f.protein >= 8 && f.fiber >= 5 && !SPICES.includes(f.name),
+    metric: 'protein',
+    metricLabel: 'Protein',
+    metricUnit: 'g',
+    highlight: 'Protein and fibre are the ultimate fullness pair: protein preserves muscle and curbs appetite, while fibre slows digestion and feeds your gut. Foods that offer both, like beans, lentils, seeds and wholegrains, keep you satisfied on fewer calories and support weight, muscle and gut health at once.',
+    related: {
+      calculator: { name: 'Protein Calculator', href: '/calculators/protein/' },
+      article: { name: 'High-protein high-fibre foods', href: '/blog/high-protein-high-fiber-foods/' },
+      lists: ['high-protein-foods', 'high-fiber-foods'],
+    },
+    faqs: [
+      { q: 'What foods are high in both protein and fibre?', a: 'Legumes are the standout: beans, lentils, chickpeas, edamame and split peas all deliver protein and fibre together. Seeds like chia, flax, pumpkin and hemp, nuts, wholegrains like oats and rye, and soy foods like tofu and natto are also excellent. These whole plant foods are the core of a high-protein, high-fibre diet.' },
+      { q: 'Why eat protein and fibre together?', a: 'They are the two most filling nutrients, so foods with both keep you satisfied for longer on fewer calories. Protein preserves muscle and curbs appetite, while fibre slows digestion, steadies blood sugar and feeds your gut bacteria. Together they support weight management, muscle and gut health at the same time.' },
+      { q: 'Are high-protein high-fibre foods good for weight loss?', a: 'Yes. The combination of protein and fibre is one of the most effective for appetite control, helping you feel full and eat less without hunger. Building meals around these foods is a simple, sustainable approach to weight management.' },
+      { q: 'Are these foods good for GLP-1 users?', a: 'Very much so. People on GLP-1 medications are advised to prioritise protein (to preserve muscle) and fibre (for fullness and digestion). Foods high in both make every smaller bite count, which is exactly what is needed on a reduced appetite.' },
+    ],
+  },
 ];
 
 export function getList(slug) {
