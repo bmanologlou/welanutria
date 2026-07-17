@@ -68,6 +68,6 @@ Both are brilliant building blocks for a high-protein diet. Work out your daily 
 
 ## The bottom line
 
-Skyr and Greek yogurt are close cousins: both thick, both high in protein, both low in fat. Skyr is marginally higher in protein and calcium, but the difference is small enough that the "best" one is whichever you enjoy and will eat regularly. And yes, you can always swap one for the other. For a full side-by-side, see our [Greek yogurt vs skyr comparison](/compare/greek-yogurt-vs-skyr/), or browse [high-protein breakfast ideas](/blog/high-protein-breakfast-ideas/) to put them to use.
+Skyr and Greek yogurt are close cousins: both thick, both high in protein, both low in fat. Skyr is marginally higher in protein and calcium, but the difference is small enough that the "best" one is whichever you enjoy and will eat regularly. And yes, you can always swap one for the other. For a full side-by-side, see our [Greek yogurt vs skyr comparison](/compare/greek-yogurt-vs-skyr/), or read more on [skyr nutrition](/blog/skyr-nutrition/) if you want the full protein and calcium breakdown.
 
 <p style="font-size:0.85rem;color:var(--muted);margin-top:24px;">This article is for general information and is not medical or nutritional advice. Speak to a qualified professional about your individual needs.</p>
