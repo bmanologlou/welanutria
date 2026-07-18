@@ -1,0 +1,311 @@
+---
+import Base from '../../layouts/Base.astro';
+import JsonLd from '../../components/JsonLd.astro';
+import Faq from '../../components/Faq.astro';
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'BMR Calculator',
+  url: 'https://welanutria.com/calculators/bmr/',
+  applicationCategory: 'HealthApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Calculate your basal metabolic rate (BMR), the calories your body burns at complete rest, using the Mifflin-St Jeor equation.',
+};
+
+const faqs = [
+  { q: 'What is BMR?', a: 'Your Basal Metabolic Rate is the number of calories your body burns at complete rest, just to keep you alive: breathing, circulation, cell repair and brain function. It typically accounts for 60 to 70 percent of the calories you burn each day.' },
+  { q: 'What is the difference between BMR and TDEE?', a: 'BMR is the calories you burn at rest. TDEE (Total Daily Energy Expenditure) is your BMR multiplied by an activity factor, so it includes movement and exercise. TDEE is the number you eat around to manage weight; BMR is the resting baseline it is built on.' },
+  { q: 'How is BMR calculated?', a: 'This calculator uses the Mifflin-St Jeor equation, one of the most accurate predictive formulas for healthy adults. It uses your age, sex, height and weight. Real metabolism varies, so treat the result as an estimate within about plus or minus 10 percent.' },
+  { q: 'Should I eat below my BMR to lose weight?', a: 'Generally no. Eating below your BMR for long periods is hard to sustain and can cost muscle. It is better to create a deficit from your TDEE (your BMR plus activity) rather than eating below the resting baseline. Speak to a professional for personalised advice.' },
+  { q: 'Why does BMR matter?', a: 'BMR is the foundation of your daily calorie needs. Knowing it helps you understand how many calories you need to maintain, lose or gain weight once activity is factored in. It also explains why larger and more muscular people burn more at rest.' },
+  { q: 'Is this a substitute for medical advice?', a: 'No. welanutria provides estimates for general information only and is not medical or dietary advice. Consult a qualified professional before making significant changes.' },
+];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Calculators', item: 'https://welanutria.com/calculators/' },
+    { '@type': 'ListItem', position: 2, name: 'BMR Calculator', item: 'https://welanutria.com/calculators/bmr/' },
+  ],
+};
+---
+<Base
+  title="BMR Calculator: Basal Metabolic Rate | welanutria"
+  description="Free BMR calculator. Work out your basal metabolic rate, the calories your body burns at rest, using the Mifflin-St Jeor equation. See your daily needs by activity level."
+  current="calculators"
+>
+  <JsonLd schema={appSchema} />
+  <JsonLd schema={breadcrumb} />
+  <div class="calc-page wrap">
+    <nav class="crumbs"><a href="/calculators/">Calculators</a> / <span>BMR Calculator</span></nav>
+
+    <header class="calc-head">
+      <p class="eyebrow">Calculator</p>
+      <h1>BMR Calculator</h1>
+      <p class="lede">Find your basal metabolic rate, the calories your body burns at complete rest, plus your daily needs by activity level. No sign-up, instant result.</p>
+    </header>
+
+    <div class="calc-grid">
+      <!-- inputs -->
+      <section class="panel">
+        <h2 class="panel-title">Your details</h2>
+
+        <div class="field"><label>Units</label>
+          <div class="seg" id="seg-units">
+            <button type="button" data-u="metric" aria-pressed="true">Metric</button>
+            <button type="button" data-u="imperial" aria-pressed="false">Imperial</button>
+          </div>
+        </div>
+
+        <div class="field"><label>Sex</label>
+          <div class="seg" id="seg-sex">
+            <button type="button" data-s="male" aria-pressed="true">Male</button>
+            <button type="button" data-s="female" aria-pressed="false">Female</button>
+          </div>
+        </div>
+
+        <div class="row row-3">
+          <div class="field"><label>Age</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease age">−</button><input type="number" id="age" value="30" min="14" max="100"><button type="button" data-step="1" aria-label="Increase age">+</button></div>
+          </div>
+          <div class="field"><label id="h-label">Height (cm)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease height">−</button><input type="number" id="height" value="175"><button type="button" data-step="1" aria-label="Increase height">+</button></div>
+          </div>
+          <div class="field"><label id="w-label">Weight (kg)</label>
+            <div class="stepper"><button type="button" data-step="-1" aria-label="Decrease weight">−</button><input type="number" id="weight" value="75"><button type="button" data-step="1" aria-label="Increase weight">+</button></div>
+          </div>
+        </div>
+
+        <div class="field"><label for="activity">Activity level</label>
+          <select id="activity">
+            <option value="1.2">Sedentary, little or no exercise</option>
+            <option value="1.375">Light, exercise 1-3 days/week</option>
+            <option value="1.55" selected>Moderate, exercise 3-5 days/week</option>
+            <option value="1.725">Active, exercise 6-7 days/week</option>
+            <option value="1.9">Very active, hard exercise or physical job</option>
+          </select>
+        </div>
+
+      </section>
+
+      <!-- results -->
+      <section class="panel result">
+        <h2 class="panel-title">Your result</h2>
+        <div class="big-result">
+          <span class="big-num" id="r-bmr">1,550</span>
+          <span class="big-lbl">BMR (calories / day at rest)</span>
+        </div>
+        <p class="r-context" id="r-context">The calories your body burns at complete rest.</p>
+
+        <div class="macros">
+          <div class="macro">
+            <span class="m-name">Maintenance</span>
+            <span class="m-sub">BMR &times; your activity</span>
+            <span class="m-val" id="r-tdee">2,400<small>cal</small></span>
+          </div>
+          <div class="macro">
+            <span class="m-name">Mild loss</span>
+            <span class="m-sub">~0.5 kg / week</span>
+            <span class="m-val" id="r-lose">1,900<small>cal</small></span>
+          </div>
+          <div class="macro">
+            <span class="m-name">Mild gain</span>
+            <span class="m-sub">lean bulk</span>
+            <span class="m-val" id="r-gain">2,700<small>cal</small></span>
+          </div>
+        </div>
+
+        <p class="margin-note">Estimates carry a margin of about ±10%. Use as a starting point and adjust based on real-world results over a few weeks.</p>
+      </section>
+
+      <a class="result-article" href="/blog/bmr-vs-tdee/">
+        <span class="ra-kicker">Read more</span>
+        <span class="ra-title">BMR vs TDEE: what's the difference?</span>
+        <span class="ra-go">Read the guide →</span>
+      </a>
+    </div>
+
+    <!-- SEO / explainer copy -->
+    <section class="explainer">
+      <h2>What is BMR?</h2>
+      <p>Your <strong>Basal Metabolic Rate (BMR)</strong> is the number of calories your body burns at complete rest, just to stay alive: breathing, circulation, cell repair and keeping your brain running. It usually accounts for <strong>60 to 70 percent</strong> of the calories you burn in a day, making it the foundation of your energy needs.</p>
+
+      <h2>How this calculator works</h2>
+      <p>We calculate your BMR using the <strong>Mifflin-St Jeor equation</strong>, one of the most accurate predictive formulas for healthy adults, based on your age, sex, height and weight. We then multiply by an activity factor to estimate your maintenance calories, and show mild loss and gain targets around that. You can read more on our <a href="/methodology/">methodology page</a>.</p>
+
+      <h2>BMR vs TDEE</h2>
+      <p>These two are closely linked. <strong>BMR</strong> is what you burn at rest. <strong>TDEE</strong> (Total Daily Energy Expenditure) is your BMR multiplied by an activity factor, so it adds the calories you burn through movement and exercise. You eat around your TDEE to manage weight, but it is built on your BMR. For the full picture including macros, use our <a href="/calculators/tdee/">TDEE calculator</a>.</p>
+
+      <div class="next-links">
+        <h3>Next steps</h3>
+        <ul>
+          <li><a href="/calculators/tdee/">TDEE calculator</a>, add activity for your full daily needs</li>
+          <li><a href="/calculators/macros/">Macro calculator</a>, split your calories into protein, carbs and fat</li>
+          <li><a href="/calculators/calorie-deficit/">Calorie deficit calculator</a>, plan your weight loss</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="faq-wrap"><Faq items={faqs} /></div>
+
+    <p class="page-disclaimer">welanutria provides estimates for general information only and is not medical advice. Consult a qualified professional before making significant changes to your diet or exercise.</p>
+  </div>
+
+  <style>
+    .calc-page{padding:28px 0 0}
+    .crumbs{font-size:.82rem;color:var(--muted);margin-bottom:14px}
+    .crumbs a{color:var(--muted)}
+    .calc-head{margin-bottom:24px}
+    .calc-head h1{font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.02em;margin:.1em 0 .3em}
+    .calc-head .lede{color:#33433D;max-width:60ch;margin:0;font-size:1.02rem}
+
+    .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+    @media(max-width:780px){.calc-grid{grid-template-columns:1fr;align-items:start}}
+
+    .panel-title{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin:0 0 16px;font-weight:700}
+
+    .field{margin-bottom:16px}
+    .field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:7px}
+    .row{display:grid;gap:13px}
+    .row-3{grid-template-columns:1fr 1fr 1fr;gap:10px}
+    @media(max-width:460px){.row-3{grid-template-columns:1fr}}
+
+    .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .seg button{flex:1;border:none;background:transparent;padding:10px;font:inherit;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;transition:.12s}
+    .seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+
+    select{width:100%;padding:11px 12px;font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:10px;background:var(--field);color:var(--ink);cursor:pointer}
+    select:focus{outline:2px solid var(--accent);outline-offset:1px}
+
+    .stepper{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--field)}
+    .stepper input{border:none;border-radius:0;text-align:center;background:transparent;padding:11px 4px;font:inherit;font-size:1rem;width:100%;color:var(--ink);-moz-appearance:textfield}
+    .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+    .stepper input:focus{outline:none}
+    .stepper:focus-within{outline:2px solid var(--accent);outline-offset:1px}
+    .stepper button{flex:none;width:38px;border:none;background:transparent;color:var(--accent);font-size:1.25rem;font-weight:600;cursor:pointer;transition:.12s;display:flex;align-items:center;justify-content:center}
+    .stepper button:hover{background:#C4DDD5}
+
+    .goals{display:flex;flex-direction:column;gap:8px}
+    .goal{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#F4FAF9;cursor:pointer;transition:.15s;text-align:left}
+    .goal:hover{border-color:var(--accent)}
+    .goal[aria-pressed=true]{border-color:#3E8C9E;background:var(--cool-sel);box-shadow:inset 0 0 0 1px #3E8C9E}
+    .goal .g-name{font-weight:600;font-size:.92rem}
+    .goal .g-sub{font-size:.78rem;color:var(--muted)}
+
+    .result{background:var(--cool-2);border-color:var(--cool-line)}
+    .big-result{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+    .big-num{font-size:2.6rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+    .big-lbl{font-size:.95rem;color:var(--muted)}
+    .r-context{color:#33433D;font-size:.92rem;margin:0 0 18px}
+
+    .macro-bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:16px;background:#fff}
+    .macro-bar span{display:block}
+    .mb-p{background:var(--moss)}.mb-c{background:var(--wheat)}.mb-f{background:var(--clay)}
+
+    .macros{display:flex;flex-direction:column;gap:2px}
+    .macro{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:0 12px;padding:9px 0;border-bottom:1px solid var(--cool-line)}
+    .macro:last-child{border-bottom:none}
+    .m-name{font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:9px;grid-row:1}
+    .m-sub{font-size:.76rem;color:var(--muted);grid-column:1;grid-row:2;margin-left:22px}
+    .m-val{font-weight:800;font-size:1.2rem;text-align:right;grid-column:2;grid-row:1/3;align-self:center;letter-spacing:-.02em}
+    .m-val small{font-weight:600;font-size:.72rem;color:var(--muted)}
+    .swatch{width:13px;height:13px;border-radius:3px;flex:none}
+    .swatch-p{background:var(--moss)}.swatch-c{background:var(--wheat)}.swatch-f{background:var(--clay)}
+    .m-val#r-p{color:var(--moss)}.m-val#r-c{color:var(--wheat)}.m-val#r-f{color:var(--clay)}
+
+    .margin-note{font-size:.78rem;color:var(--muted);margin:18px 0 0;line-height:1.5}
+
+    .explainer{max-width:calc((100% - 16px) / 2);margin:28px 0 0}
+    .faq-wrap{max-width:calc((100% - 16px) / 2)}
+    @media(max-width:780px){.explainer,.page-disclaimer,.faq-wrap{max-width:100%!important}}
+    .explainer h2{font-size:1.3rem;letter-spacing:-.01em;margin:1.6em 0 .4em}
+    .explainer h3{font-size:1.05rem;margin:1.4em 0 .4em}
+    .explainer p{color:#33433D;line-height:1.65;margin:0 0 1em}
+    .next-links{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:18px}
+    .next-links h3{margin:0 0 8px}
+    .next-links ul{margin:0;padding-left:1.2em;line-height:1.7}
+    .next-links a{font-weight:500}
+
+    .page-disclaimer{max-width:calc((100% - 16px) / 2);font-size:.78rem;color:var(--muted);margin:24px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
+  </style>
+
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+      let units = 'metric', sex = 'male';
+
+      // segmented: units
+      $('seg-units').addEventListener('click', (e) => {
+        const b = e.target.closest('button'); if(!b) return;
+        const newUnits = b.dataset.u;
+        if(newUnits === units) return;
+        // convert current values
+        const h = $('height'), w = $('weight');
+        if(newUnits === 'imperial'){
+          h.value = Math.round(parseFloat(h.value)/2.54);   // cm -> in
+          w.value = Math.round(parseFloat(w.value)*2.2046);  // kg -> lb
+          $('h-label').textContent = 'Height (in)';
+          $('w-label').textContent = 'Weight (lb)';
+        } else {
+          h.value = Math.round(parseFloat(h.value)*2.54);    // in -> cm
+          w.value = Math.round(parseFloat(w.value)/2.2046);  // lb -> kg
+          $('h-label').textContent = 'Height (cm)';
+          $('w-label').textContent = 'Weight (kg)';
+        }
+        units = newUnits;
+        [...$('seg-units').children].forEach(x => x.setAttribute('aria-pressed', x===b ? 'true':'false'));
+        calc();
+      });
+
+      // segmented: sex
+      $('seg-sex').addEventListener('click', (e) => {
+        const b = e.target.closest('button'); if(!b) return;
+        sex = b.dataset.s;
+        [...$('seg-sex').children].forEach(x => x.setAttribute('aria-pressed', x===b ? 'true':'false'));
+        calc();
+      });
+
+      // steppers
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.stepper button'); if(!btn) return;
+        const input = btn.parentElement.querySelector('input');
+        const step = parseFloat(btn.dataset.step) || 1;
+        let v = (parseFloat(input.value)||0) + step;
+        const min = input.min!=='' ? parseFloat(input.min) : -Infinity;
+        const max = input.max!=='' ? parseFloat(input.max) : Infinity;
+        if(v<min) v=min; if(v>max) v=max;
+        input.value = v; calc();
+      });
+
+      ['age','height','weight','activity'].forEach(id => {
+        $(id).addEventListener('input', calc);
+        $(id).addEventListener('change', calc);
+      });
+
+      function calc(){
+        let age = parseFloat($('age').value)||0;
+        let h = parseFloat($('height').value)||0;
+        let w = parseFloat($('weight').value)||0;
+        if(units === 'imperial'){ h = h*2.54; w = w/2.2046; } // to cm, kg
+        const act = parseFloat($('activity').value)||1.55;
+
+        // Mifflin-St Jeor
+        let bmr = 10*w + 6.25*h - 5*age + (sex==='male' ? 5 : -161);
+        bmr = Math.round(bmr/10)*10;
+        let tdee = Math.round((bmr*act)/10)*10;
+        let lose = Math.round((tdee-500)/10)*10;
+        let gain = Math.round((tdee+300)/10)*10;
+
+        $('r-bmr').textContent = bmr.toLocaleString();
+        $('r-tdee').innerHTML = tdee.toLocaleString() + '<small>cal</small>';
+        $('r-lose').innerHTML = lose.toLocaleString() + '<small>cal</small>';
+        $('r-gain').innerHTML = gain.toLocaleString() + '<small>cal</small>';
+      }
+
+      calc();
+    })();
+  </script>
+</Base>
