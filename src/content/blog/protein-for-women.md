@@ -57,7 +57,7 @@ This is why most successful weight-loss approaches lean on protein. Our [calorie
 
 Menopause brings hormonal changes that speed up muscle and bone loss and can shift body fat toward the midsection. Protein helps on every front. It preserves muscle, supports bone health alongside calcium and vitamin D, and keeps appetite steady at a time when it can otherwise rise.
 
-Research suggests even modest increases in protein can help offset these changes. For many women, simply nudging protein up at breakfast and adding a protein-rich snack is enough to make a real difference.
+Research suggests even modest increases in protein can help offset these changes. For many women, simply nudging protein up at breakfast and adding a protein-rich snack is enough to make a real difference. Protein is just one piece, though: see our full guide to the [best foods for menopause](/blog/best-foods-for-menopause/) for calcium, fibre and more.
 
 ## Best protein foods for women
 
