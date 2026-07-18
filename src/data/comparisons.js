@@ -287,6 +287,32 @@ export const comparisons = [
       { q: 'Do I need to soak chickpeas and lentils?', a: 'Dried chickpeas usually need soaking before cooking, while most lentils do not, which makes lentils quicker for weeknight meals. Canned chickpeas skip the soaking entirely and are ready to use, a convenient option for either legume.' },
     ],
   },
+  {
+    slug: 'cottage-cheese-vs-greek-yogurt',
+    title: 'Cottage Cheese vs Greek Yogurt',
+    foodA: 'Cottage cheese (low-fat)',
+    foodB: 'Greek yogurt (0% fat)',
+    labelA: 'Cottage cheese',
+    labelB: 'Greek yogurt',
+    description: 'Cottage cheese vs Greek yogurt compared: calories, protein, calcium and carbs per 100 g, plus which high-protein dairy is better for weight loss and muscle.',
+    intro: 'Cottage cheese and Greek yogurt are the two high-protein dairy foods everyone is reaching for, both packed with protein and endlessly versatile in sweet and savoury dishes. They are close on nutrition, but there are real differences in texture, calcium and how you use them. Here is how they compare.',
+    verdict: 'Both are excellent high-protein, low-fat choices, and you can happily eat both. Cottage cheese is slightly higher in protein and works brilliantly in both savoury dishes (dips, pasta, eggs) and sweet ones, which is behind its viral popularity. Greek yogurt is higher in calcium, creamier, and better for smoothies, breakfast bowls and baking. Choose cottage cheese for the highest protein and savoury versatility, Greek yogurt for calcium and a smoother texture.',
+    chooseA: 'Choose cottage cheese for slightly more protein and huge versatility in sweet and savoury dishes.',
+    chooseB: 'Choose Greek yogurt for more calcium, a creamier texture, and smoothies, bowls and baking.',
+    related: {
+      lists: ['high-protein-foods', 'high-protein-high-fiber-foods'],
+      recipes: ['cottage-cheese-fruit-bowl', 'greek-yogurt-protein-bowl'],
+      article: { name: 'Cottage cheese nutrition', href: '/blog/cottage-cheese-nutrition/' },
+      calculator: { name: 'Protein Calculator', href: '/calculators/protein/' },
+    },
+    faqs: [
+      { q: 'Is cottage cheese or Greek yogurt healthier?', a: 'Both are excellent, high-protein, low-fat dairy foods, and neither is clearly healthier. Cottage cheese is slightly higher in protein and lower in sugar, while Greek yogurt is higher in calcium and creamier. The best choice depends on your goals and how you like to eat them.' },
+      { q: 'Which has more protein, cottage cheese or Greek yogurt?', a: 'Cottage cheese is slightly higher, with around 12 g of protein per 100 g compared with about 10 g for fat-free Greek yogurt. Both are among the best high-protein dairy choices available.' },
+      { q: 'Which has more calcium?', a: 'Greek yogurt has more calcium, around 110 mg per 100 g versus about 83 mg for cottage cheese. If bone health and calcium are your priority, Greek yogurt has the edge, though both contribute usefully.' },
+      { q: 'Can I substitute one for the other?', a: 'Often, yes. In many recipes, dips, bowls and baking, they are interchangeable, especially when cottage cheese is blended smooth. Cottage cheese suits savoury dishes better, while Greek yogurt is smoother for sweet ones, but they swap well in most cases.' },
+      { q: 'Which is better for weight loss?', a: 'Both are excellent for weight loss thanks to high protein and low fat, which control appetite. Cottage cheese is marginally higher in protein and lower in sugar, but the difference is small. Choose whichever keeps you fullest and you enjoy most.' },
+    ],
+  },
 ];
 
 export function getComparison(slug) {
