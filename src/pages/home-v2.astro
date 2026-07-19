@@ -75,7 +75,7 @@ const faqs = [
         </div>
       </div>
       <div class="hero-art">
-        <img src="/img/hero-photo.webp" alt="Small bowls of healthy ingredients including lentils, chickpeas, seeds and berries" width="800" height="800" loading="eager" />
+        <img src="/img/wn-hero-photo.svg" alt="Illustration of healthy foods with nutrition data" width="740" height="500" loading="eager" />
       </div>
     </div>
   </section>
@@ -164,19 +164,19 @@ const faqs = [
 
   <style>
     .hero{padding:64px 0 40px;background:linear-gradient(180deg,var(--cool) 0%,var(--paper) 100%)}
-    .hero-inner{display:grid;grid-template-columns:1fr 400px;gap:40px;align-items:center}
+    .hero-inner{display:grid;grid-template-columns:1fr 460px;gap:40px;align-items:center}
     .hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;letter-spacing:-.03em;margin:.2em 0 .3em;max-width:14ch}
     .lede{font-size:1.15rem;color:#3F4F49;max-width:52ch;margin:0 0 28px}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
-    .hero-art img{width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:0 8px 28px rgba(31,61,52,.10)}
+    .hero-art img{width:100%;height:auto;display:block}
     @media(max-width:900px){
       .hero-inner{grid-template-columns:1fr;gap:24px}
-      .hero-art{max-width:320px;margin:0 auto;order:-1}
+      .hero-art{max-width:460px;margin:0 auto;order:-1}
     }
     @media(max-width:480px){
       .hero-cta{flex-direction:column}
       .hero-cta .btn{width:100%;text-align:center}
-      .hero-art{max-width:240px}
+      .hero-art{max-width:100%}
     }
 
     .section{padding:44px 0 0}
