@@ -115,7 +115,7 @@ const faqs = [
     <div class="recipe-grid">
       {featuredRecipes.map((r) => (
         <a class="recipe-card" href={`/recipes/${r.slug}/`}>
-          <span class="recipe-img"><img src={`/img/recipes/${r.img}`} alt="" width="300" height="200" loading="lazy" /></span>
+          <span class="recipe-img"><img src={`/img/recipes/${r.img}`} alt={r.name} width="300" height="200" loading="lazy" /></span>
           <span class="recipe-body">
             <span class="recipe-name">{r.name}</span>
             <span class="recipe-macros">{r.cal} cal &middot; {r.protein}g protein</span>
