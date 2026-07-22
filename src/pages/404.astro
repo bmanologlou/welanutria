@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Page Not Found | welanutria"
+  description="Sorry, we couldn't find that page. Explore our free calculators, recipes, food comparisons and meal plans instead."
+  current=""
+>
+  <section class="wrap nf">
+    <p class="nf-code">404</p>
+    <h1>We couldn't find that page</h1>
+    <p class="nf-lede">The page you were looking for may have moved or no longer exists. Here are some good places to pick up where you left off.</p>
+
+    <div class="nf-grid">
+      <a class="nf-card" href="/calculators/">
+        <span class="nf-name">Calculators</span>
+        <span class="nf-desc">TDEE, macros, protein, BMI and more</span>
+      </a>
+      <a class="nf-card" href="/recipes/">
+        <span class="nf-name">Recipes</span>
+        <span class="nf-desc">High-protein meals with full nutrition</span>
+      </a>
+      <a class="nf-card" href="/compare/">
+        <span class="nf-name">Food Comparisons</span>
+        <span class="nf-desc">Two foods, side by side</span>
+      </a>
+      <a class="nf-card" href="/food-lists/">
+        <span class="nf-name">Food Lists</span>
+        <span class="nf-desc">The best foods for every goal</span>
+      </a>
+      <a class="nf-card" href="/meal-plans/">
+        <span class="nf-name">Meal Plans</span>
+        <span class="nf-desc">Seven-day plans built around your goal</span>
+      </a>
+      <a class="nf-card" href="/blog/">
+        <span class="nf-name">Blog</span>
+        <span class="nf-desc">Practical guides on eating well</span>
+      </a>
+    </div>
+
+    <p class="nf-home"><a href="/">Back to homepage &rarr;</a></p>
+  </section>
+
+  <style>
+    .nf{padding:64px 0 48px;max-width:760px}
+    .nf-code{font-size:3rem;font-weight:800;color:var(--accent);letter-spacing:-.03em;margin:0 0 4px;line-height:1}
+    .nf h1{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em;margin:0 0 12px}
+    .nf-lede{font-size:1.1rem;color:#3F4F49;max-width:52ch;margin:0 0 32px;line-height:1.6}
+    .nf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:720px){.nf-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+    @media(max-width:440px){.nf-grid{grid-template-columns:1fr}}
+    .nf-card{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px;transition:.15s}
+    .nf-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .nf-name{font-weight:700;font-size:1.05rem;color:var(--ink)}
+    .nf-desc{font-size:.88rem;color:var(--muted);line-height:1.45}
+    .nf-home{margin:28px 0 0}
+    .nf-home a{font-weight:600;color:var(--accent)}
+  </style>
+</Base>
