@@ -69,7 +69,7 @@ Cottage cheese has gone viral because it ticks every box of modern eating: **hig
 
 ## Cottage cheese vs Greek yogurt
 
-The two high-protein dairy stars are often compared. Cottage cheese is slightly higher in protein, while Greek yogurt is higher in calcium and creamier. For a full side-by-side, see our [cottage cheese vs Greek yogurt comparison](/compare/cottage-cheese-vs-greek-yogurt/).
+The two high-protein dairy stars are often compared. Cottage cheese is slightly higher in protein, while Greek yogurt is higher in calcium and creamier. For a full side-by-side, see our [cottage cheese vs Greek yogurt comparison](/compare/cottage-cheese-vs-greek-yogurt/). And if you are weighing up all three, our [Greek yogurt vs skyr comparison](/compare/greek-yogurt-vs-skyr/) covers the other popular high-protein choice.
 
 ## The bottom line
 

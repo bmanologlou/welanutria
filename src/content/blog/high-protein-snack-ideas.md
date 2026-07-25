@@ -36,7 +36,7 @@ Not sure how much protein you need? Our [protein calculator](/calculators/protei
 
 <div class="highlight"><p><strong>The viral one:</strong> blended cottage cheese "ice cream". Blitz cottage cheese with frozen fruit and a little honey until smooth, then freeze. It sets like soft-serve and delivers serious protein, which is exactly why it took over social media.</p></div>
 
-- **Greek yogurt or skyr with berries and seeds** (a classic, ~15 to 18g protein)
+- **Greek yogurt or skyr with berries and seeds** (a classic, ~15 to 18g protein). Not sure which? See our [Greek yogurt vs skyr comparison](/compare/greek-yogurt-vs-skyr/)
 - **Cottage cheese with fruit**, like our [cottage cheese and fruit bowl](/recipes/cottage-cheese-fruit-bowl/) (~28g)
 - **Protein energy balls**, like our [peanut butter energy balls](/recipes/peanut-butter-energy-balls/)
 - **A protein smoothie**, like our [protein berry smoothie](/recipes/protein-berry-smoothie/) (~42g)
