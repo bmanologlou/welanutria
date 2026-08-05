@@ -22,6 +22,10 @@ faqs:
     a: "Plain skyr has around 63 calories per 100 g, or about 95 calories in a 150 g tub. Combined with its high protein and very low fat, this makes skyr a filling, low-calorie choice for weight management."
   - q: "Is skyr good for you?"
     a: "Yes. Plain skyr is high in protein, a good source of calcium, low in fat and low in calories, which makes it a strong choice for muscle, bone health, fullness and weight management. Choose plain versions to avoid the added sugar found in flavoured ones."
+  - q: "Is skyr good for your bones?"
+    a: "Yes. Skyr provides around 150 mg of calcium per 100 g, plus protein, both of which support bone health. Calcium is the main mineral in bone, while adequate protein helps maintain bone strength and muscle around the joints. Combined with its high protein, skyr is a useful food for keeping bones and muscles strong, especially as you age."
+  - q: "Does skyr have more calcium than milk?"
+    a: "Skyr and milk are broadly similar, both providing roughly 120 to 150 mg of calcium per 100 g. Skyr's big advantage is protein: it has around 11 g per 100 g versus about 3.4 g in milk, so it delivers similar calcium with far more protein. For calcium plus protein together, skyr is the denser choice."
 ---
 
 Skyr has become one of the most popular high-protein dairy foods, and people increasingly want to know exactly what is in it, especially its calcium and protein content. Here is a clear breakdown of skyr's nutrition, its benefits, and how much of your daily needs a tub actually covers.

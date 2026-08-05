@@ -30,7 +30,7 @@ Gut health has gone from a niche topic to one of the biggest themes in nutrition
 
 ## How food shapes your gut
 
-Your gut microbiome is the community of bacteria living in your digestive system. When it is diverse and balanced, it helps you digest food, produces useful compounds and supports your immune system. What you eat is the biggest lever you have over it.
+Your gut microbiome is the community of bacteria living in your digestive system. When it is diverse and balanced, it helps you digest food, produces useful compounds and supports your immune system. A healthy gut and lower inflammation go hand in hand, so many gut-friendly foods overlap with [anti-inflammatory foods](/blog/anti-inflammatory-foods/). What you eat is the biggest lever you have over it.
 
 Two types of food matter most, and they work as a pair.
 
