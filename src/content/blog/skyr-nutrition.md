@@ -57,7 +57,7 @@ Work out how much protein you need each day with our [protein calculator](/calcu
 
 ## Potassium and other nutrients
 
-Skyr provides around **150 mg of potassium per 100 g**, a modest contribution to your daily intake. It also contains small amounts of B12, zinc and folate, alongside its standout protein and calcium.
+Skyr provides around **150 mg of potassium per 100 g**, a modest contribution to your daily intake. It also contains small amounts of B12, zinc and [folate](/blog/folate-and-folic-acid/), alongside its standout protein and calcium.
 
 ## Is skyr good for you?
 
