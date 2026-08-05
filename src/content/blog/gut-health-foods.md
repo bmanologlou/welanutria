@@ -59,9 +59,9 @@ Our [high-fibre foods list](/food-lists/high-fiber-foods/) shows the best source
 
 Fermented foods add living bacteria directly to your gut. The best options include:
 
-- **Yogurt and kefir** with live or active cultures
+- **Yogurt and kefir** with live or active cultures (see our [kefir vs yogurt comparison](/compare/kefir-vs-yogurt/))
 - **Sauerkraut** (unpasteurised)
-- **Kimchi**
+- **Kimchi** ([kimchi vs sauerkraut compared](/compare/kimchi-vs-sauerkraut/))
 - **Miso and tempeh** (fermented soy)
 
 <div class="highlight"><p><strong>Check the label for "live" or "active cultures".</strong> Heat and pasteurisation kill the beneficial bacteria, so many shelf-stable products do not contain live probiotics. Foods pickled in vinegar rather than salt usually do not either.</p></div>
@@ -72,9 +72,11 @@ A simple starting point is a daily serving of yogurt or kefir with live cultures
 
 If you want one easy framework, remember the three F's:
 
-- **Fibre** from a wide variety of plants, the more colours and types the better
+- **Fibre** from a wide variety of plants, the more colours and types the better (see our [high-fibre foods list](/food-lists/high-fiber-foods/))
 - **Fermented foods** for live cultures, a small daily serving
 - **Fluids** to keep everything moving, mainly water
+
+For a ranked list of the best options, see our [gut health foods list](/food-lists/gut-health-foods/), and to go deeper on fibre, our guide to [fibermaxxing](/blog/fibermaxxing/).
 
 Alongside these, cutting back on ultra-processed foods and eating at fairly regular times both help your gut settle into a healthy rhythm.
 
