@@ -52,7 +52,7 @@ A recent 2026 study even suggested that **plant protein** may be particularly he
 
 With less oestrogen, bone loss accelerates and the risk of osteoporosis rises. **Calcium** and **vitamin D** (which helps you absorb calcium) become essential:
 
-- **Calcium:** dairy (milk, yogurt, [skyr](/blog/skyr-nutrition/), cheese), fortified plant milks, tinned fish with bones, calcium-set tofu, leafy greens
+- **Calcium:** dairy (milk, yogurt, [skyr](/blog/skyr-nutrition/), cheese), fortified plant milks (see our [oat milk vs almond milk comparison](/compare/oat-milk-vs-almond-milk/)), tinned fish with bones, calcium-set tofu, leafy greens
 - **Vitamin D:** sunlight, oily fish, eggs, fortified foods, or a supplement
 
 Our [high-calcium foods list](/food-lists/high-calcium-foods/) ranks the best sources.
