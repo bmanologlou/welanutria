@@ -26,6 +26,14 @@ faqs:
     a: "Yes. Skyr provides around 150 mg of calcium per 100 g, plus protein, both of which support bone health. Calcium is the main mineral in bone, while adequate protein helps maintain bone strength and muscle around the joints. Combined with its high protein, skyr is a useful food for keeping bones and muscles strong, especially as you age."
   - q: "Does skyr have more calcium than milk?"
     a: "Skyr and milk are broadly similar, both providing roughly 120 to 150 mg of calcium per 100 g. Skyr's big advantage is protein: it has around 11 g per 100 g versus about 3.4 g in milk, so it delivers similar calcium with far more protein. For calcium plus protein together, skyr is the denser choice."
+  - q: "What are the benefits of skyr?"
+    a: "Skyr's main benefits come from its nutrition profile: it is very high in protein for muscle and fullness, a good source of calcium for bones, rich in potassium, and low in fat and calories. That combination makes it useful for building or maintaining muscle, managing weight, supporting bone health, and staying full between meals. Plain skyr also has no added sugar, unlike many flavoured yogurts."
+  - q: "Is skyr good for muscle building?"
+    a: "Yes. Skyr is one of the best dairy foods for muscle building because it is so protein-dense, with around 11 g per 100 g, or roughly 16 g in a standard tub. That protein supplies the amino acids muscles need to repair and grow. Eaten after training or as a high-protein snack, skyr is an easy, affordable way to hit your daily protein target."
+  - q: "Why does skyr have so much protein?"
+    a: "Skyr is very high in protein because of how it is made: it is strained heavily to remove most of the whey and liquid, which concentrates the protein. Technically skyr is a fresh cheese rather than a yogurt, and this straining process is why it ends up thicker and higher in protein than regular yogurt, at around 11 g per 100 g."
+  - q: "Is skyr good for weight loss?"
+    a: "Yes. Skyr suits weight loss well because it is high in protein and low in calories, a combination that keeps you full and helps preserve muscle in a calorie deficit. At roughly 63 calories and 11 g of protein per 100 g, plain skyr is one of the more filling, protein-dense foods you can eat for the calories. Choose plain versions to avoid added sugar."
 ---
 
 Skyr has become one of the most popular high-protein dairy foods, and people increasingly want to know exactly what is in it, especially its calcium and protein content. Here is a clear breakdown of skyr's nutrition, its benefits, and how much of your daily needs a tub actually covers.
