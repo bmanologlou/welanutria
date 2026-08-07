@@ -34,6 +34,10 @@ faqs:
     a: "Skyr is very high in protein because of how it is made: it is strained heavily to remove most of the whey and liquid, which concentrates the protein. Technically skyr is a fresh cheese rather than a yogurt, and this straining process is why it ends up thicker and higher in protein than regular yogurt, at around 11 g per 100 g."
   - q: "Is skyr good for weight loss?"
     a: "Yes. Skyr suits weight loss well because it is high in protein and low in calories, a combination that keeps you full and helps preserve muscle in a calorie deficit. At roughly 63 calories and 11 g of protein per 100 g, plain skyr is one of the more filling, protein-dense foods you can eat for the calories. Choose plain versions to avoid added sugar."
+  - q: "Is skyr a complete protein?"
+    a: "Yes. Like other dairy foods, skyr is a complete protein, meaning it contains all nine essential amino acids your body cannot make itself. This makes it a high-quality protein source that fully supports muscle repair and growth on its own, without needing to be combined with other proteins."
+  - q: "How much skyr should I eat a day?"
+    a: "There is no fixed limit, but a typical serving is one 150 to 170 g tub, which gives around 16 to 18 g of protein. One or two servings a day fits easily into most diets and is a simple way to boost your protein. As with any food, variety matters, so use it as part of a balanced diet rather than your only protein source."
 ---
 
 Skyr has become one of the most popular high-protein dairy foods, and people increasingly want to know exactly what is in it, especially its calcium and protein content. Here is a clear breakdown of skyr's nutrition, its benefits, and how much of your daily needs a tub actually covers.
