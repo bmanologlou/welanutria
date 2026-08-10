@@ -102,59 +102,64 @@ const breadcrumb = {
 
   <section class="wrap section fh-prose">
     <h2>Why cottage cheese is good for you</h2>
-    <p>Cottage cheese earns its popularity: it is <strong>very high in protein</strong> ({food.protein}g per 100g) for muscle and fullness, <strong>low in calories and fat</strong>, and a useful source of <strong>calcium and vitamin B12</strong>. The main thing to watch is sodium, which can be high in some brands. For the full breakdown, see our <a href="/blog/cottage-cheese-nutrition/">cottage cheese nutrition guide</a>.</p>
+    <p>Cottage cheese has quietly become one of the most popular high-protein foods, and for good reason. It is <strong>very high in protein</strong> at around {food.protein}g per 100g, which supports muscle repair, keeps you full for hours, and helps protect lean tissue when you are losing weight. At the same time it is <strong>low in calories and fat</strong>, so you get a lot of nutrition for very little on your plate.</p>
+    <p>Beyond protein, it is a useful source of <strong>calcium and vitamin B12</strong>, both important for bones, energy and nerve function. It also contains casein, a slow-digesting protein that makes it a popular choice before bed. The one thing to watch is sodium, which can be high in some brands, so check the label if you are keeping salt down. For the full breakdown, see our <a href="/blog/cottage-cheese-nutrition/">cottage cheese nutrition guide</a>.</p>
   </section>
 
   <div class="fh-band">
     <section class="wrap section">
       <h2>How to eat it</h2>
+      <p class="fh-sub">Cottage cheese works in both sweet and savoury dishes, which is part of why it is so easy to eat every day.</p>
       <div class="fh-eat">
         <div class="fh-eat-col">
-          <h3>&#127853; Sweet</h3>
+          <h3>Sweet</h3>
           <ul><li>Fruit and honey bowl</li><li>Blended into pancakes</li><li>With berries and seeds</li><li>Frozen "ice cream"</li></ul>
         </div>
         <div class="fh-eat-col">
-          <h3>&#129360; Savoury</h3>
+          <h3>Savoury</h3>
           <ul><li>On toast with tomato</li><li>Whipped into a dip</li><li>Stirred into pasta sauce</li><li>With cucumber and pepper</li></ul>
         </div>
       </div>
     </section>
   </div>
 
-  {inRecipes.length > 0 && (
-    <section class="wrap section">
-      <h2>Recipes with cottage cheese</h2>
-      <div class="fh-recipes">
-        {inRecipes.map((r) => (
-          <a class="fh-recipe" href={`/recipes/${r.slug}/`}>
-            <img src={`/img/recipes/${r.image}`} alt={r.title} loading="lazy" />
-            <div class="fh-recipe-body">
-              <span class="fh-recipe-title">{r.title}</span>
-              {r.macros && <span class="fh-recipe-macros">{r.macros.cal} cal &middot; {r.macros.protein}g protein</span>}
-            </div>
-          </a>
-        ))}
-        <a class="fh-recipe fh-recipe-more" href="/blog/cottage-cheese-recipes/">
-          <div class="fh-recipe-body"><span class="fh-recipe-title">More cottage cheese ideas &rarr;</span></div>
+  <section class="wrap section">
+    <h2>Recipes &amp; ideas with cottage cheese</h2>
+    <p class="fh-sub">Ways to put it to use across the site, from a full recipe to quick ideas and a side-by-side comparison.</p>
+    <div class="fh-blocks">
+      {inRecipes.map((r) => (
+        <a class="fh-block" href={`/recipes/${r.slug}/`}>
+          <img src={`/img/recipes/${r.image}`} alt={r.title} loading="lazy" />
+          <div class="fh-block-body">
+            <span class="fh-block-tag">Recipe</span>
+            <span class="fh-block-title">{r.title}</span>
+            {r.macros && <span class="fh-block-meta">{r.macros.cal} cal &middot; {r.macros.protein}g protein</span>}
+          </div>
         </a>
-      </div>
-    </section>
-  )}
-
-  {inComparisons.length > 0 && (
-    <section class="wrap section">
-      <h2>Compare it</h2>
-      <p class="fh-sub">See how cottage cheese stacks up against other high-protein foods.</p>
-      <div class="fh-chips">
-        {inComparisons.map((c) => <a class="fh-chip fh-chip-lg" href={`/compare/${c.slug}/`}>{c.title} &rarr;</a>)}
-      </div>
-    </section>
-  )}
+      ))}
+      <a class="fh-block" href="/blog/cottage-cheese-recipes/">
+        <div class="fh-block-body">
+          <span class="fh-block-tag">Guide</span>
+          <span class="fh-block-title">High-Protein Cottage Cheese Ideas</span>
+          <span class="fh-block-meta">A roundup of sweet and savoury ways to use it, from breakfast bowls to blended sauces and dips.</span>
+        </div>
+      </a>
+      {inComparisons.map((c) => (
+        <a class="fh-block" href={`/compare/${c.slug}/`}>
+          <div class="fh-block-body">
+            <span class="fh-block-tag">Compare</span>
+            <span class="fh-block-title">{c.title}</span>
+            <span class="fh-block-meta">See how the two stack up on protein, calcium, calories and texture.</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
 
   {inLists.length > 0 && (
     <section class="wrap section">
       <h2>Featured in {inLists.length} food lists</h2>
-      <p class="fh-sub">Cottage cheese ranks in these guides on the site.</p>
+      <p class="fh-sub">Cottage cheese qualifies for these ranked guides on the site.</p>
       <div class="fh-chips">
         {inLists.map((l) => <a class="fh-chip" href={`/food-lists/${l.slug}/`}>{l.title}</a>)}
       </div>
@@ -183,7 +188,7 @@ const breadcrumb = {
     .fh-lbl{font-size:.85rem;color:var(--muted)}
     .section{padding:34px 0 0}
     .section h2{font-size:1.4rem;letter-spacing:-.02em;margin:0 0 6px}
-    .fh-sub{color:var(--muted);font-size:.95rem;margin:0 0 16px}
+    .fh-sub{color:var(--muted);font-size:.95rem;margin:0 0 16px;max-width:64ch;line-height:1.5}
     .fh-band{background:var(--paper-2);margin-top:40px;padding:8px 0 40px}
     .fh-band .section{padding-top:32px}
     .fh-table{width:100%;border-collapse:collapse;font-size:.95rem}
@@ -191,26 +196,25 @@ const breadcrumb = {
     .fh-table th{font-weight:600;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
     .fh-table td:first-child{font-weight:600;color:var(--ink)}
     .fh-note{font-size:.82rem;color:var(--muted);margin:12px 0 0}
-    .fh-prose p{font-size:1.02rem;line-height:1.7;color:#33453F;max-width:66ch}
+    .fh-prose p{font-size:1.02rem;line-height:1.7;color:#33453F;max-width:66ch;margin:0 0 14px}
     .fh-eat{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     @media(max-width:560px){.fh-eat{grid-template-columns:1fr}}
-    .fh-eat-col{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px}
+    .fh-eat-col{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px}
     .fh-eat-col h3{margin:0 0 10px;font-size:1rem;color:var(--accent)}
     .fh-eat-col ul{margin:0;padding-left:18px;color:#33453F}
     .fh-eat-col li{margin:5px 0;line-height:1.5}
-    .fh-recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-    .fh-recipe{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s;display:flex;flex-direction:column}
-    .fh-recipe:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
-    .fh-recipe img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-    .fh-recipe-body{padding:12px 14px}
-    .fh-recipe-title{display:block;font-weight:700;color:var(--ink);font-size:.95rem;line-height:1.3}
-    .fh-recipe-macros{display:block;font-size:.82rem;color:var(--muted);margin-top:4px}
-    .fh-recipe-more{justify-content:center;align-items:center;min-height:120px;background:var(--paper)}
-    .fh-explore-group{margin-bottom:24px}
+    .fh-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media(max-width:720px){.fh-blocks{grid-template-columns:1fr}}
+    .fh-block{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s;display:flex;flex-direction:column}
+    .fh-block:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .fh-block img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+    .fh-block-body{padding:16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+    .fh-block-tag{align-self:flex-start;background:var(--paper-2);color:var(--accent-deep);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:100px}
+    .fh-block-title{font-weight:700;color:var(--ink);font-size:1rem;line-height:1.3}
+    .fh-block-meta{font-size:.85rem;color:var(--muted);line-height:1.45}
     .fh-chips{display:flex;flex-wrap:wrap;gap:8px}
     .fh-chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:.9rem;font-weight:600;color:var(--ink);transition:.15s}
     .fh-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-    .fh-chip-lg{background:var(--cool);padding:11px 20px;font-size:.95rem}
     .fh-faq{padding-top:40px}
   </style>
 </Base>
