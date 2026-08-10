@@ -126,9 +126,9 @@ const breadcrumb = {
   <section class="wrap section">
     <h2>Recipes &amp; ideas with cottage cheese</h2>
     <p class="fh-sub">Ways to put it to use across the site, from a full recipe to quick ideas and a side-by-side comparison.</p>
-    <div class="fh-blocks">
+    <div class="fh-explore">
       {inRecipes.map((r) => (
-        <a class="fh-block" href={`/recipes/${r.slug}/`}>
+        <a class="fh-block fh-block-feature" href={`/recipes/${r.slug}/`}>
           <img src={`/img/recipes/${r.image}`} alt={r.title} loading="lazy" />
           <div class="fh-block-body">
             <span class="fh-block-tag">Recipe</span>
@@ -137,22 +137,24 @@ const breadcrumb = {
           </div>
         </a>
       ))}
-      <a class="fh-block" href="/blog/cottage-cheese-recipes/">
-        <div class="fh-block-body">
-          <span class="fh-block-tag">Guide</span>
-          <span class="fh-block-title">High-Protein Cottage Cheese Ideas</span>
-          <span class="fh-block-meta">A roundup of sweet and savoury ways to use it, from breakfast bowls to blended sauces and dips.</span>
-        </div>
-      </a>
-      {inComparisons.map((c) => (
-        <a class="fh-block" href={`/compare/${c.slug}/`}>
+      <div class="fh-stack">
+        <a class="fh-block fh-block-row" href="/blog/cottage-cheese-recipes/">
           <div class="fh-block-body">
-            <span class="fh-block-tag">Compare</span>
-            <span class="fh-block-title">{c.title}</span>
-            <span class="fh-block-meta">See how the two stack up on protein, calcium, calories and texture.</span>
+            <span class="fh-block-tag">Guide</span>
+            <span class="fh-block-title">High-Protein Cottage Cheese Ideas</span>
+            <span class="fh-block-meta">A roundup of sweet and savoury ways to use it, from breakfast bowls to blended sauces and dips.</span>
           </div>
         </a>
-      ))}
+        {inComparisons.map((c) => (
+          <a class="fh-block fh-block-row" href={`/compare/${c.slug}/`}>
+            <div class="fh-block-body">
+              <span class="fh-block-tag">Compare</span>
+              <span class="fh-block-title">{c.title}</span>
+              <span class="fh-block-meta">See how the two stack up on protein, calcium, calories and texture.</span>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -203,12 +205,14 @@ const breadcrumb = {
     .fh-eat-col h3{margin:0 0 10px;font-size:1rem;color:var(--accent)}
     .fh-eat-col ul{margin:0;padding-left:18px;color:#33453F}
     .fh-eat-col li{margin:5px 0;line-height:1.5}
-    .fh-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    @media(max-width:720px){.fh-blocks{grid-template-columns:1fr}}
+    .fh-explore{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+    @media(max-width:720px){.fh-explore{grid-template-columns:1fr}}
+    .fh-stack{display:grid;grid-template-rows:1fr 1fr;gap:14px}
     .fh-block{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s;display:flex;flex-direction:column}
     .fh-block:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
-    .fh-block img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
-    .fh-block-body{padding:16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+    .fh-block-feature img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+    .fh-block-body{padding:16px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+    .fh-block-row{justify-content:center}
     .fh-block-tag{align-self:flex-start;background:var(--paper-2);color:var(--accent-deep);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:100px}
     .fh-block-title{font-weight:700;color:var(--ink);font-size:1rem;line-height:1.3}
     .fh-block-meta{font-size:.85rem;color:var(--muted);line-height:1.45}
