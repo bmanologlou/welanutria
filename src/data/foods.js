@@ -247,6 +247,8 @@ export const foods = [
   { name: 'Oat milk (unsweetened)', category: 'Eggs & dairy', cal: 43, protein: 1.3, carbs: 6.7, fat: 1.5, fiber: 0.8, iron: 0.2, calcium: 120, potassium: 150, magnesium: 6, omega3: 0.03, vitaminC: 0, zinc: 0.2, folate: 2, b12: 0.5, sugar: 2.5, serving: 'cup', servingG: 240 },
   { name: 'Almond milk (unsweetened)', category: 'Eggs & dairy', cal: 15, protein: 0.6, carbs: 0.6, fat: 1.2, fiber: 0.3, iron: 0.2, calcium: 120, potassium: 67, magnesium: 6, omega3: 0.0, vitaminC: 0, zinc: 0.1, folate: 1, b12: 0.5, sugar: 0, serving: 'cup', servingG: 240 },
   { name: 'Soy milk (unsweetened)', category: 'Eggs & dairy', cal: 43, protein: 3.3, carbs: 1.8, fat: 1.8, fiber: 0.6, iron: 0.5, calcium: 120, potassium: 118, magnesium: 15, omega3: 0.1, vitaminC: 0, zinc: 0.3, folate: 9, b12: 0.5, sugar: 0.9, serving: 'cup', servingG: 240 },
+  { name: 'Honey', category: 'Fruit', cal: 304, protein: 0.3, carbs: 82, fat: 0, fiber: 0.2, iron: 0.4, calcium: 6, potassium: 52, magnesium: 2, omega3: 0, vitaminC: 0.5, zinc: 0.2, folate: 2, b12: 0, sugar: 82, serving: 'tbsp', servingG: 21 },
+  { name: 'Oatmeal (cooked)', category: 'Grains', cal: 71, protein: 2.5, carbs: 12, fat: 1.5, fiber: 1.7, iron: 0.9, calcium: 9, potassium: 70, magnesium: 27, omega3: 0.03, vitaminC: 0, zinc: 0.6, folate: 6, b12: 0, sugar: 0.5, serving: 'bowl', servingG: 234 },
 ];
 
 // Helper: per-serving values (rounded)
