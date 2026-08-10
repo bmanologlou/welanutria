@@ -6,17 +6,21 @@ import { foodLists } from '../../data/foodLists.js';
 import { comparisons } from '../../data/comparisons.js';
 import { recipes } from '../../data/recipes.js';
 
-// --- PILOT: hard-coded to cottage cheese to preview the concept ---
 const food = foods.find((f) => f.name === 'Cottage cheese (low-fat)');
 const slug = 'cottage-cheese';
 const displayName = 'Cottage Cheese';
 const url = `https://welanutria.com/foods/${slug}/`;
 
-// Per-serving values
 const factor = food.servingG / 100;
 const per = (v) => Math.round(v * factor * 10) / 10;
 
-// Nutrition rows to show (skip zeros)
+const badges = [];
+if (food.protein >= 9) badges.push('High protein');
+if (food.cal <= 120) badges.push('Low calorie');
+if (food.fat <= 3) badges.push('Low fat');
+if (food.carbs <= 10) badges.push('Low carb');
+badges.push('Vegetarian');
+
 const ROWS = [
   { key: 'cal', label: 'Calories', unit: 'kcal' },
   { key: 'protein', label: 'Protein', unit: 'g' },
@@ -30,20 +34,9 @@ const ROWS = [
 ];
 const rows = ROWS.filter((r) => food[r.key] > 0);
 
-// Which food lists this food qualifies for
-const inLists = foodLists.filter((l) => {
-  try { return l.filter && l.filter(food); } catch { return false; }
-});
-
-// Comparisons featuring this food
-const inComparisons = comparisons.filter((c) =>
-  JSON.stringify(c).toLowerCase().includes('cottage cheese')
-);
-
-// Recipes featuring this food
-const inRecipes = recipes.filter((r) =>
-  JSON.stringify(r).toLowerCase().includes('cottage cheese')
-);
+const inLists = foodLists.filter((l) => { try { return l.filter && l.filter(food); } catch { return false; } });
+const inComparisons = comparisons.filter((c) => JSON.stringify(c).toLowerCase().includes('cottage cheese'));
+const inRecipes = recipes.filter((r) => JSON.stringify(r).toLowerCase().includes('cottage cheese'));
 
 const faqs = [
   { q: 'How much protein is in cottage cheese?', a: `Low-fat cottage cheese has around ${food.protein} g of protein per 100 g, or roughly ${per(food.protein)} g in a ${food.servingG} g serving. That makes it one of the most protein-dense foods you can keep in the fridge.` },
@@ -54,14 +47,16 @@ const faqs = [
 ];
 
 const nutritionSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'NutritionInformation',
-  name: displayName,
-  calories: `${food.cal} kcal`,
-  proteinContent: `${food.protein} g`,
-  carbohydrateContent: `${food.carbs} g`,
-  fatContent: `${food.fat} g`,
-  servingSize: '100 g',
+  '@context': 'https://schema.org', '@type': 'NutritionInformation', name: displayName,
+  calories: `${food.cal} kcal`, proteinContent: `${food.protein} g`,
+  carbohydrateContent: `${food.carbs} g`, fatContent: `${food.fat} g`, servingSize: '100 g',
+};
+const breadcrumb = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://welanutria.com/' },
+    { '@type': 'ListItem', position: 2, name: displayName, item: url },
+  ],
 };
 ---
 <Base
@@ -70,19 +65,26 @@ const nutritionSchema = {
   current=""
 >
   <script type="application/ld+json" set:html={JSON.stringify(nutritionSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
 
-  <section class="wrap fh">
-    <p class="fh-eyebrow">{food.category}</p>
-    <h1>{displayName}</h1>
-    <p class="fh-lede">A high-protein, low-calorie dairy food, and one of the most versatile things you can keep in the fridge. Here is its full nutrition, benefits, and everything on the site to help you use it.</p>
+  <nav class="wrap crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>/</span><span>{displayName}</span>
+  </nav>
 
-    <div class="fh-stats">
-      <div class="fh-stat"><span class="fh-num">{food.cal}</span><span class="fh-lbl">calories</span></div>
-      <div class="fh-stat"><span class="fh-num">{food.protein}g</span><span class="fh-lbl">protein</span></div>
-      <div class="fh-stat"><span class="fh-num">{food.calcium}mg</span><span class="fh-lbl">calcium</span></div>
-      <div class="fh-stat"><span class="fh-num">{food.fat}g</span><span class="fh-lbl">fat</span></div>
+  <section class="wrap fh-hero">
+    <div class="fh-hero-text">
+      <p class="fh-eyebrow">{food.category}</p>
+      <h1>{displayName}</h1>
+      <p class="fh-lede">A high-protein, low-calorie dairy food, and one of the most versatile things you can keep in the fridge. Here is its full nutrition and everything on the site to help you use it.</p>
+      <div class="fh-badges">
+        {badges.map((b) => <span class="fh-badge">{b}</span>)}
+      </div>
     </div>
-    <p class="fh-note">Per 100 g. Values are approximate and vary by brand.</p>
+    <div class="fh-hero-stats">
+      <div class="fh-stat fh-stat-lead"><span class="fh-num">{food.protein}g</span><span class="fh-lbl">protein per 100g</span></div>
+      <div class="fh-stat"><span class="fh-num">{food.cal}</span><span class="fh-lbl">calories</span></div>
+      <div class="fh-stat"><span class="fh-num">{food.calcium}mg</span><span class="fh-lbl">calcium</span></div>
+    </div>
   </section>
 
   <section class="wrap section">
@@ -95,47 +97,66 @@ const nutritionSchema = {
         ))}
       </tbody>
     </table>
+    <p class="fh-note">Per 100 g. Values are approximate and vary by brand.</p>
+  </section>
+
+  <section class="wrap section fh-prose">
+    <h2>Why cottage cheese is good for you</h2>
+    <p>Cottage cheese earns its popularity: it is <strong>very high in protein</strong> ({food.protein}g per 100g) for muscle and fullness, <strong>low in calories and fat</strong>, and a useful source of <strong>calcium and vitamin B12</strong>. The main thing to watch is sodium, which can be high in some brands. For the full breakdown, see our <a href="/blog/cottage-cheese-nutrition/">cottage cheese nutrition guide</a>.</p>
   </section>
 
   <section class="wrap section">
-    <h2>Why cottage cheese is good for you</h2>
-    <p>Cottage cheese earns its popularity: it is <strong>very high in protein</strong> ({food.protein}g per 100g) for muscle and fullness, <strong>low in calories and fat</strong>, and a useful source of <strong>calcium and vitamin B12</strong>. It works in both sweet dishes (fruit bowls, blended into pancakes) and savoury ones (dips, pasta sauces, on toast). The main thing to watch is sodium, which can be high in some brands.</p>
-    <p>For the full breakdown, see our <a href="/blog/cottage-cheese-nutrition/">cottage cheese nutrition guide</a>.</p>
-  </section>
-
-  {inComparisons.length > 0 && (
-    <section class="wrap section">
-      <h2>Compare cottage cheese</h2>
-      <div class="fh-cards">
-        {inComparisons.map((c) => (
-          <a class="fh-card" href={`/compare/${c.slug}/`}>{c.title}</a>
-        ))}
+    <h2>How to eat it</h2>
+    <div class="fh-eat">
+      <div class="fh-eat-col">
+        <h3>Sweet</h3>
+        <ul><li>Fruit and honey bowl</li><li>Blended into pancakes</li><li>With berries and seeds</li><li>Frozen "ice cream"</li></ul>
       </div>
-    </section>
-  )}
+      <div class="fh-eat-col">
+        <h3>Savoury</h3>
+        <ul><li>On toast with tomato</li><li>Whipped into a dip</li><li>Stirred into pasta sauce</li><li>With cucumber and pepper</li></ul>
+      </div>
+    </div>
+  </section>
 
   {inRecipes.length > 0 && (
     <section class="wrap section">
       <h2>Recipes with cottage cheese</h2>
-      <div class="fh-cards">
+      <div class="fh-recipes">
         {inRecipes.map((r) => (
-          <a class="fh-card" href={`/recipes/${r.slug}/`}>{r.title}</a>
+          <a class="fh-recipe" href={`/recipes/${r.slug}/`}>
+            <img src={`/img/recipes/${r.image}`} alt={r.title} loading="lazy" />
+            <div class="fh-recipe-body">
+              <span class="fh-recipe-title">{r.title}</span>
+              {r.macros && <span class="fh-recipe-macros">{r.macros.cal} cal &middot; {r.macros.protein}g protein</span>}
+            </div>
+          </a>
         ))}
-        <a class="fh-card" href="/blog/cottage-cheese-recipes/">More cottage cheese ideas</a>
+        <a class="fh-recipe fh-recipe-more" href="/blog/cottage-cheese-recipes/">
+          <div class="fh-recipe-body"><span class="fh-recipe-title">More cottage cheese ideas &rarr;</span></div>
+        </a>
       </div>
     </section>
   )}
 
-  {inLists.length > 0 && (
-    <section class="wrap section">
-      <h2>Cottage cheese appears in these food lists</h2>
-      <div class="fh-cards">
-        {inLists.map((l) => (
-          <a class="fh-card" href={`/food-lists/${l.slug}/`}>{l.title}</a>
-        ))}
+  <section class="wrap section fh-explore">
+    {inComparisons.length > 0 && (
+      <div class="fh-explore-group">
+        <h2>Compare it</h2>
+        <div class="fh-chips">
+          {inComparisons.map((c) => <a class="fh-chip" href={`/compare/${c.slug}/`}>{c.title}</a>)}
+        </div>
       </div>
-    </section>
-  )}
+    )}
+    {inLists.length > 0 && (
+      <div class="fh-explore-group">
+        <h2>Featured in these lists</h2>
+        <div class="fh-chips">
+          {inLists.map((l) => <a class="fh-chip" href={`/food-lists/${l.slug}/`}>{l.title}</a>)}
+        </div>
+      </div>
+    )}
+  </section>
 
   <section class="wrap section">
     <h2>Frequently asked questions</h2>
@@ -143,24 +164,46 @@ const nutritionSchema = {
   </section>
 
   <style>
-    .fh{padding:56px 0 32px}
+    .crumbs{padding:20px 0 0;font-size:.85rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+    .crumbs a{color:var(--muted)}.crumbs a:hover{color:var(--accent)}
+    .fh-hero{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;padding:32px 0 40px}
+    @media(max-width:720px){.fh-hero{grid-template-columns:1fr;gap:24px}}
     .fh-eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;font-weight:600;color:var(--accent);margin:0 0 6px}
-    .fh h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em;margin:0 0 12px}
-    .fh-lede{font-size:1.15rem;color:#3F4F49;max-width:60ch;margin:0 0 28px;line-height:1.6}
-    .fh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:640px}
-    @media(max-width:560px){.fh-stats{grid-template-columns:repeat(2,1fr)}}
-    .fh-stat{background:var(--cool);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;text-align:center}
-    .fh-num{display:block;font-size:1.7rem;font-weight:800;color:var(--ink);letter-spacing:-.02em}
-    .fh-lbl{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
-    .fh-note{font-size:.82rem;color:var(--muted);margin:12px 0 0}
-    .section{padding:36px 0 0}
+    .fh-hero h1{font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em;margin:0 0 12px}
+    .fh-lede{font-size:1.1rem;color:#3F4F49;max-width:52ch;margin:0 0 18px;line-height:1.6}
+    .fh-badges{display:flex;flex-wrap:wrap;gap:8px}
+    .fh-badge{background:var(--paper-2);color:var(--accent-deep);border-radius:100px;padding:5px 13px;font-size:.82rem;font-weight:600}
+    .fh-hero-stats{display:flex;flex-direction:column;gap:10px}
+    .fh-stat{background:var(--cool);border:1px solid var(--cool-line);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:baseline;gap:10px}
+    .fh-stat-lead{background:var(--accent);border-color:var(--accent)}
+    .fh-stat-lead .fh-num,.fh-stat-lead .fh-lbl{color:#fff}
+    .fh-num{font-size:1.7rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+    .fh-lbl{font-size:.85rem;color:var(--muted)}
+    .section{padding:34px 0 0}
     .section h2{font-size:1.4rem;letter-spacing:-.02em;margin:0 0 16px}
     .fh-table{width:100%;border-collapse:collapse;font-size:.95rem}
     .fh-table th,.fh-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
-    .fh-table th{font-weight:600;color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+    .fh-table th{font-weight:600;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
     .fh-table td:first-child{font-weight:600;color:var(--ink)}
-    .fh-cards{display:flex;flex-wrap:wrap;gap:10px}
-    .fh-card{display:inline-flex;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px 18px;font-weight:600;font-size:.94rem;color:var(--ink);transition:.15s}
-    .fh-card:hover{border-color:var(--accent);color:var(--accent);text-decoration:none;transform:translateY(-2px)}
+    .fh-note{font-size:.82rem;color:var(--muted);margin:12px 0 0}
+    .fh-prose p{font-size:1.02rem;line-height:1.7;color:#33453F;max-width:66ch}
+    .fh-eat{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:560px){.fh-eat{grid-template-columns:1fr}}
+    .fh-eat-col{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px}
+    .fh-eat-col h3{margin:0 0 10px;font-size:1rem;color:var(--accent)}
+    .fh-eat-col ul{margin:0;padding-left:18px;color:#33453F}
+    .fh-eat-col li{margin:5px 0;line-height:1.5}
+    .fh-recipes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+    .fh-recipe{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.15s;display:flex;flex-direction:column}
+    .fh-recipe:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none}
+    .fh-recipe img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+    .fh-recipe-body{padding:12px 14px}
+    .fh-recipe-title{display:block;font-weight:700;color:var(--ink);font-size:.95rem;line-height:1.3}
+    .fh-recipe-macros{display:block;font-size:.82rem;color:var(--muted);margin-top:4px}
+    .fh-recipe-more{justify-content:center;align-items:center;min-height:120px;background:var(--paper)}
+    .fh-explore-group{margin-bottom:24px}
+    .fh-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .fh-chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:.9rem;font-weight:600;color:var(--ink);transition:.15s}
+    .fh-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
   </style>
 </Base>
