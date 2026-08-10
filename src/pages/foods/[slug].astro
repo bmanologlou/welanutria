@@ -81,6 +81,13 @@ const colBTitle = page.eatTitleB || 'Savoury';
 const colA = page.eatColA || page.eatSweet;
 const colB = page.eatColB || page.eatSavoury;
 const showEat = colA && colB;
+
+// Explore row: build up to 3 cards, each with a graceful fallback so the
+// row is never broken or empty regardless of what data a food has.
+const featureRecipe = inRecipes[0] || null;
+const compareCard = inComparisons[0] || null;
+const hasGuide = !!page.guideHref;
+const hasExploreRow = featureRecipe || compareCard || hasGuide;
 ---
 <Base
   title={`${displayName} Nutrition: Protein, Calories & Benefits`}
@@ -147,44 +154,79 @@ const showEat = colA && colB;
     </div>
   )}
 
-  {(inRecipes.length > 0 || inComparisons.length > 0) && (
+  {hasExploreRow && (
     <section class="wrap section">
       <h2>Recipes &amp; ideas with {displayName.toLowerCase()}</h2>
       <p class="fh-sub">Ways to put it to use across the site, from full recipes to guides and side-by-side comparisons.</p>
       <div class="fh-explore">
-        {inRecipes.slice(0, 1).map((r) => (
-          <a class="fh-block fh-block-feature" href={`/recipes/${r.slug}/`}>
-            <img src={`/img/recipes/${r.image}`} alt={r.title} loading="lazy" />
+        {featureRecipe ? (
+          <a class="fh-block fh-block-feature" href={`/recipes/${featureRecipe.slug}/`}>
+            <img src={`/img/recipes/${featureRecipe.image}`} alt={featureRecipe.title} loading="lazy" />
             <div class="fh-block-body">
               <span class="fh-block-tag">Recipe</span>
-              <span class="fh-block-title">{r.title}</span>
-              {r.macros && <span class="fh-block-meta">{r.macros.cal} cal &middot; {r.macros.protein}g protein</span>}
+              <span class="fh-block-title">{featureRecipe.title}</span>
+              {featureRecipe.macros && <span class="fh-block-meta">{featureRecipe.macros.cal} cal &middot; {featureRecipe.macros.protein}g protein</span>}
             </div>
           </a>
-        ))}
-        <div class="fh-stack">
-          <a class="fh-block fh-block-row fh-type-guide" href={page.guideHref}>
+        ) : (
+          <a class="fh-block fh-block-feature fh-type-explore fh-feature-fallback" href="/recipes/">
             <div class="fh-block-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M12 11v9"/><path d="M5 11a7 7 0 0 1 14 0"/><path d="M8 7l1-2M12 7V5M16 7l-1-2"/></svg>
             </div>
             <div class="fh-block-body">
-              <span class="fh-block-tag">Guide</span>
-              <span class="fh-block-title">More on {displayName.toLowerCase()}</span>
-              <span class="fh-block-meta">Related guidance and food lists on the site.</span>
+              <span class="fh-block-tag">Recipes</span>
+              <span class="fh-block-title">Browse high-protein recipes</span>
+              <span class="fh-block-meta">Meals and snacks with full nutrition.</span>
             </div>
           </a>
-          {inComparisons.slice(0, 1).map((c) => (
-            <a class="fh-block fh-block-row fh-type-compare" href={`/compare/${c.slug}/`}>
+        )}
+        <div class="fh-stack">
+          {hasGuide ? (
+            <a class="fh-block fh-block-row fh-type-guide" href={page.guideHref}>
+              <div class="fh-block-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div class="fh-block-body">
+                <span class="fh-block-tag">Guide</span>
+                <span class="fh-block-title">More on {displayName.toLowerCase()}</span>
+                <span class="fh-block-meta">Related guidance and food lists on the site.</span>
+              </div>
+            </a>
+          ) : (
+            <a class="fh-block fh-block-row fh-type-explore" href="/blog/">
+              <div class="fh-block-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div class="fh-block-body">
+                <span class="fh-block-tag">Guides</span>
+                <span class="fh-block-title">Read our nutrition guides</span>
+                <span class="fh-block-meta">Practical articles on eating well.</span>
+              </div>
+            </a>
+          )}
+          {compareCard ? (
+            <a class="fh-block fh-block-row fh-type-compare" href={`/compare/${compareCard.slug}/`}>
               <div class="fh-block-icon">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
               </div>
               <div class="fh-block-body">
                 <span class="fh-block-tag">Compare</span>
-                <span class="fh-block-title">{c.title}</span>
+                <span class="fh-block-title">{compareCard.title}</span>
                 <span class="fh-block-meta">See how the two stack up side by side.</span>
               </div>
             </a>
-          ))}
+          ) : (
+            <a class="fh-block fh-block-row fh-type-explore" href="/compare/">
+              <div class="fh-block-icon">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              </div>
+              <div class="fh-block-body">
+                <span class="fh-block-tag">Compare</span>
+                <span class="fh-block-title">Browse all food comparisons</span>
+                <span class="fh-block-meta">See side-by-side nutrition for popular foods.</span>
+              </div>
+            </a>
+          )}
         </div>
       </div>
     </section>
@@ -257,6 +299,13 @@ const showEat = colA && colB;
     .fh-type-compare{background:var(--paper-2);border-color:var(--line)}
     .fh-type-compare .fh-block-icon{color:var(--accent-deep)}
     .fh-type-compare .fh-block-tag{background:#fff;color:var(--accent-deep)}
+    .fh-type-explore{background:transparent;border:1px dashed var(--line)}
+    .fh-type-explore .fh-block-icon{color:var(--muted);opacity:.6}
+    .fh-type-explore .fh-block-tag{background:transparent;color:var(--muted);border:1px solid var(--line)}
+    .fh-type-explore .fh-block-title{color:var(--muted)}
+    .fh-feature-fallback{justify-content:center;align-items:flex-start;padding:24px 22px;min-height:220px}
+    .fh-feature-fallback .fh-block-body{flex:0;padding:0;justify-content:center;gap:8px}
+    .fh-feature-fallback .fh-block-icon{margin-bottom:6px}
     .fh-chips{display:flex;flex-wrap:wrap;gap:8px}
     .fh-chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:.9rem;font-weight:600;color:var(--ink);transition:.15s}
     .fh-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
