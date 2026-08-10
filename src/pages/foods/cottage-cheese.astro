@@ -105,19 +105,21 @@ const breadcrumb = {
     <p>Cottage cheese earns its popularity: it is <strong>very high in protein</strong> ({food.protein}g per 100g) for muscle and fullness, <strong>low in calories and fat</strong>, and a useful source of <strong>calcium and vitamin B12</strong>. The main thing to watch is sodium, which can be high in some brands. For the full breakdown, see our <a href="/blog/cottage-cheese-nutrition/">cottage cheese nutrition guide</a>.</p>
   </section>
 
-  <section class="wrap section">
-    <h2>How to eat it</h2>
-    <div class="fh-eat">
-      <div class="fh-eat-col">
-        <h3>Sweet</h3>
-        <ul><li>Fruit and honey bowl</li><li>Blended into pancakes</li><li>With berries and seeds</li><li>Frozen "ice cream"</li></ul>
+  <div class="fh-band">
+    <section class="wrap section">
+      <h2>How to eat it</h2>
+      <div class="fh-eat">
+        <div class="fh-eat-col">
+          <h3>&#127853; Sweet</h3>
+          <ul><li>Fruit and honey bowl</li><li>Blended into pancakes</li><li>With berries and seeds</li><li>Frozen "ice cream"</li></ul>
+        </div>
+        <div class="fh-eat-col">
+          <h3>&#129360; Savoury</h3>
+          <ul><li>On toast with tomato</li><li>Whipped into a dip</li><li>Stirred into pasta sauce</li><li>With cucumber and pepper</li></ul>
+        </div>
       </div>
-      <div class="fh-eat-col">
-        <h3>Savoury</h3>
-        <ul><li>On toast with tomato</li><li>Whipped into a dip</li><li>Stirred into pasta sauce</li><li>With cucumber and pepper</li></ul>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   {inRecipes.length > 0 && (
     <section class="wrap section">
@@ -139,27 +141,27 @@ const breadcrumb = {
     </section>
   )}
 
-  <section class="wrap section fh-explore">
-    {inComparisons.length > 0 && (
-      <div class="fh-explore-group">
-        <h2>Compare it</h2>
-        <div class="fh-chips">
-          {inComparisons.map((c) => <a class="fh-chip" href={`/compare/${c.slug}/`}>{c.title}</a>)}
-        </div>
+  {inComparisons.length > 0 && (
+    <section class="wrap section">
+      <h2>Compare it</h2>
+      <p class="fh-sub">See how cottage cheese stacks up against other high-protein foods.</p>
+      <div class="fh-chips">
+        {inComparisons.map((c) => <a class="fh-chip fh-chip-lg" href={`/compare/${c.slug}/`}>{c.title} &rarr;</a>)}
       </div>
-    )}
-    {inLists.length > 0 && (
-      <div class="fh-explore-group">
-        <h2>Featured in these lists</h2>
-        <div class="fh-chips">
-          {inLists.map((l) => <a class="fh-chip" href={`/food-lists/${l.slug}/`}>{l.title}</a>)}
-        </div>
-      </div>
-    )}
-  </section>
+    </section>
+  )}
 
-  <section class="wrap section">
-    <h2>Frequently asked questions</h2>
+  {inLists.length > 0 && (
+    <section class="wrap section">
+      <h2>Featured in {inLists.length} food lists</h2>
+      <p class="fh-sub">Cottage cheese ranks in these guides on the site.</p>
+      <div class="fh-chips">
+        {inLists.map((l) => <a class="fh-chip" href={`/food-lists/${l.slug}/`}>{l.title}</a>)}
+      </div>
+    </section>
+  )}
+
+  <section class="wrap section fh-faq">
     <Faq items={faqs} />
   </section>
 
@@ -180,7 +182,10 @@ const breadcrumb = {
     .fh-num{font-size:1.7rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
     .fh-lbl{font-size:.85rem;color:var(--muted)}
     .section{padding:34px 0 0}
-    .section h2{font-size:1.4rem;letter-spacing:-.02em;margin:0 0 16px}
+    .section h2{font-size:1.4rem;letter-spacing:-.02em;margin:0 0 6px}
+    .fh-sub{color:var(--muted);font-size:.95rem;margin:0 0 16px}
+    .fh-band{background:var(--paper-2);margin-top:40px;padding:8px 0 40px}
+    .fh-band .section{padding-top:32px}
     .fh-table{width:100%;border-collapse:collapse;font-size:.95rem}
     .fh-table th,.fh-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
     .fh-table th{font-weight:600;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
@@ -205,5 +210,7 @@ const breadcrumb = {
     .fh-chips{display:flex;flex-wrap:wrap;gap:8px}
     .fh-chip{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:.9rem;font-weight:600;color:var(--ink);transition:.15s}
     .fh-chip:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+    .fh-chip-lg{background:var(--cool);padding:11px 20px;font-size:.95rem}
+    .fh-faq{padding-top:40px}
   </style>
 </Base>
