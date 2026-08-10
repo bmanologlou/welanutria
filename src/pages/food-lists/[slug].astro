@@ -185,8 +185,8 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .food-table tbody tr:nth-child(even){background:#fff}
     .td-food{min-width:150px}
     .f-name{display:block;font-weight:600;color:var(--ink)}
-    a.f-name-link{color:var(--accent);text-decoration:none}
-    a.f-name-link:hover{text-decoration:underline}
+    a.f-name-link{font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+    a.f-name-link:hover{text-decoration-color:var(--accent);color:var(--accent)}
     .f-cat{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
     .td-metric{white-space:nowrap}
     .td-metric strong{font-size:1.15rem;color:var(--accent);font-weight:800}
