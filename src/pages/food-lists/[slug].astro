@@ -4,6 +4,10 @@ import JsonLd from '../../components/JsonLd.astro';
 import Faq from '../../components/Faq.astro';
 import { foodLists, getList } from '../../data/foodLists.js';
 import { foods, perServing } from '../../data/foods.js';
+import { foodPages } from '../../data/foodPages.js';
+
+// Map DB food name -> food page slug, so list rows can link to /foods/<slug>/
+const foodPageBySlug = new Map(foodPages.map((p) => [p.dbName, p.slug]));
 
 export async function getStaticPaths() {
   return foodLists.map((list) => ({
@@ -95,7 +99,9 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
           {rows.map((r) => (
             <tr>
               <td class="td-food">
-                <span class="f-name">{r.name}</span>
+                {foodPageBySlug.has(r.name)
+                  ? <a class="f-name f-name-link" href={`/foods/${foodPageBySlug.get(r.name)}/`}>{r.name}</a>
+                  : <span class="f-name">{r.name}</span>}
                 <span class="f-cat">{r.category}</span>
               </td>
               <td class="td-metric"><strong>{metricValue(r)}{list.metricUnit === 'g' ? ' g' : ''}</strong>{list.metricUnit === 'kcal' ? ' kcal' : list.metric === 'efficiency' ? ' g' : (list.metricUnit && list.metricUnit !== 'g' ? ' ' + list.metricUnit : '')}</td>
@@ -179,6 +185,8 @@ const relatedLists = (list.related.lists || []).map((s) => getList(s)).filter(Bo
     .food-table tbody tr:nth-child(even){background:#fff}
     .td-food{min-width:150px}
     .f-name{display:block;font-weight:600;color:var(--ink)}
+    a.f-name-link{color:var(--accent);text-decoration:none}
+    a.f-name-link:hover{text-decoration:underline}
     .f-cat{display:block;font-size:.74rem;color:var(--muted);margin-top:2px}
     .td-metric{white-space:nowrap}
     .td-metric strong{font-size:1.15rem;color:var(--accent);font-weight:800}
