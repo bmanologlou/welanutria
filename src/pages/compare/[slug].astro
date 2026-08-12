@@ -221,8 +221,9 @@ const faqSchema = {
     const printBtn = document.getElementById('printBtn');
     const pageUrl = window.location.href;
     const pageTitle = document.title;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
     if (shareBtn) {
-      if (navigator.share) {
+      if (navigator.share && isMobile) {
         shareBtn.addEventListener('click', async () => { try { await navigator.share({ title: pageTitle, url: pageUrl }); } catch(e){} });
       } else {
         shareBtn.addEventListener('click', async () => {
