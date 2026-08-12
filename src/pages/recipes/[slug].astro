@@ -68,7 +68,7 @@ const breadcrumb = {
   ],
 };
 ---
-<Base title={`${recipe.title} Recipe | welanutria`} description={recipe.description} current="recipes" ogType="article">
+<Base title={`${recipe.title} Recipe | welanutria`} description={recipe.description} current="recipes" ogType="article" image={recipe.image ? `/img/recipes/${recipe.image}` : ''}>
   <JsonLd schema={recipeSchema} />
   <JsonLd schema={breadcrumb} />
 
@@ -268,17 +268,21 @@ const breadcrumb = {
     const printBtn = document.getElementById('printBtn');
     const pageUrl = window.location.href;
     const pageTitle = document.title;
+    // Native share only on touch/mobile devices; desktop always copies the link
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    async function copyLink() {
+      try {
+        await navigator.clipboard.writeText(pageUrl);
+        const label = shareBtn.childNodes[shareBtn.childNodes.length-1];
+        const o = label.textContent; label.textContent=' Copied!';
+        setTimeout(()=>{label.textContent=o;},1800);
+      } catch(e){}
+    }
     if (shareBtn) {
-      if (navigator.share) {
+      if (navigator.share && isMobile) {
         shareBtn.addEventListener('click', async () => { try { await navigator.share({ title: pageTitle, url: pageUrl }); } catch(e){} });
       } else {
-        shareBtn.addEventListener('click', async () => {
-          try { await navigator.clipboard.writeText(pageUrl);
-            const label = shareBtn.childNodes[shareBtn.childNodes.length-1];
-            const o = label.textContent; label.textContent=' Copied!';
-            setTimeout(()=>{label.textContent=o;},1800);
-          } catch(e){}
-        });
+        shareBtn.addEventListener('click', copyLink);
       }
     }
     if (printBtn) printBtn.addEventListener('click', () => window.print());
