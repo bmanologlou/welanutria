@@ -6,6 +6,7 @@ const {
   description = 'Free, fast health and fitness calculators and recipes. TDEE, BMI, ideal weight, protein, water and body fat. No sign-up.',
   current = '',
   ogType = 'website',
+  image = '',
 } = Astro.props;
 
 const nav = [
@@ -18,7 +19,9 @@ const nav = [
 ];
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.pathname;
-const ogImage = Astro.site ? new URL('/img/og.png', Astro.site).href : '/img/og.png';
+const ogImage = image
+  ? (Astro.site ? new URL(image, Astro.site).href : image)
+  : (Astro.site ? new URL('/img/og.png', Astro.site).href : '/img/og.png');
 
 // Site-wide Organization + WebSite structured data (appears on every page)
 const orgSchema = {
