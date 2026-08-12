@@ -147,10 +147,11 @@ const dateFmt = new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', 
     const copyLabel = document.getElementById('copyLabel');
     const pageUrl = window.location.href;
     const pageTitle = document.title;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
     if (shareBtn) {
       // If the browser supports native share (mobile mostly), use it; otherwise hide and rely on copy.
-      if (navigator.share) {
+      if (navigator.share && isMobile) {
         shareBtn.addEventListener('click', async () => {
           try {
             await navigator.share({ title: pageTitle, url: pageUrl });
