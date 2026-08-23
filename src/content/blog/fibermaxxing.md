@@ -44,14 +44,14 @@ The key is **whole foods**, not powders. Here is where the most fibre comes from
 
 | Food group | Examples |
 | --- | --- |
-| Legumes | Beans, lentils, chickpeas |
-| Wholegrains | Oats, wholewheat, rye |
+| Legumes | Beans, [lentils](/foods/lentils/), [chickpeas](/foods/chickpeas/) |
+| Wholegrains | [Oats](/foods/oats/), wholewheat, rye |
 | Seeds | Chia, flax |
 | Vegetables | Broccoli, carrots, leafy greens |
 | Fruit | Berries, apples, pears (with skin) |
-| Nuts | Almonds, walnuts |
+| Nuts | [Almonds](/foods/almonds/), walnuts |
 
-Our [high-fibre foods list](/food-lists/high-fiber-foods/) ranks the best sources by fibre content, and our [gut health foods](/blog/gut-health-foods/) guide shows how fibre and a healthy microbiome connect.
+Our [high-fibre foods list](/food-lists/high-fiber-foods/) ranks the best sources by fibre content, and our [gut health foods](/blog/gut-health-foods/) guide shows how fibre and a healthy microbiome connect. If you want fibre and protein together, see our [high-protein high-fibre foods](/blog/high-protein-high-fiber-foods/) guide.
 
 ## How to fibremaxx without the bloating
 
