@@ -68,4 +68,4 @@ For healthy people, moderately high protein is safe, and there's no clearly esta
 3. **Pair it with training** if your goal is muscle.
 4. **Lean on it when dieting** to stay full and keep muscle.
 
-Get your protein right and almost every other goal, whether that's losing fat or building muscle, gets easier.
+Get your protein right and almost every other goal, whether that's losing fat or building muscle, gets easier. For the bigger picture, see how protein works together with fibre in our [high-protein, high-fibre eating guide](/blog/high-protein-high-fiber-eating/).
