@@ -76,7 +76,7 @@ a:hover{text-decoration:underline}
 .site-footer{border-top:1px solid var(--line);margin-top:64px;background:var(--paper-2);flex-shrink:0}
 .site-footer .wrap{padding-top:32px;padding-bottom:32px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;font-size:.88rem;color:var(--muted)}
 .site-footer a{color:var(--muted)}
-.site-footer .f-col h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);margin:0 0 10px}
+.site-footer .f-col h3{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);margin:0 0 10px}
 .site-footer .f-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .site-footer .f-bottom{width:100%;border-top:1px solid var(--line);padding-top:16px;font-size:.8rem}
 
