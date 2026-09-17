@@ -20,6 +20,8 @@ faqs:
     a: "Skyr leads the high-protein options at around 150 mg of calcium per 100 g, ahead of Greek yogurt (about 110 mg), quark (about 90 mg) and cottage cheese (about 83 mg). If you want protein and calcium together, skyr is the densest single choice."
   - q: "Is casein in dairy good before bed?"
     a: "Yes. Cottage cheese, quark and skyr are rich in casein, a slow-digesting protein that releases amino acids gradually over several hours. That makes them popular as a pre-sleep snack to support overnight muscle recovery, which is one reason cottage cheese has become a fitness favourite."
+  - q: "Which high-protein dairy is easiest to digest if I am lactose-sensitive?"
+    a: "The strained, cultured options are usually gentlest: skyr, quark and Greek yogurt are strained to remove much of the lactose, and their live cultures help digest what remains. Cottage cheese is also lower in lactose than milk. None are lactose-free, so those with a dairy allergy should avoid them, and anyone with lactose intolerance should start with a small portion to test tolerance."
 ---
 
 If you have walked down a supermarket dairy aisle lately, you will have noticed it: everything now shouts about **protein**. Cottage cheese, skyr, quark, Greek yogurt and kefir are all riding the same wave, and it can be hard to tell which one actually delivers the most. This guide settles it with numbers, then helps you choose the right one for your goal.
@@ -49,6 +51,10 @@ Because the protein numbers are so similar, the smarter question is what each on
 **For versatility**, cottage cheese is unbeaten right now. It blends smooth for sauces, bakes into flatbreads, and works in both sweet and savoury dishes, which is behind its viral popularity. Compare it head to head in [cottage cheese vs Greek yogurt](/compare/cottage-cheese-vs-greek-yogurt/).
 
 **For gut health over protein**, kefir is the pick. It is lower in protein but delivers a wider range of live cultures than yogurt or skyr, so it is the one to choose when digestion, not protein density, is your priority.
+
+## Which is easiest to digest?
+
+If dairy sometimes leaves you bloated, the type matters. Straining and fermentation both lower lactose, so the strained, cultured options are often gentler than milk. **Skyr, quark and Greek yogurt** are strained, which drains off much of the lactose, and their live cultures help break down what remains, so many people who are mildly lactose-sensitive tolerate them well in normal portions. **Cottage cheese** is lower in lactose than milk too, though it is not strained as heavily. None of these are lactose-free, so anyone with a true dairy allergy should avoid them, and those with lactose intolerance are best starting with a small portion to test their own tolerance. If gut comfort is your main goal, plain versions with live cultures are the ones to reach for.
 
 ## Protein content is only half the story
 

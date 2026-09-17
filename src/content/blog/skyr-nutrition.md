@@ -38,6 +38,8 @@ faqs:
     a: "Yes. Like other dairy foods, skyr is a complete protein, meaning it contains all nine essential amino acids your body cannot make itself. This makes it a high-quality protein source that fully supports muscle repair and growth on its own, without needing to be combined with other proteins."
   - q: "How much skyr should I eat a day?"
     a: "There is no fixed limit, but a typical serving is one 150 to 170 g tub, which gives around 16 to 18 g of protein. One or two servings a day fits easily into most diets and is a simple way to boost your protein. As with any food, variety matters, so use it as part of a balanced diet rather than your only protein source."
+  - q: "Does skyr have less lactose than Greek yogurt?"
+    a: "They are broadly similar and both are lower in lactose than milk. Skyr is heavily strained, which drains off much of the milk sugar, and its live cultures help break down what remains, so many people who are mildly lactose-sensitive tolerate it well in normal portions. It is not lactose-free, so anyone with a dairy allergy should avoid it, and those with lactose intolerance are best starting small to test their tolerance."
 ---
 
 Skyr has become one of the most popular high-protein dairy foods, and people increasingly want to know exactly what is in it, especially its calcium and protein content. Here is a clear breakdown of skyr's nutrition, its benefits, and how much of your daily needs a tub actually covers.

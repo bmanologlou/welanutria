@@ -34,6 +34,12 @@ faqs:
     a: "Yes. Cottage cheese contains all nine essential amino acids, so it counts as a complete protein. It is especially rich in casein, a slow-digesting protein, which is why many people eat it before bed to support overnight muscle recovery."
   - q: "How much cottage cheese should I eat a day?"
     a: "There is no fixed limit, but a typical serving is 100 to 200 g, giving roughly 12 to 24 g of protein. One to two servings a day fits most eating patterns. If you watch sodium, check the label, as cottage cheese can be relatively high in salt."
+  - q: "Is cottage cheese high in sodium?"
+    a: "Yes, this is cottage cheese's main nutritional drawback. Regular cottage cheese has roughly 300 to 400 mg of sodium per 100 g, and a half-cup serving can reach 350 to 450 mg, around 15 to 20 percent of the daily limit of 2,300 mg. The salt is added for flavour and as a preservative. It is not a problem for most people, but worth watching if you have high blood pressure or are limiting salt."
+  - q: "How can I reduce the sodium in cottage cheese?"
+    a: "Two easy ways. First, choose a low-sodium or no-salt-added version, which can have as little as 15 to 30 mg per half-cup. Second, rinsing regular cottage cheese in a fine strainer under cold water for one to two minutes can cut its sodium by 60 to 80 percent, while keeping most of the protein and calcium. Drain and pat dry; the texture changes slightly but the nutrition stays."
+  - q: "Is cottage cheese OK for high blood pressure?"
+    a: "In moderation, and ideally in a low-sodium version. Cottage cheese is high in protein and provides potassium and calcium, which are helpful for blood pressure, but its added salt means people managing hypertension should watch portion sizes, choose no-salt-added varieties, or rinse it. As always, follow your doctor's or dietitian's advice for your situation."
 ---
 
 Cottage cheese has gone from diet-plate afterthought to viral superstar, and the reason is simple: it is one of the most protein-packed, versatile foods you can buy. Here is a clear breakdown of its nutrition, benefits, and exactly how much protein and calcium a serving delivers.
@@ -73,7 +79,7 @@ For most people, cottage cheese is an excellent choice:
 - **Good source of calcium and B12**
 - **Endlessly versatile** in sweet and savoury dishes
 
-The one thing to watch is **sodium**, which can be high in some brands. If you are limiting salt, check the label and look for lower-sodium options.
+The one thing to watch is **sodium**. Regular cottage cheese carries roughly 300 to 400 mg per 100 g, and a half-cup can reach 350 to 450 mg, since salt is added for flavour and to preserve it. That is fine for most people, but worth managing if you have high blood pressure or are cutting salt. Two simple fixes: choose a low-sodium or no-salt-added version, or rinse regular cottage cheese under cold water for a minute or two, which cuts the sodium by 60 to 80 percent while keeping most of the protein and calcium.
 
 ## Why is cottage cheese so popular?
 
