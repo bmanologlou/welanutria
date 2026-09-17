@@ -313,6 +313,32 @@ export const comparisons = [
       { q: 'Which is better for weight loss?', a: 'Both are excellent for weight loss thanks to high protein and low fat, which control appetite. Cottage cheese is marginally higher in protein and lower in sugar, but the difference is small. Choose whichever keeps you fullest and you enjoy most.' },
     ],
   },
+  {
+    slug: 'cottage-cheese-vs-skyr',
+    title: 'Cottage Cheese vs Skyr',
+    foodA: 'Cottage cheese (low-fat)',
+    foodB: 'Skyr',
+    labelA: 'Cottage cheese',
+    labelB: 'Skyr',
+    description: 'Cottage cheese vs skyr compared: calories, protein, calcium and carbs per 100 g, plus which high-protein dairy is better for muscle, weight loss and everyday snacking.',
+    intro: 'Cottage cheese and skyr are two of the most talked-about high-protein dairy foods, both low in fat and built around protein. They sit very close on protein, but differ in calcium, texture and how you use them. Here is how they compare, gram for gram.',
+    verdict: 'Both are outstanding high-protein, low-fat choices with almost identical protein, so you can happily eat either or both. Cottage cheese has a fraction more protein and a savoury-friendly curd texture that suits dips, eggs and pasta. Skyr is far higher in calcium, thicker and smoother, and leans naturally sweet for breakfast bowls and smoothies. Choose cottage cheese for savoury versatility, skyr for calcium and a spoonable, creamy texture.',
+    chooseA: 'Choose cottage cheese for a touch more protein and savoury versatility in dips, eggs and pasta.',
+    chooseB: 'Choose skyr for much more calcium, a thicker, smoother texture, and sweet breakfast bowls.',
+    related: {
+      lists: ['high-protein-foods', 'high-protein-high-fiber-foods'],
+      recipes: ['cottage-cheese-fruit-bowl', 'greek-yogurt-protein-bowl'],
+      article: { name: 'Skyr nutrition', href: '/blog/skyr-nutrition/' },
+      calculator: { name: 'Protein Calculator', href: '/calculators/protein/' },
+    },
+    faqs: [
+      { q: 'Which has more protein, cottage cheese or skyr?', a: 'They are almost identical. Low-fat cottage cheese has around 12 g of protein per 100 g, and skyr around 11 g. The difference is small enough that both count among the best high-protein dairy foods, so protein alone should not decide it.' },
+      { q: 'Which has more calcium?', a: 'Skyr has far more calcium, around 150 mg per 100 g versus about 83 mg for cottage cheese. If you want a high-protein dairy that also supports bone health, skyr has a clear edge here.' },
+      { q: 'Which is lower in calories?', a: 'Skyr is slightly lower, at about 63 kcal per 100 g compared with around 72 kcal for low-fat cottage cheese. Both are low-calorie, high-protein foods that work well for weight loss.' },
+      { q: 'Which is better for weight loss?', a: 'Both are excellent for weight loss because their high protein and low fat keep you full on few calories. Skyr is marginally lower in calories and higher in calcium; cottage cheese is marginally higher in protein. Choose whichever keeps you fullest and fits your meals.' },
+      { q: 'Can I use one instead of the other?', a: 'Usually yes. Skyr swaps neatly into sweet uses such as bowls, smoothies and as a thick topping, while cottage cheese shines in savoury dishes and blends smooth for dips and sauces. For most recipes they are interchangeable, especially once cottage cheese is blended.' },
+    ],
+  },
 ];
 
 export function getComparison(slug) {
