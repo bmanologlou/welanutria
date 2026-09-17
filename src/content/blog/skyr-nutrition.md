@@ -94,4 +94,6 @@ Skyr and Greek yogurt are very similar, and you can [substitute one for the othe
 
 Skyr is a nutritional standout: very high in protein, a good source of calcium, low in fat and low in calories. A single 150 g tub delivers around 16 g of protein and 225 mg of calcium, supporting muscle, bones and fullness in one go. Stick to plain versions to keep added sugar down, and it is one of the best everyday dairy choices you can make.
 
+Curious how skyr compares with the other protein-packed options? See [cottage cheese vs skyr](/compare/cottage-cheese-vs-skyr/) and the full [high-protein dairy comparison](/blog/high-protein-dairy/).
+
 <p style="font-size:0.85rem;color:var(--muted);margin-top:24px;">This article is for general information and is not medical or nutritional advice. Nutrition values are approximate and vary by brand. Speak to a qualified professional about your individual needs.</p>
