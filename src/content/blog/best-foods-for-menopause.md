@@ -35,7 +35,7 @@ Menopause brings real changes to the body: hormone shifts speed up muscle and bo
 As oestrogen declines, three things change that food can directly influence:
 
 - **Muscle loss speeds up**, making protein more important
-- **Bone density drops**, making calcium and vitamin D critical
+- **Bone density drops**, making calcium, vitamin D and [magnesium](/blog/magnesium-benefits-and-foods/) critical
 - **Fat tends to shift to the midsection**, where fibre and protein help with weight
 
 Starting in **perimenopause** (the years before periods stop) gives you a head start, rather than waiting until symptoms peak.
