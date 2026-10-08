@@ -20,6 +20,10 @@ faqs:
     a: "Focus on protein-dense foods so small portions still deliver. Eggs, Greek yogurt, skyr, cottage cheese, fish, chicken, tofu and a scoop of protein powder in a smoothie all pack protein into little volume. Eating protein first at meals also helps you get it in before you feel full."
   - q: "Are these foods only for people on GLP-1 medications?"
     a: "No. A high-protein, high-fibre, whole-food pattern is a sound approach for almost anyone wanting to manage weight, stay full and eat well. GLP-1 users simply have a stronger reason to prioritise protein and fibre because they are eating less overall."
+  - q: "How much protein should I eat on GLP-1 medications?"
+    a: "Current guidance suggests around 1.2 to 1.6 g of protein per kg of body weight per day during active weight loss, which is higher than the old general target. The reason is muscle: eating less can cost muscle as well as fat, and protein plus some resistance exercise helps protect it. Our protein calculator can work out your personal number."
+  - q: "Can GLP-1 medications cause muscle loss?"
+    a: "They can, but indirectly. The rapid weight loss that comes with a much smaller appetite tends to include some muscle, not just fat. This is not unique to GLP-1s, it happens with any large, fast weight loss. Keeping protein high and doing some resistance training are the two best ways to minimise it."
 ---
 
 GLP-1 medications like semaglutide have changed how millions of people eat, by sharply reducing appetite. When you are eating less, **what** you eat matters more than ever: every bite needs to deliver protein, fibre and nutrients. This guide covers the food principles that help, whatever the reason you are eating smaller portions.
@@ -70,8 +74,18 @@ These are not strict rules, but foods that GLP-1 users often report tolerating l
 
 The goal is not restriction for its own sake, but making your limited appetite work for you.
 
+## Protein and your muscle: the numbers that matter
+
+There is a specific reason protein comes first on a GLP-1, beyond fullness: **protecting muscle**. Rapid weight loss on reduced appetite can cost muscle as well as fat, and muscle is what keeps your metabolism up and helps regulate appetite, both of which matter enormously for keeping weight off later.
+
+Current guidance suggests around **1.2 to 1.6 g of protein per kg of body weight** per day during active weight loss, well above the old general target. With a small appetite that takes planning: lead every meal with a protein source, use protein smoothies or Greek yogurt and skyr as easy tops-ups, and spread protein through the day rather than loading one meal. Use our [protein calculator](/calculators/protein/) to set your personal target, and pair it with some resistance exercise to hold on to the muscle you have.
+
+## Managing side effects, and life after the medication
+
+Two practical realities deserve their own guides. First, the most common early hurdles are **nausea and constipation**, both of which respond well to simple food changes; see [foods that help with GLP-1 side effects](/blog/glp-1-nausea-constipation-foods/). Second, since weight often returns once the medication stops, the habits you build now are what protect your results; see [life after GLP-1: how to keep the weight off](/blog/life-after-glp-1/). Together with this guide, these cover the three stages: eating well, handling side effects, and maintaining the outcome.
+
 ## The bottom line
 
-Eating well on a GLP-1 medication comes down to a simple shift: since you are eating less, make it count. **Protein first, fibre close behind, nutrient-dense whole foods throughout.** These same principles help anyone eating smaller portions. Start with our [protein calculator](/calculators/protein/) to set a target, then build meals around the [high-protein](/food-lists/high-protein-foods/) and [high-fibre](/food-lists/high-fiber-foods/) foods that keep you full.
+Eating well on a GLP-1 medication comes down to a simple shift: since you are eating less, make it count. **Protein first, fibre close behind, nutrient-dense whole foods throughout.** These same principles help anyone eating smaller portions. Start with our [protein calculator](/calculators/protein/) to set a target, then build meals around the [high-protein](/food-lists/high-protein-foods/) and [high-fibre](/food-lists/high-fiber-foods/) foods that keep you full. For a ready-made template, try our [GLP-1 meal plan](/meal-plans/glp-1-meal-plan/).
 
 <p style="font-size:0.85rem;color:var(--muted);margin-top:24px;">This article is for general information only and is not medical advice. GLP-1 medications should be taken under medical supervision. Always follow the guidance of your doctor or a registered dietitian regarding your diet and medication.</p>

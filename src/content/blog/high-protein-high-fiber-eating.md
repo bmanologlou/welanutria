@@ -64,4 +64,4 @@ If you want the trend-driven version of this, our [fibermaxxing](/blog/fibermaxx
 
 ## The takeaway
 
-Protein and fibre are not a fad. They are the two nutrients that do the most to keep you full, healthy and on track, and most people have room to eat more of both. Anchor your meals with protein, round them out with fibre, lean on legumes to get both at once, and build the fibre up gradually. It is a simple framework that works for muscle, weight loss and everyday health alike.
+Protein and fibre are not a fad. They are the two nutrients that do the most to keep you full, healthy and on track, and most people have room to eat more of both. Anchor your meals with protein, round them out with fibre, lean on legumes to get both at once, and build the fibre up gradually. It is a simple framework that works for muscle, weight loss and everyday health alike. If you are using it to reset your eating, our [January reset guide](/blog/january-reset/) turns these principles into a practical, habit-based plan.
