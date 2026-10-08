@@ -13,6 +13,15 @@ export async function getStaticPaths() {
 const { plan } = Astro.props;
 const url = `https://welanutria.com/meal-plans/${plan.slug}/`;
 const avg = planAverage(plan);
+
+// Related meal plans: other plans, closest by calorie target first, max 3.
+// Gives every plan extra internal links (helps crawl/indexing + authority flow).
+const relatedPlans = mealPlans
+  .filter((p) => p.slug !== plan.slug)
+  .map((p) => ({ p, diff: Math.abs((planAverage(p).cal || 0) - (avg.cal || 0)) }))
+  .sort((a, b) => a.diff - b.diff)
+  .slice(0, 3)
+  .map((x) => x.p);
 const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const breadcrumb = {
@@ -97,6 +106,16 @@ const breadcrumb = {
       </a>
     </div>
 
+    <nav class="more-plans">
+      <h2>Other meal plans to explore</h2>
+      <ul>
+        {relatedPlans.map((p) => (
+          <li><a href={`/meal-plans/${p.slug}/`}>{p.title}</a></li>
+        ))}
+        <li><a href="/meal-plans/">See all meal plans →</a></li>
+      </ul>
+    </nav>
+
     <p class="plan-disclaimer">This meal plan is a general guide, not personalised nutrition advice. Calorie and macro values are estimates calculated from typical ingredient values and may vary. Adjust portions to your own needs, and consult a qualified professional for tailored advice.</p>
     <p class="print-credit">Copywriting by welanutria.com · {url}</p>
   </article>
@@ -151,6 +170,11 @@ const breadcrumb = {
     .pr-title{font-weight:600;color:var(--ink);font-size:1.02rem;line-height:1.3}
     .pr-go{color:var(--accent);font-weight:600;font-size:.85rem;margin-top:2px}
 
+    .more-plans{margin:32px 0 0}
+    .more-plans h2{font-size:1.05rem;margin:0 0 12px}
+    .more-plans ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px 16px}
+    .more-plans a{color:var(--accent);text-decoration:none;font-weight:600;font-size:.92rem}
+    .more-plans a:hover{text-decoration:underline}
     .plan-disclaimer{font-size:.78rem;color:var(--muted);margin:28px 0 0;padding-top:16px;border-top:1px solid var(--line);line-height:1.5}
 
     .print-credit{display:none}
