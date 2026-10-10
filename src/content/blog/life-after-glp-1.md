@@ -40,7 +40,7 @@ The single most important idea in this article: **do not wait until you stop.** 
 
 Rapid weight loss, including on GLP-1s, can strip away **muscle as well as fat**. That matters for maintenance because muscle keeps your metabolism higher and helps regulate appetite. Losing it makes regain more likely.
 
-Two things protect muscle: enough **protein** and some **resistance training**. Current guidance suggests around 1.2 to 1.6 g of protein per kg of body weight during weight loss. Use our [protein calculator](/calculators/protein/) to find your number, then build meals around [high-protein foods](/food-lists/high-protein-foods/). Adding even twice-weekly strength work, bodyweight or weights, makes a real difference to what you keep.
+Two things protect muscle: enough **protein** and some **resistance training**. Current guidance suggests around 1.2 to 1.6 g of protein per kg of body weight during weight loss. Use our [protein calculator](/calculators/protein/) to find your number, then build meals around [high-protein foods](/food-lists/high-protein-foods/). Adding even twice-weekly strength work, bodyweight or weights, makes a real difference to what you keep. Some people also add [creatine](/blog/creatine-guide/), one of the better-evidenced supplements for supporting strength and preserving muscle alongside training.
 
 ## The maintenance plate
 

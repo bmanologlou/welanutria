@@ -76,6 +76,6 @@ The goal is a whole-food pattern most of the time, not perfection.
 
 ## The bottom line
 
-Eating well through menopause comes down to a few clear priorities: **protein to preserve muscle, calcium and vitamin D for bones, fibre for weight and digestion**, with soy foods as a helpful extra. Start these habits in perimenopause if you can. Set your protein target with our [protein calculator](/calculators/protein/), and build meals around [high-protein](/food-lists/high-protein-foods/) and [high-calcium](/food-lists/high-calcium-foods/) foods.
+Eating well through menopause comes down to a few clear priorities: **protein to preserve muscle, calcium and vitamin D for bones, fibre for weight and digestion**, with soy foods as a helpful extra. Start these habits in perimenopause if you can. Set your protein target with our [protein calculator](/calculators/protein/), and build meals around [high-protein](/food-lists/high-protein-foods/) and [high-calcium](/food-lists/high-calcium-foods/) foods. Beyond food, [creatine for women](/blog/creatine-for-women/) is drawing growing interest for helping preserve muscle and strength through menopause alongside resistance training.
 
 <p style="font-size:0.85rem;color:var(--muted);margin-top:24px;">This article is for general information and is not medical advice. Menopause symptoms and needs vary; consult your doctor or a registered dietitian for personalised guidance, especially before starting supplements.</p>
