@@ -1,6 +1,6 @@
 ---
 title: "Life After GLP-1: How to Keep the Weight Off"
-description: "Weight often returns after stopping GLP-1 medications. The nutrition and habit strategies that protect your results: protein, fibre, muscle, and sustainable routines."
+description: "Weight often returns after stopping GLP-1 medications. The nutrition and habit strategies that protect your results and keep muscle."
 pubDate: 2026-10-08
 relatedCalculators:
   - name: "Protein Calculator"

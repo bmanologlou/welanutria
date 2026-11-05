@@ -1,6 +1,6 @@
 ---
 title: "Gut Health Foods: What to Eat for a Healthy Microbiome"
-description: "The best foods for gut health, from fibre-rich prebiotics to fermented probiotic foods, plus simple ways to support digestion and a balanced microbiome."
+description: "The best foods for gut health, from fibre-rich prebiotics to fermented probiotics, plus simple ways to support digestion."
 pubDate: 2026-06-27
 relatedCalculators:
   - name: "TDEE Calculator"
