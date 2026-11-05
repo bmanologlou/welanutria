@@ -96,7 +96,7 @@ const repsAt = { 100:1, 95:2, 90:4, 85:6, 80:8, 75:10, 70:12, 65:16, 60:20 };
         <thead><tr><th>% of 1RM</th><th>Weight</th><th>Approx reps</th></tr></thead>
         <tbody id="pct-body">
           {pcts.map((p) => (
-            <tr><td>{p}%</td><td data-pct={p} class="pct-w">—</td><td>{repsAt[p]}</td></tr>
+            <tr><td>{p}%</td><td data-pct={p} class="pct-w">-</td><td>{repsAt[p]}</td></tr>
           ))}
         </tbody>
       </table>

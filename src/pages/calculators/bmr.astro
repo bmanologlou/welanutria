@@ -11,7 +11,7 @@ const appSchema = {
   applicationCategory: 'HealthApplication',
   operatingSystem: 'Any',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  description: 'Calculate your basal metabolic rate (BMR), the calories your body burns at complete rest, using the Mifflin-St Jeor equation.',
+  description: 'Calculate your basal metabolic rate (BMR), the calories your body burns at rest, with the Mifflin-St Jeor equation.',
 };
 
 const faqs = [
@@ -34,7 +34,7 @@ const breadcrumb = {
 ---
 <Base
   title="BMR Calculator: Basal Metabolic Rate | welanutria"
-  description="Free BMR calculator. Work out your basal metabolic rate, the calories your body burns at rest, using the Mifflin-St Jeor equation. See your daily needs by activity level."
+  description="Free BMR calculator: work out your basal metabolic rate, the calories your body burns at rest, with the Mifflin-St Jeor equation."
   current="calculators"
 >
   <JsonLd schema={appSchema} />
