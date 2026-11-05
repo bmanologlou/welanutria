@@ -580,7 +580,7 @@ export const foodLists = [
     slug: 'gut-health-foods',
     title: 'Gut-Health Foods',
     h1: 'Foods for Gut Health',
-    description: 'A list of gut-friendly foods, from fermented foods like kimchi and kefir to high-fibre choices that feed good bacteria. Support digestion and a healthy gut microbiome.',
+    description: 'A list of gut-friendly foods, from fermented kimchi and kefir to high-fibre choices that feed good bacteria and support digestion.',
     intro: 'A healthy gut relies on two things: fermented foods that add beneficial bacteria, and fibre that feeds them. This list brings together the best gut-friendly whole foods, from kimchi and kefir to beans and wholegrains, to help support digestion and a balanced microbiome.',
     sortBy: 'fiber',
     sortDir: 'desc',

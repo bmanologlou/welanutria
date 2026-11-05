@@ -320,7 +320,7 @@ export const comparisons = [
     foodB: 'Skyr',
     labelA: 'Cottage cheese',
     labelB: 'Skyr',
-    description: 'Cottage cheese vs skyr compared: calories, protein, calcium and carbs per 100 g, plus which high-protein dairy is better for muscle, weight loss and everyday snacking.',
+    description: 'Cottage cheese vs skyr compared: calories, protein, calcium and carbs per 100 g, and which is better for muscle and weight loss.',
     intro: 'Cottage cheese and skyr are two of the most talked-about high-protein dairy foods, both low in fat and built around protein. They sit very close on protein, but differ in calcium, texture and how you use them. Here is how they compare, gram for gram.',
     verdict: 'Both are outstanding high-protein, low-fat choices with almost identical protein, so you can happily eat either or both. Cottage cheese has a fraction more protein and a savoury-friendly curd texture that suits dips, eggs and pasta. Skyr is far higher in calcium, thicker and smoother, and leans naturally sweet for breakfast bowls and smoothies. Choose cottage cheese for savoury versatility, skyr for calcium and a spoonable, creamy texture.',
     chooseA: 'Choose cottage cheese for a touch more protein and savoury versatility in dips, eggs and pasta.',
