@@ -2,6 +2,7 @@
 title: "How Much Protein Do You Need a Day?"
 description: "How much protein you really need each day to build muscle, lose fat or stay healthy, in grams per kilo, plus when to eat it and why it matters."
 pubDate: 2026-06-25
+updatedDate: 2026-08-23
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"
@@ -53,7 +54,7 @@ Protein does three things that make it the most valuable macronutrient for most 
 
 ## When and how to eat it
 
-Timing matters less than the total, but spreading protein out helps. Your body handles protein best in servings of roughly **20 to 40 grams**, so several moderate doses across the day beat one big hit.
+Timing matters less than the total, but spreading protein out helps. Your body handles protein best in servings of roughly **20 to 40 grams**, so several moderate doses across the day beat one big hit. For the full picture on this, see our guide to [protein timing and distribution](/blog/protein-timing-distribution/).
 
 A practical approach: include a solid protein source at every meal. Most people get plenty at dinner but fall short at breakfast, so that's usually the easiest place to add some.
 

@@ -2,6 +2,7 @@
 title: "GLP-1 Side Effects: Foods That Help With Nausea and Constipation"
 description: "A practical food guide for the two most common GLP-1 side effects: gentle foods for nausea, plus fibre and hydration for constipation."
 pubDate: 2026-10-08
+updatedDate: 2026-11-05
 relatedCalculators:
   - name: "Water Intake Calculator"
     href: "/calculators/water/"

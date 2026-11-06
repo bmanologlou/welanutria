@@ -2,6 +2,7 @@
 title: "Skyr Nutrition: Protein, Calcium and Benefits"
 description: "Skyr nutrition explained: how much protein, calcium and potassium it has per 100g and per tub, its health benefits, and how it compares to Greek yogurt."
 pubDate: 2026-07-17
+updatedDate: 2026-09-17
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

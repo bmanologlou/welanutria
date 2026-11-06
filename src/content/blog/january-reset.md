@@ -2,6 +2,7 @@
 title: "The January Reset: Build Habits That Actually Last"
 description: "A calm, no-crash-diet guide to resetting your eating in the new year: add protein and fibre, use simple routines, and build habits that last."
 pubDate: 2026-10-08
+updatedDate: 2026-11-05
 relatedCalculators:
   - name: "TDEE Calculator"
     href: "/calculators/tdee/"

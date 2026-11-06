@@ -2,6 +2,7 @@
 title: "Protein for Women: How Much You Need and Why It Matters"
 description: "How much protein women need a day for weight loss, muscle and menopause, why needs change with age, and the best high-protein foods to hit your target."
 pubDate: 2026-06-27
+updatedDate: 2026-07-18
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

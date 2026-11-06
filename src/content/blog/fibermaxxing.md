@@ -2,6 +2,7 @@
 title: "Fibermaxxing: How to Eat More Fibre (the Right Way)"
 description: "Fibermaxxing explained: why fibre is the nutrient of 2026, how much you actually need, the best high-fibre foods, and how to increase fibre without the bloating."
 pubDate: 2026-07-10
+updatedDate: 2026-08-23
 relatedCalculators:
   - name: "TDEE Calculator"
     href: "/calculators/tdee/"
@@ -21,7 +22,7 @@ faqs:
   - q: "How do I increase fibre without bloating?"
     a: "Increase it gradually over a couple of weeks rather than all at once, drink plenty of water, and spread fibre across meals instead of loading it into one. Whole foods are gentler than sudden large doses of fibre powders. If discomfort persists, ease back and build up more slowly."
   - q: "Should I use fibre supplements?"
-    a: "Whole foods are the better starting point, since they bring vitamins, minerals and variety alongside fibre. Supplements can help fill a gap for some people, but skipping the ultra-processed fibre powders in favour of beans, vegetables, fruit and wholegrains is usually the more effective and satisfying approach."
+    a: "Whole foods are the better starting point, since they bring vitamins, minerals and variety alongside fibre. Supplements can help fill a gap for some people, and [psyllium husk](/blog/psyllium-husk-benefits/) is the best-evidenced option, but for most people beans, vegetables, fruit and wholegrains are the more effective and satisfying approach."
 ---
 
 Fibre has quietly become the nutrient everyone is talking about. Dubbed "fibermaxxing" online, the idea is simple: most of us do not eat enough fibre, and deliberately eating more supports gut health, fullness and overall wellbeing. Here is what fibermaxxing actually means, how much you need, and how to do it without the bloating.

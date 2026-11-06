@@ -2,6 +2,7 @@
 title: "Gut Health Foods: What to Eat for a Healthy Microbiome"
 description: "The best foods for gut health, from fibre-rich prebiotics to fermented probiotics, plus simple ways to support digestion."
 pubDate: 2026-06-27
+updatedDate: 2026-11-05
 relatedCalculators:
   - name: "TDEE Calculator"
     href: "/calculators/tdee/"
@@ -92,6 +93,6 @@ If adding fibre or fermented foods causes mild bloating at first, that is normal
 
 ## The bottom line
 
-A healthy gut does not need exotic products or expensive supplements. It needs fibre from a wide variety of plants, a little fermented food for live cultures, and enough water to keep things moving. Build meals around plants, add a daily serving of yogurt or another fermented food, and your microbiome does the rest. Browse our [high-fibre foods list](/food-lists/high-fiber-foods/) to get started, or explore our [recipes](/recipes/) for fibre-rich meals.
+A healthy gut does not need exotic products or expensive supplements. It needs fibre from a wide variety of plants, a little fermented food for live cultures, and enough water to keep things moving. Build meals around plants, add a daily serving of yogurt or another fermented food, and your microbiome does the rest. Browse our [high-fibre foods list](/food-lists/high-fiber-foods/) to get started, or explore our [recipes](/recipes/) for fibre-rich meals. If you want to top up your fibre, [psyllium husk](/blog/psyllium-husk-benefits/) is one of the most proven supplements for digestion and regularity.
 
 <p style="font-size:0.85rem;color:var(--muted);margin-top:24px;">This article is for general information and is not medical advice. If you have a digestive condition or persistent symptoms, speak to a qualified healthcare professional.</p>

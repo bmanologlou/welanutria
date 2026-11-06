@@ -2,6 +2,7 @@
 title: "High-Protein, High-Fibre Eating: The Complete Guide"
 description: "Why protein and fibre are the two nutrients worth building your meals around, how much of each you need, the best foods for both, and how to put it all together."
 pubDate: 2026-08-23
+updatedDate: 2026-10-08
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

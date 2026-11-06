@@ -2,6 +2,7 @@
 title: "Cottage Cheese Nutrition: Protein, Calcium and Benefits"
 description: "Cottage cheese nutrition explained: how much protein and calcium it has per 100g and per serving, its health benefits, and why it's the viral high-protein food."
 pubDate: 2026-07-17
+updatedDate: 2026-09-17
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

@@ -2,6 +2,7 @@
 title: "GLP-1 Friendly Foods: What to Eat to Feel Full"
 description: "A practical food guide for people on GLP-1 medications: high-protein, high-fibre foods that support satiety and help preserve muscle, plus what to limit."
 pubDate: 2026-07-10
+updatedDate: 2026-10-08
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

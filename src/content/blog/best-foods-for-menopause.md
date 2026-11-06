@@ -2,6 +2,7 @@
 title: "Best Foods for Menopause: What to Eat and Why"
 description: "The best foods for menopause: protein for muscle, calcium for bones, fibre and phytoestrogens. A practical nutrition guide for perimenopause and beyond."
 pubDate: 2026-07-17
+updatedDate: 2026-10-10
 relatedCalculators:
   - name: "Protein Calculator"
     href: "/calculators/protein/"

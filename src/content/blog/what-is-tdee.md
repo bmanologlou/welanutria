@@ -2,6 +2,7 @@
 title: "What Is TDEE and How Do You Calculate It?"
 description: "TDEE is the calories you burn in a day. What it means, how it's calculated from BMR and activity, and how to use it for your goals."
 pubDate: 2026-06-24
+updatedDate: 2026-11-05
 relatedCalculators:
   - name: "TDEE & Macros Calculator"
     href: "/calculators/tdee/"
